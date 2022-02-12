@@ -1,0 +1,19 @@
+[
+    {
+        "name": "default",
+        "script": "artisan",
+        "interpreter": "php",
+        "args": "queue:work --queue=default --tries=1 --sleep=0"
+    },
+    {
+        "name": "echo",
+        "script": "laravel-echo-server",
+        "args": "start"
+    },
+    {
+        "name": "information_queue",
+        "script": "artisan",
+        "interpreter": "php",
+        "args": "queue:work --queue=information_queue --tries=1 --sleep=0"
+    }
+]
