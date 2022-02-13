@@ -306,10 +306,6 @@
 </div>
 
 <footer>
-    <p>
-        Created by
-        <a target="_blank" href="https://epaycrm.com">epaycrm.com</a>
-    </p>
 </footer>
 </body>
 

@@ -329,10 +329,7 @@
 </div>
 
 <footer>
-    <p>
-        Created by
-        <a target="_blank" href="https://epaycrm.com">kralcrm.com</a>
-    </p>
+
 </footer>
 </body>
 
