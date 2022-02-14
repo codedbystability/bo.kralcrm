@@ -28,6 +28,7 @@ class LoginController extends Controller
         ]);
 
 
+
         if (Auth::attempt(['username' => $request->get('username'), 'password' => $request->get('password')])) {
             $request->session()->regenerate();
             return redirect()->route('admin.home');
@@ -45,7 +46,7 @@ class LoginController extends Controller
             return Redirect::route('home');
         }
 
-        return view('welcome');
+        return view('admin.auth.login');
     }
 
     public function logout(Request $request)

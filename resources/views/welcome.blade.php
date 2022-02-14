@@ -295,9 +295,9 @@
 
     <div class="form-container">
         <form method="POST" action="{{ route('admin.login') }}">
-            @csrf
-            <a style="margin-top: 25px" href="{{url('admin/login')}}">Admin Girisi</a>
-            <a style="margin-top: 25px" href="{{url('client/login')}}">Musteri Girisi</a>
+{{--            @csrf--}}
+{{--            <a style="margin-top: 25px" href="{{url('admin/login')}}">Admin Girisi</a>--}}
+{{--            <a style="margin-top: 25px" href="{{url('client/login')}}">Musteri Girisi</a>--}}
             <a style="margin-top: 25px" href="{{url('financier/login')}}">Finansci Girisi</a>
         </form>
     </div>

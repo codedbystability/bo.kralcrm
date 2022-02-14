@@ -99,11 +99,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function getFinancierStats(FinancierAction $financierAction, $financier)
+    public function getFinancierStats(?FinancierAction $financierAction, $financier)
     {
         return Transaction::whereHas('actions', function ($query) use ($financierAction, $financier) {
-            return $query->where('action_id', $financierAction->id)
-                ->where('financier_id', $financier->id);
+            return $query->when($financierAction, function () use ($query, $financierAction, $financier) {
+                return $query->where('action_id', $financierAction->id)
+                    ->where('financier_id', $financier->id);
+            });
         })
             ->get();
 
