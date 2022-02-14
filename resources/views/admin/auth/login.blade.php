@@ -321,8 +321,8 @@
                 <button class="ghost" id="signIn"></button>
             </div>
             <div class="overlay-panel overlay-right">
-                <a style="margin-top: 25px" href="{{url('client/login')}}">Musteri Girisi</a>
-                <a style="margin-top: 25px" href="{{url('financier/login')}}">Finansci Girisi</a>
+{{--                <a style="margin-top: 25px" href="{{url('client/login')}}">Musteri Girisi</a>--}}
+{{--                <a style="margin-top: 25px" href="{{url('financier/login')}}">Finansci Girisi</a>--}}
             </div>
         </div>
     </div>
