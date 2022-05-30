@@ -58,6 +58,10 @@ Route::prefix('admin')->group(function () {
 
 
         Route::resource('financiers', \App\Http\Controllers\Admin\FinancierController::class, ['as' => 'admin']);
+        Route::post('financiers/customers/store-customer', [\App\Http\Controllers\Admin\FinancierController::class, 'storeCustomer'])->name('admin.financiers.customer-store');
+        Route::get('financiers/customers/create/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'createCustomer'])->name('admin.financiers.customer-create');
+        Route::get('financiers/customers/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'customers'])->name('admin.financiers.customers');
+        Route::delete('destroy-customer/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'destroyCustomer'])->name('admin.financiers.customer-destroy');
         Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class, ['as' => 'admin']);
     });
 

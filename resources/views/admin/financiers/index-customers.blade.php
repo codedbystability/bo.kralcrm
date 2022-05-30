@@ -12,7 +12,7 @@
             <div class="card">
 
                 <div class="card-header text-right">
-                    <a href="{{route('admin.financiers.create')}}" type="button" class="btn btn-primary">
+                    <a href="{{route('admin.financiers.customer-create',$financier->id)}}" type="button" class="btn btn-primary">
                         <i class="fa fa-plus-circle"></i> <strong>Yeni Kayit</strong>
                     </a>
 
@@ -30,13 +30,14 @@
                                         <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                             rowspan="1" colspan="1" aria-sort="ascending"
                                             aria-label="Rendering engine: activate to sort column descending">
-                                            ISIM
+                                            FINANSCI
                                         </th>
+
 
                                         <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                             rowspan="1" colspan="1" aria-sort="ascending"
                                             aria-label="Rendering engine: activate to sort column descending">
-                                            KULLANICI ADI
+                                            CLIENT ADI
                                         </th>
 
 
@@ -48,39 +49,39 @@
                                     </thead>
                                     <tbody>
 
-                                    @foreach($financiers as $key=> $financier)
+                                    @foreach($clients as $key => $client)
                                         <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
 
                                             <td>{{$financier->id}}</td>
-                                            <td>{{$financier->name}}</td>
                                             <td>{{$financier->username}}</td>
-
+                                            <td>{{$client->client->username}}</td>
 
                                             <td class="project-actions d-flex justify-content-around">
 
-                                                <form
-                                                    action="{{ route('admin.financiers.customers', $financier->id) }}"
-                                                    method="GET">
-                                                    <button type="submit" class="btn btn-primary btn-sm mt-1">
-                                                        <i class="fas fa-pencil-alt">
-                                                        </i>
-                                                        Musteri Goruntule
-                                                    </button>
-                                                </form>
+                                                {{--                                                <form--}}
+                                                {{--                                                    action="{{ route('admin.financiers.customers', $financier->id) }}"--}}
+                                                {{--                                                    method="GET">--}}
+                                                {{--                                                    <button type="submit" class="btn btn-primary btn-sm mt-1">--}}
+                                                {{--                                                        <i class="fas fa-pencil-alt">--}}
+                                                {{--                                                        </i>--}}
+                                                {{--                                                        Musteri Goruntule--}}
+                                                {{--                                                    </button>--}}
+                                                {{--                                                </form>--}}
+
+                                                {{--                                                <form--}}
+                                                {{--                                                    action="{{ route('admin.financiers.edit', $financier->id) }}"--}}
+                                                {{--                                                    method="GET">--}}
+                                                {{--                                                    <button type="submit" class="btn btn-primary btn-sm mt-1">--}}
+                                                {{--                                                        <i class="fas fa-pencil-alt">--}}
+                                                {{--                                                        </i>--}}
+                                                {{--                                                        Duzenle--}}
+                                                {{--                                                    </button>--}}
+                                                {{--                                                </form>--}}
+
 
                                                 <form
-                                                    action="{{ route('admin.financiers.edit', $financier->id) }}"
-                                                    method="GET">
-                                                    <button type="submit" class="btn btn-primary btn-sm mt-1">
-                                                        <i class="fas fa-pencil-alt">
-                                                        </i>
-                                                        Duzenle
-                                                    </button>
-                                                </form>
-
-
-                                                <form action="{{ route('admin.financiers.destroy', $financier->id) }}"
-                                                      method="POST">
+                                                    action="{{ route('admin.financiers.customer-destroy', $client->id) }}"
+                                                    method="POST">
                                                     <button type="submit" class="btn btn-danger btn-sm mt-1">
                                                         {{ method_field('DELETE') }}
                                                         {{ csrf_field() }}

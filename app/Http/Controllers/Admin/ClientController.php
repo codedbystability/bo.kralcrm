@@ -308,6 +308,7 @@ class ClientController extends Controller
         ];
     }
 
+
     private function setFlash($type, $message)
     {
         Session::flash('message', $message);

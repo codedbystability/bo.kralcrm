@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use App\Models\ClientFinancier;
 use App\Models\Financier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +18,7 @@ class FinancierController extends Controller
 {
     public function index()
     {
-        $financiers = Financier::get();
+        $financiers = Financier::with('clients')->get();
 
         return view('admin.financiers.index')->with([
             'financiers' => $financiers
@@ -278,6 +280,68 @@ class FinancierController extends Controller
                     ->where('bottom_group', 'cancelled')
             ],
         ];
+    }
+
+
+    public function storeCustomer(Request $request)
+    {
+
+        $financier = Financier::findOrFail($request->get('financier_id'));
+        $clients = Client::whereIn('id', $request->get('clients'))->get();
+
+        foreach ($clients as $client) {
+            ClientFinancier::firstOrCreate([
+                'client_id' => $client->id,
+                'financier_id' => $financier->id
+            ]);
+        }
+        $this->setFlash('success', 'Finansci Atamasi Yapildi !');
+        return Redirect::route('admin.financiers.customers', $financier->id);
+
+
+    }
+
+    public function createCustomer($financierID)
+    {
+        $financier = Financier::findOrFail($financierID);
+        $financierClients = ClientFinancier::where('financier_id', $financierID)
+//            ->with('client')
+            ->pluck('client_id')
+            ->toArray();
+
+        $allClients = Client::whereNotIn('id', $financierClients)->get();
+
+        return view('admin.financiers.create-customer')->with([
+
+            'clients' => $financierClients,
+            'allClients' => $allClients,
+            'financier' => $financier,
+        ]);
+
+
+    }
+
+    public function customers($financierID)
+    {
+        $financier = Financier::findOrFail($financierID);
+        $financierClients = ClientFinancier::where('financier_id', $financierID)
+            ->with('client')
+            ->get();
+
+        return view('admin.financiers.index-customers')->with([
+            'clients' => $financierClients,
+            'financier' => $financier
+        ]);
+    }
+
+    public function destroyCustomer($clientFinancierID)
+    {
+        $financierClient = ClientFinancier::findOrFail($clientFinancierID);
+        $financierClient->delete();
+
+        $this->setFlash('success', 'Finansci Atamasi Tamamlandi !');
+
+        return Redirect::back();
     }
 
     private function setFlash($type, $message)

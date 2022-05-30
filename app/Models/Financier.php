@@ -51,4 +51,9 @@ class Financier extends Authenticatable
     {
         return $this->belongsTo(Client::class, 'client_id');
     }
+
+    public function clients(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ClientFinancier::class);
+    }
 }
