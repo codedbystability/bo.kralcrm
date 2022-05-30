@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>E-pay CRM B.O.</title>
+    <title>PAYSYS CRM</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

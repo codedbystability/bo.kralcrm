@@ -8,13 +8,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{{--    @if(\Illuminate\Support\Facades\Auth::guard('web')->check())--}}
-{{--        <title>Admin Panel</title>--}}
-{{--    @elseif(\Illuminate\Support\Facades\Auth::guard('client')->check())--}}
-{{--        <title>Musteri Panel</title>--}}
-{{--    @endif--}}
+    {{--    @if(\Illuminate\Support\Facades\Auth::guard('web')->check())--}}
+    {{--        <title>Admin Panel</title>--}}
+    {{--    @elseif(\Illuminate\Support\Facades\Auth::guard('client')->check())--}}
+    {{--        <title>Musteri Panel</title>--}}
+    {{--    @endif--}}
 
-    <title>E-pay CRM B.O.</title>
+    <title>PAYSYS CRM</title>
 
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
