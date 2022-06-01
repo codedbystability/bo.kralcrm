@@ -31,7 +31,6 @@ class LoginController extends Controller
 
 
         if (Auth::guard($this->guard)->attempt(['username' => $request->get('username'), 'password' => $request->get('password')])) {
-
             $request->session()->regenerate();
 
             return redirect()->route('client.home');
@@ -45,7 +44,6 @@ class LoginController extends Controller
     public function loginUI(Request $request)
     {
         if (Auth::user()) {
-            dd('here client');
             return Redirect::route('home');
         }
 
