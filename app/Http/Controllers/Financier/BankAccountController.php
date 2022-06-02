@@ -134,4 +134,13 @@ class BankAccountController extends Controller
         return Redirect::route('financier.bank-accounts.index');
 
     }
+
+    public function activate($id)
+    {
+        $acc = Account::findOrFail($id);
+        $acc->update([
+            'is_active' => !$acc->is_active
+        ]);
+        return Redirect::route('financier.bank-accounts.index');
+    }
 }

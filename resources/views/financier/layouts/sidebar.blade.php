@@ -40,14 +40,15 @@
  || \Illuminate\Support\Facades\Request::is('financier/banks')
  || \Illuminate\Support\Facades\Request::is('financier/banks/*')
  || \Illuminate\Support\Facades\Request::is('papara-accounts/*')   ? 'open' : ''}}">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-handshake"></i>
-                        <p>
-                            Hesaplar
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
+
                     @can('observe bank account')
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-handshake"></i>
+                            <p>
+                                Hesaplar
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('financier.banks.index')}}"
@@ -69,17 +70,17 @@
                             </li>
                         </ul>
                     @endcan
-{{--                    @can('observe papara account')--}}
-{{--                        <ul class="nav nav-treeview">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{route('financier.papara-accounts.index')}}"--}}
-{{--                                   class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/papara-accounts' ?'active' : ''}}">--}}
-{{--                                    <i class="fas fa-list nav-icon"></i>--}}
-{{--                                    <p>Papara Hesaplari</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    @endcan--}}
+                    {{--                    @can('observe papara account')--}}
+                    {{--                        <ul class="nav nav-treeview">--}}
+                    {{--                            <li class="nav-item">--}}
+                    {{--                                <a href="{{route('financier.papara-accounts.index')}}"--}}
+                    {{--                                   class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/papara-accounts' ?'active' : ''}}">--}}
+                    {{--                                    <i class="fas fa-list nav-icon"></i>--}}
+                    {{--                                    <p>Papara Hesaplari</p>--}}
+                    {{--                                </a>--}}
+                    {{--                            </li>--}}
+                    {{--                        </ul>--}}
+                    {{--                    @endcan--}}
 
 
                 </li>
@@ -95,110 +96,110 @@
                     <ul class="nav nav-treeview"
                         style="display:  {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*') || \Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
 
-{{--                        <li class="nav-item menu-is-opening menu-{{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'open' : ''}}">--}}
-{{--                            <a href="#" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>--}}
-{{--                                    Papara Islemler--}}
-{{--                                    <i class="right fas fa-angle-left"></i>--}}
-{{--                                </p>--}}
-{{--                            </a>--}}
-{{--                            @can('observe papara withdraw waiting')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.papara.waiting-withdraws')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/waiting-withdraws' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-building nav-icon"></i>--}}
-{{--                                            <p>Bekleyen Cekimler</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                        {{--                        <li class="nav-item menu-is-opening menu-{{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'open' : ''}}">--}}
+                        {{--                            <a href="#" class="nav-link">--}}
+                        {{--                                <i class="far fa-circle nav-icon"></i>--}}
+                        {{--                                <p>--}}
+                        {{--                                    Papara Islemler--}}
+                        {{--                                    <i class="right fas fa-angle-left"></i>--}}
+                        {{--                                </p>--}}
+                        {{--                            </a>--}}
+                        {{--                            @can('observe papara withdraw waiting')--}}
+                        {{--                                <ul class="nav nav-treeview"--}}
+                        {{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a href="{{route('financier.transactions.papara.waiting-withdraws')}}"--}}
+                        {{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/waiting-withdraws' ?'active' : ''}}">--}}
+                        {{--                                            <i class="fas fa-building nav-icon"></i>--}}
+                        {{--                                            <p>Bekleyen Cekimler</p>--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            @endcan--}}
 
-{{--                            @can('observe papara deposit waiting')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item ">--}}
-{{--                                        <a href="{{route('financier.transactions.papara.waiting-deposits')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/waiting-deposits' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-home nav-icon"></i>--}}
-{{--                                            <p>Bekleyen Yatirimlar</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
-
-
-{{--                            @can('observe papara deposit approved')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.papara.approved-deposits')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/approved-deposits' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-check-circle nav-icon"></i>--}}
-{{--                                            <p>Onaylanan Yatirimlar</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                        {{--                            @can('observe papara deposit waiting')--}}
+                        {{--                                <ul class="nav nav-treeview"--}}
+                        {{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
+                        {{--                                    <li class="nav-item ">--}}
+                        {{--                                        <a href="{{route('financier.transactions.papara.waiting-deposits')}}"--}}
+                        {{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/waiting-deposits' ?'active' : ''}}">--}}
+                        {{--                                            <i class="fas fa-home nav-icon"></i>--}}
+                        {{--                                            <p>Bekleyen Yatirimlar</p>--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            @endcan--}}
 
 
-{{--                            @can('observe papara withdraw completed')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.papara.completed-withdraws')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/completed-withdraws' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-plus nav-icon"></i>--}}
-{{--                                            <p>Tamamlanan Cekimler</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
-
-{{--                            @can('observe papara deposit completed')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.papara.completed-deposits')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/completed-deposits' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-plus-circle nav-icon"></i>--}}
-{{--                                            <p>Tamamlanan Yatirimlar</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                        {{--                            @can('observe papara deposit approved')--}}
+                        {{--                                <ul class="nav nav-treeview"--}}
+                        {{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a href="{{route('financier.transactions.papara.approved-deposits')}}"--}}
+                        {{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/approved-deposits' ?'active' : ''}}">--}}
+                        {{--                                            <i class="fas fa-check-circle nav-icon"></i>--}}
+                        {{--                                            <p>Onaylanan Yatirimlar</p>--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            @endcan--}}
 
 
-{{--                            @can('observe papara withdraw cancelled')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.papara.cancelled-withdraws')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/cancelled-withdraws' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-minus nav-icon"></i>--}}
-{{--                                            <p>Iptal Edilen Cekimler</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                        {{--                            @can('observe papara withdraw completed')--}}
+                        {{--                                <ul class="nav nav-treeview"--}}
+                        {{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a href="{{route('financier.transactions.papara.completed-withdraws')}}"--}}
+                        {{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/completed-withdraws' ?'active' : ''}}">--}}
+                        {{--                                            <i class="fas fa-plus nav-icon"></i>--}}
+                        {{--                                            <p>Tamamlanan Cekimler</p>--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            @endcan--}}
 
-{{--                            @can('observe papara deposit cancelled')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.papara.cancelled-deposits')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/cancelled-deposits' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-minus-square nav-icon"></i>--}}
-{{--                                            <p>Iptal Edilen Yatirimlar</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                        {{--                            @can('observe papara deposit completed')--}}
+                        {{--                                <ul class="nav nav-treeview"--}}
+                        {{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a href="{{route('financier.transactions.papara.completed-deposits')}}"--}}
+                        {{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/completed-deposits' ?'active' : ''}}">--}}
+                        {{--                                            <i class="fas fa-plus-circle nav-icon"></i>--}}
+                        {{--                                            <p>Tamamlanan Yatirimlar</p>--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            @endcan--}}
 
 
-{{--                        </li>--}}
+                        {{--                            @can('observe papara withdraw cancelled')--}}
+                        {{--                                <ul class="nav nav-treeview"--}}
+                        {{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a href="{{route('financier.transactions.papara.cancelled-withdraws')}}"--}}
+                        {{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/cancelled-withdraws' ?'active' : ''}}">--}}
+                        {{--                                            <i class="fas fa-minus nav-icon"></i>--}}
+                        {{--                                            <p>Iptal Edilen Cekimler</p>--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            @endcan--}}
+
+                        {{--                            @can('observe papara deposit cancelled')--}}
+                        {{--                                <ul class="nav nav-treeview"--}}
+                        {{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a href="{{route('financier.transactions.papara.cancelled-deposits')}}"--}}
+                        {{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/cancelled-deposits' ?'active' : ''}}">--}}
+                        {{--                                            <i class="fas fa-minus-square nav-icon"></i>--}}
+                        {{--                                            <p>Iptal Edilen Yatirimlar</p>--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            @endcan--}}
+
+
+                        {{--                        </li>--}}
 
                         <li class="nav-item menu-is-opening menu-{{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'open' : ''}}">
                             <a href="#" class="nav-link">
@@ -308,25 +309,30 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{route('financier.transactions.reports.index')}}"
-                       class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports') ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Raporlar
-                        </p>
-                    </a>
-                </li>
+                @can('observe reports')
 
-                <li class="nav-item">
-                    <a href="{{route('financier.transactions.reports.accounts')}}"
-                       class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts-filter') ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Hesap Raporlar
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{route('financier.transactions.reports.index')}}"
+                           class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports') ? 'active' : ''}}">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Raporlar
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('observe accountreports')
+                    <li class="nav-item">
+                        <a href="{{route('financier.transactions.reports.accounts')}}"
+                           class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts-filter') ? 'active' : ''}}">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Hesap Raporlar
+                            </p>
+                        </a>
+                    </li>
+                @endcan
 
 
                 <li class="nav-item">

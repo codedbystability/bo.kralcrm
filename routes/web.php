@@ -59,8 +59,10 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('financiers', \App\Http\Controllers\Admin\FinancierController::class, ['as' => 'admin']);
         Route::post('financiers/customers/store-customer', [\App\Http\Controllers\Admin\FinancierController::class, 'storeCustomer'])->name('admin.financiers.customer-store');
+        Route::get('financiers/activate/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'activate'])->name('admin.financiers.activate');
         Route::get('financiers/customers/create/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'createCustomer'])->name('admin.financiers.customer-create');
         Route::get('financiers/customers/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'customers'])->name('admin.financiers.customers');
+        Route::get('financiers/permissions/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'permissions'])->name('admin.financiers.permissions');
         Route::delete('destroy-customer/{id}', [\App\Http\Controllers\Admin\FinancierController::class, 'destroyCustomer'])->name('admin.financiers.customer-destroy');
         Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class, ['as' => 'admin']);
     });
@@ -114,8 +116,9 @@ Route::prefix('financier')->group(function () {
         });
 
         Route::resource('banks', \App\Http\Controllers\Financier\BankController::class, ['as' => 'financier']);
-        Route::get('banks/passive/{id}',[\App\Http\Controllers\Financier\BankController::class,'deactivate'])->name('financier.banks.passive');
+        Route::get('banks/passive/{id}', [\App\Http\Controllers\Financier\BankController::class, 'deactivate'])->name('financier.banks.passive');
         Route::resource('bank-accounts', \App\Http\Controllers\Financier\BankAccountController::class, ['as' => 'financier']);
+        Route::get('/bank-accounts/activate/{id}', [\App\Http\Controllers\Financier\BankAccountController::class, 'activate'])->name('financier.bank-accounts.activate');
         Route::resource('papara-accounts', \App\Http\Controllers\Financier\PaparaAccountController::class, ['as' => 'financier']);
 
         Route::get('notes/mark/{id}', [\App\Http\Controllers\Financier\NoteController::class, 'mark'])->name('financier.notes.mark');

@@ -92,7 +92,7 @@
                                                         <form
                                                             action="{{ route('financier.banks.passive', $bank->id) }}"
                                                             method="GET">
-                                                            <button type="submit" class="btn btn-warning btn-sm">
+                                                            <button type="submit" class="btn btn-secondary btn-sm">
                                                                 <i class="fas fa-trash">
                                                                 </i>
                                                                 Pasif Et

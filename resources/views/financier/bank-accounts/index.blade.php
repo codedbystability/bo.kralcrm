@@ -7,7 +7,6 @@
 
 @section('content')
 
-
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -58,7 +57,8 @@
 
 
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Engine version: activate to sort column ascending">
                                                 SAHIBI
                                             </th>
                                             {{--                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"--}}
@@ -67,22 +67,26 @@
                                             {{--                                        </th>--}}
 
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Engine version: activate to sort column ascending">
                                                 GUNLUK ISLEM
                                             </th>
 
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Engine version: activate to sort column ascending">
                                                 GUNLUK YATIRIM
                                             </th>
 
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Engine version: activate to sort column ascending">
                                                 GUNLUK CEKIM
                                             </th>
 
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Engine version: activate to sort column ascending">
                                                 GUNLUK NET
                                             </th>
 
@@ -127,6 +131,21 @@
                                                                 <i class="fas fa-pencil-alt">
                                                                 </i>
                                                                 Duzenle
+                                                            </button>
+                                                        </form>
+
+
+                                                        <form
+                                                            action="{{ route('financier.bank-accounts.activate', $agreement->id) }}"
+                                                            method="GET">
+                                                            <button type="submit" class="btn btn-secondary btn-sm ">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                                @if($agreement->is_active)
+                                                                    Pasif Et
+                                                                @else
+                                                                    Aktif Et
+                                                                @endif
                                                             </button>
                                                         </form>
                                                     @endcan

@@ -58,10 +58,11 @@
 
                                             <td class="project-actions d-flex justify-content-around">
 
+
                                                 <form
                                                     action="{{ route('admin.financiers.customers', $financier->id) }}"
                                                     method="GET">
-                                                    <button type="submit" class="btn btn-primary btn-sm mt-1">
+                                                    <button type="submit" class="btn btn-secondary btn-sm mt-1">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
                                                         Musteri Goruntule
@@ -77,6 +78,31 @@
                                                         Duzenle
                                                     </button>
                                                 </form>
+
+                                                @if($financier->is_active)
+                                                    <form
+                                                        action="{{ route('admin.financiers.activate', $financier->id) }}"
+                                                        method="GET">
+                                                        <button type="submit" class="btn btn-secondary btn-sm mt-1">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Pasif Et
+                                                        </button>
+                                                    </form>
+
+                                                @else
+
+                                                    <form
+                                                        action="{{ route('admin.financiers.activate', $financier->id) }}"
+                                                        method="GET">
+                                                        <button type="submit" class="btn btn-success btn-sm mt-1">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Aktif Et
+                                                        </button>
+                                                    </form>
+
+                                                @endif
 
 
                                                 <form action="{{ route('admin.financiers.destroy', $financier->id) }}"

@@ -30,7 +30,7 @@ class FinancierController extends Controller
         $permissions = $this->getAllPermissions();
 
         return view('admin.financiers.create')->with([
-            'permissions' => $permissions
+            'permissions' => $permissions,
         ]);
     }
 
@@ -111,6 +111,23 @@ class FinancierController extends Controller
         $financier->syncPermissions($permissions);
 
         return Redirect::route('admin.financiers.index');
+    }
+
+    public function activate($id)
+    {
+        $financier = Financier::find($id);
+        if (!$financier) {
+            $this->setFlash('error', 'Finansci Bulunamadi !');
+            return Redirect::back();
+        }
+
+        $financier->update([
+            'is_active' => !$financier->is_active
+        ]);
+        $this->setFlash('success', 'Finansci Basariyla Guncellendi !');
+
+        return Redirect::route('admin.financiers.index');
+
     }
 
     public function destroy(Request $request, $id)
@@ -273,11 +290,20 @@ class FinancierController extends Controller
             ],
 
             [
-                'title' => 'Papara Iptal Cekim',
-                'key' => 'cancelled_papara_withdraws',
-                'values' => $allPermissions->where('top_group', 'papara')
-                    ->where('sub_group', 'withdraw')
-                    ->where('bottom_group', 'cancelled')
+                'title' => 'Banka Izinleri',
+                'key' => 'bank_permissions',
+                'values' => $allPermissions->where('top_group', 'banks')
+//                    ->where('sub_group', 'withdraw')
+//                    ->where('bottom_group', 'cancelled')
+            ],
+
+
+            [
+                'title' => 'Raporlar',
+                'key' => 'report_permissions',
+                'values' => $allPermissions->where('top_group', 'reports')
+//                    ->where('sub_group', 'withdraw')
+//                    ->where('bottom_group', 'cancelled')
             ],
         ];
     }
@@ -319,6 +345,26 @@ class FinancierController extends Controller
         ]);
 
 
+    }
+
+    public function permissions($financierID)
+    {
+        $financier = Financier::with('permissions')->findOrFail($financierID);
+        $financierPermissions = [];
+        $permissions = $this->getAllPermissions();
+
+        foreach ($permissions as $permission) {
+
+            foreach ($permission['values'] as $itm) {
+                array_push($financierPermissions, $itm['id']);
+            }
+        }
+
+        return view('admin.financiers.create')->with([
+            'permissions' => $permissions,
+            'financier' => $financier,
+            'financierPermissions' => $financierPermissions,
+        ]);
     }
 
     public function customers($financierID)
