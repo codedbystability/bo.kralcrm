@@ -7,17 +7,16 @@
 
 @section('content')
 
-
     <div class="row">
         <div class="col-12">
             <div class="card">
 
                 <div class="card-header text-right">
-{{--                    @can('add bank account')--}}
-{{--                        <a href="{{route('financier.banks.create')}}" type="button" class="btn btn-primary">--}}
-{{--                            <i class="fa fa-plus-circle"></i> <strong>Yeni Kayit</strong>--}}
-{{--                        </a>--}}
-{{--                    @endcan--}}
+                    {{--                    @can('add bank account')--}}
+                    {{--                        <a href="{{route('financier.banks.create')}}" type="button" class="btn btn-primary">--}}
+                    {{--                            <i class="fa fa-plus-circle"></i> <strong>Yeni Kayit</strong>--}}
+                    {{--                        </a>--}}
+                    {{--                    @endcan--}}
 
 
                 </div>
@@ -75,25 +74,37 @@
 
 
                                                 @can('delete bank account')
+
+                                                    <form
+                                                        action="{{ route('financier.banks.destroy', $bank->id) }}"
+                                                        method="POST">
+                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                            {{ method_field('DELETE') }}
+                                                            {{ csrf_field() }}
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Sil
+                                                        </button>
+                                                    </form>
+
                                                     @if($bank->is_active)
+
                                                         <form
-                                                            action="{{ route('financier.banks.destroy', $bank->id) }}"
-                                                            method="POST">
-                                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                                {{ method_field('DELETE') }}
-                                                                {{ csrf_field() }}
+                                                            action="{{ route('financier.banks.passive', $bank->id) }}"
+                                                            method="GET">
+                                                            <button type="submit" class="btn btn-warning btn-sm">
                                                                 <i class="fas fa-trash">
                                                                 </i>
-                                                                Pasif Yap
+                                                                Pasif Et
                                                             </button>
                                                         </form>
+
                                                     @else
 
                                                         <form
-                                                            action="{{ route('financier.banks.destroy', $bank->id) }}"
-                                                            method="POST">
+                                                            action="{{ route('financier.banks.passive', $bank->id) }}"
+                                                            method="GET">
                                                             <button type="submit" class="btn btn-success btn-sm">
-                                                                {{ method_field('DELETE') }}
                                                                 {{ csrf_field() }}
                                                                 <i class="fas fa-check-circle">
                                                                 </i>

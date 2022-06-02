@@ -11,8 +11,9 @@ class BankController extends Controller
 {
     public function index()
     {
-        $data = Bank::where('is_active', true)
-            ->orderBy('id', 'desc')
+        //where('is_active', true)
+        //            ->
+        $data = Bank::orderBy('id', 'desc')
             ->paginate(20);
 
 
@@ -21,13 +22,23 @@ class BankController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, $id)
+
+    public function deactivate($id)
     {
         $banks = Bank::findOrFail($id);
 
         $banks->update([
             'is_active' => !$banks->is_active
         ]);
+
+        return Redirect::back();
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $banks = Bank::findOrFail($id);
+
+        $banks->delete();
 
         return Redirect::back();
     }
