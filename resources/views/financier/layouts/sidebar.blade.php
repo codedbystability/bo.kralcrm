@@ -208,18 +208,18 @@
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-{{--                            @can('observe havale withdraw waiting')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.havale.waiting-withdraws')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/waiting-withdraws' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-building nav-icon"></i>--}}
-{{--                                            <p>Bekleyen Cekimler</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                            @can('observe havale withdraw waiting')
+                                <ul class="nav nav-treeview"
+                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
+                                    <li class="nav-item">
+                                        <a href="{{route('financier.transactions.havale.waiting-withdraws')}}"
+                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/waiting-withdraws' ?'active' : ''}}">
+                                            <i class="fas fa-building nav-icon"></i>
+                                            <p>Bekleyen Cekimler</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endcan
 
                             @can('observe havale deposit waiting')
                                 <ul class="nav nav-treeview"
@@ -248,18 +248,18 @@
                                 </ul>
                             @endcan
 
-{{--                            @can('observe havale withdraw approved')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.havale.completed-withdraws')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/completed-withdraws' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-plus nav-icon"></i>--}}
-{{--                                            <p>Tamamlanan Cekimler</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                            @can('observe havale withdraw approved')
+                                <ul class="nav nav-treeview"
+                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
+                                    <li class="nav-item">
+                                        <a href="{{route('financier.transactions.havale.completed-withdraws')}}"
+                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/completed-withdraws' ?'active' : ''}}">
+                                            <i class="fas fa-plus nav-icon"></i>
+                                            <p>Tamamlanan Cekimler</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endcan
 
                             @can('observe havale deposit completed')
                                 <ul class="nav nav-treeview"
@@ -275,18 +275,18 @@
                             @endcan
 
 
-{{--                            @can('observe havale withdraw cancelled')--}}
-{{--                                <ul class="nav nav-treeview"--}}
-{{--                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a href="{{route('financier.transactions.havale.cancelled-withdraws')}}"--}}
-{{--                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/cancelled-withdraws' ?'active' : ''}}">--}}
-{{--                                            <i class="fas fa-minus nav-icon"></i>--}}
-{{--                                            <p>Iptal Edilen Cekimler</p>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            @endcan--}}
+                            @can('observe havale withdraw cancelled')
+                                <ul class="nav nav-treeview"
+                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
+                                    <li class="nav-item">
+                                        <a href="{{route('financier.transactions.havale.cancelled-withdraws')}}"
+                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/cancelled-withdraws' ?'active' : ''}}">
+                                            <i class="fas fa-minus nav-icon"></i>
+                                            <p>Iptal Edilen Cekimler</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endcan
 
 
                             @can('observe havale deposit cancelled')
