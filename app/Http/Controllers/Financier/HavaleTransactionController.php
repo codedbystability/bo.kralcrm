@@ -87,10 +87,19 @@ class HavaleTransactionController extends Controller
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
 
         $status = $this->transactionStatusRepository->getByKey($statusKey);
+        $approvedStatus = $this->transactionStatusRepository->getByKey('approved');
         $type = $this->transactionTypeRepository->getByKey($typeKey);
 
         $transactions = Transaction::whereIn('client_id', $clientIds)
-            ->where('status_id', $status->id)
+            ->when($statusKey === 'waiting', function ($q) use ($status) {
+                return $q->where('status_id', $status->id)
+                    ->orWhere('status_id',);
+            }, function ($query) use ($status, $approvedStatus) {
+                return $query->where('status_id', $status->id)
+                    ->orWhere('status_id', $approvedStatus);
+            })
+
+//            ->where('status_id', $status->id)
             ->where('method_id', $this->paparaMethod->id)
             ->where('type_id', $type->id)
             ->where('is_active', true)

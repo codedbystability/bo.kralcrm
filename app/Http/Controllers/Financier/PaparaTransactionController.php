@@ -84,6 +84,7 @@ class PaparaTransactionController extends Controller
         $status = $this->transactionStatusRepository->getByKey($statusKey);
         $type = $this->transactionTypeRepository->getByKey($typeKey);
 
+
         $transactions = Transaction::whereIn('client_id', $clientIds)
             ->where('status_id', $status->id)
             ->where('method_id', $this->paparaMethod->id)

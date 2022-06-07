@@ -7,7 +7,7 @@ use BenSampo\Enum\Enum;
 final class TransactionStatusEnum extends Enum
 {
     const waiting = 'Beklemede';
-    const approved = 'Onaylandi';
+    const approved = 'Banka Gonderildi';
     const cancelled = 'Iptal Edildi';
     const completed = 'Tamamlandi';
 
