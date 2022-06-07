@@ -30,11 +30,13 @@ class TransactionActionRepository
     {
         $action = $this->getByKey($transactionActionKey);
 
-        return $this->model->create([
-            'transaction_id' => $transaction->id,
-            'action_id' => $action->id,
-            'financier_id' => $financier->id
-        ]);
+        if ($action) {
+            return $this->model->create([
+                'transaction_id' => $transaction->id,
+                'action_id' => $action->id,
+                'financier_id' => $financier->id
+            ]);
+        }
     }
 
 

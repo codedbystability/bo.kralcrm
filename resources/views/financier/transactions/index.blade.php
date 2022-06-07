@@ -108,20 +108,20 @@
                                                                 </button>
                                                             </form>
 
-                                                            @if($transaction->type->key === 'deposit')
-                                                                <form
-                                                                    action="{{ route('financier.transactions.oto-assign', $transaction->id) }}"
-                                                                    method="POST"
-                                                                    onsubmit="return confirmDelete('Islem Onaylanacak. Emin misiniz ?')">
-                                                                    <button type="submit"
-                                                                            class="btn btn-info btn-sm mt-1">
-                                                                        {{ csrf_field() }}
-                                                                        <i class="fas fa-dolly">
-                                                                        </i>
-                                                                        Oto Hesap At !
-                                                                    </button>
-                                                                </form>
-                                                            @endif
+{{--                                                            @if($transaction->type->key === 'deposit')--}}
+{{--                                                                <form--}}
+{{--                                                                    action="{{ route('financier.transactions.oto-assign', $transaction->id) }}"--}}
+{{--                                                                    method="POST"--}}
+{{--                                                                    onsubmit="return confirmDelete('Islem Onaylanacak. Emin misiniz ?')">--}}
+{{--                                                                    <button type="submit"--}}
+{{--                                                                            class="btn btn-info btn-sm mt-1">--}}
+{{--                                                                        {{ csrf_field() }}--}}
+{{--                                                                        <i class="fas fa-dolly">--}}
+{{--                                                                        </i>--}}
+{{--                                                                        Oto Hesap At !--}}
+{{--                                                                    </button>--}}
+{{--                                                                </form>--}}
+{{--                                                            @endif--}}
 
 
                                                         @endcan

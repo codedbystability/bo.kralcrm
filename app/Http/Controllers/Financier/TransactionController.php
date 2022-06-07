@@ -351,7 +351,8 @@ class TransactionController extends Controller
     public function assignComplete(Request $request, $id): \Illuminate\Http\RedirectResponse
     {
 
-        $transaction = Transaction::with('client', 'method', 'status', 'type', 'transactionable')->find($request->get('transaction_id'));
+        $transaction = Transaction::with('client', 'method', 'status', 'type', 'transactionable')
+            ->find($request->get('transaction_id'));
 
         if (!$transaction) {
             $this->setFlash('error', 'Islem bulunamadi !');
@@ -389,12 +390,9 @@ class TransactionController extends Controller
             $this->transactionActionRepository->action(Auth::user(), $transaction, 'deposit-bank-info-send');
 
             $this->setFlash('success', 'Banka Atamasi Yapildi');
-
         }
 
-
         return $this->setReturnPage($oldTransaction);
-
 
     }
 
