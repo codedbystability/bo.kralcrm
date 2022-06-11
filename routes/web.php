@@ -127,6 +127,9 @@ Route::prefix('financier')->group(function () {
 
             Route::get('detail/{id}', [\App\Http\Controllers\Financier\TransactionController::class, 'detail'])
                 ->name('financier.transactions.detail');
+            Route::get('letclient/{id}', [\App\Http\Controllers\Financier\TransactionController::class, 'letclient'])
+                ->name('financier.transactions.letclient');
+
             Route::post('add/note', [\App\Http\Controllers\Financier\TransactionController::class, 'addNote'])
                 ->name('financier.transactions.add-note');
             Route::post('approve/{id}', [\App\Http\Controllers\Financier\TransactionController::class, 'approve'])

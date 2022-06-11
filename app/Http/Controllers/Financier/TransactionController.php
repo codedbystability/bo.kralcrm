@@ -156,6 +156,11 @@ class TransactionController extends Controller
         return $this->setReturnPage($transaction);
     }
 
+    public function letclient(Request $request,$id){
+        $this->setFlash('error', 'Islem Bulunamadi !' . $id);
+        return Redirect::back();
+    }
+
     public function detail(Request $request, $id)
     {
         $transaction = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')

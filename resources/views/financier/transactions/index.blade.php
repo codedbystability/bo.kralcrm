@@ -11,7 +11,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h5>
             <i class="icon fas fa-info"></i>
-           <span id="alert-title"> Islem bekleyen odemeler mevcut !!!</span>
+            <span id="alert-title"> Islem bekleyen odemeler mevcut !!!</span>
 
         </h5>
         <span id="alert-message">Info alert preview. This alert is dismissable.</span>
@@ -78,7 +78,8 @@
                                         <tbody>
 
                                         @foreach($transactions as $key=> $transaction)
-                                            <tr class="{{$key % 2 === 0 ? 'even':'odd'}}" id="waiting-deposits-{{$transaction->id}}">
+                                            <tr class="{{$key % 2 === 0 ? 'even':'odd'}}"
+                                                id="waiting-deposits-{{$transaction->id}}">
 
                                                 <td class="sorting_1 dtr-control">
                                                     <h5>{{$transaction->method->name}}</h5>
@@ -108,21 +109,20 @@
                                                                 </button>
                                                             </form>
 
-{{--                                                            @if($transaction->type->key === 'deposit')--}}
-{{--                                                                <form--}}
-{{--                                                                    action="{{ route('financier.transactions.oto-assign', $transaction->id) }}"--}}
-{{--                                                                    method="POST"--}}
-{{--                                                                    onsubmit="return confirmDelete('Islem Onaylanacak. Emin misiniz ?')">--}}
-{{--                                                                    <button type="submit"--}}
-{{--                                                                            class="btn btn-info btn-sm mt-1">--}}
-{{--                                                                        {{ csrf_field() }}--}}
-{{--                                                                        <i class="fas fa-dolly">--}}
-{{--                                                                        </i>--}}
-{{--                                                                        Oto Hesap At !--}}
-{{--                                                                    </button>--}}
-{{--                                                                </form>--}}
-{{--                                                            @endif--}}
-
+                                                            {{--                                                            @if($transaction->type->key === 'deposit')--}}
+                                                            {{--                                                                <form--}}
+                                                            {{--                                                                    action="{{ route('financier.transactions.oto-assign', $transaction->id) }}"--}}
+                                                            {{--                                                                    method="POST"--}}
+                                                            {{--                                                                    onsubmit="return confirmDelete('Islem Onaylanacak. Emin misiniz ?')">--}}
+                                                            {{--                                                                    <button type="submit"--}}
+                                                            {{--                                                                            class="btn btn-info btn-sm mt-1">--}}
+                                                            {{--                                                                        {{ csrf_field() }}--}}
+                                                            {{--                                                                        <i class="fas fa-dolly">--}}
+                                                            {{--                                                                        </i>--}}
+                                                            {{--                                                                        Oto Hesap At !--}}
+                                                            {{--                                                                    </button>--}}
+                                                            {{--                                                                </form>--}}
+                                                            {{--                                                            @endif--}}
 
                                                         @endcan
 
@@ -180,10 +180,7 @@
                                                                 </button>
                                                             </form>
 
-
-
                                                         @endcan
-
 
                                                     @endif
 
@@ -203,6 +200,19 @@
                                                     @endcan
 
                                                     @if($transaction->status->key === 'approved')
+
+                                                            <form
+                                                                action="{{ route('financier.transactions.letclient', $transaction->id) }} "
+                                                                method="POST">
+                                                                <button type="submit"
+                                                                        class="btn btn-warning btn-sm mt-1">
+                                                                    {{ csrf_field() }}
+                                                                    <i class="fas fa-check-circle">
+                                                                    </i>
+                                                                    Yeniden Bilgilendir
+
+                                                                </button>
+                                                            </form>
 
                                                         @can('approve ' . $permissionKey)
                                                             <button type="submit"
@@ -233,7 +243,6 @@
                                                     @endif
 
                                                     @if($transaction->status->key === 'completed')
-
 
                                                         @can('cancel ' . $permissionKey)
                                                             <button type="submit" class=" btn btn-danger btn-sm mt-1"
@@ -318,9 +327,9 @@
                 </form>
 
             </div>
-{{--            <button id="audio-button" onclick="playAudio()" style="visibility: hidden">--}}
-{{--            </button>--}}
-{{--            <audio id="audio" type="audio/mp3" src="http://127.0.0.1:8000/audio/notification.mp3" autoplay="true" muted="true"/>--}}
+            {{--            <button id="audio-button" onclick="playAudio()" style="visibility: hidden">--}}
+            {{--            </button>--}}
+            {{--            <audio id="audio" type="audio/mp3" src="http://127.0.0.1:8000/audio/notification.mp3" autoplay="true" muted="true"/>--}}
 
             <!-- /.modal-content -->
         </div>
@@ -384,7 +393,6 @@
         <!-- /.modal-dialog -->
     </div>
 
-
 @endsection
 
 
@@ -392,15 +400,15 @@
 
     <script type="text/javascript">
 
-        function playAudio(){
+        function playAudio() {
             const audio = new Audio('{{env('BASE_URL')}}audio/notification-2.mp3')
-            audio.volume=1;
+            audio.volume = 1;
             audio.play()
         }
 
         $(document).ready(function () {
             const waitingDeposits = $('[id^="waiting-deposits-"]');
-            if (waitingDeposits.length >= 1 &&  window.location.pathname === '/financier/transactions/havale/waiting-deposits' ){
+            if (waitingDeposits.length >= 1 && window.location.pathname === '/financier/transactions/havale/waiting-deposits') {
                 //BEKLEYEN DEPOSIT VAR ALARM CAL !
                 const alertContainer = document.getElementById('alert-container');
                 alertContainer.style.display = 'block';
