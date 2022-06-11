@@ -156,8 +156,20 @@ class TransactionController extends Controller
         return $this->setReturnPage($transaction);
     }
 
-    public function letclient(Request $request,$id){
-        $this->setFlash('error', 'Islem Bulunamadi !' . $id);
+    public function letclient(Request $request, $id)
+    {
+
+
+        $transaction = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')
+            ->find($id);
+
+        if ($transaction->status->key === 'completed') {
+            InformClientJob::dispatch($transaction, 'S', $transaction->edit_time, $transaction->status_id)->onQueue('information_queue');
+            $this->setFlash('error', 'Islem Bulunamadi ! ' . $id);
+        }else{
+            $this->setFlash('error', 'Bilgilendirme yapilamaz ! ' . $id);
+        }
+
         return Redirect::back();
     }
 
