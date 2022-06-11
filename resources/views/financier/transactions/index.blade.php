@@ -199,20 +199,22 @@
                                                         </form>
                                                     @endcan
 
+                                                    @if($transaction->status->key ==='completed')
+                                                        <form
+                                                            action="{{ route('financier.transactions.letclient', $transaction->id) }} "
+                                                            method="POST">
+                                                            <button type="submit"
+                                                                    class="btn btn-warning btn-sm mt-1">
+                                                                {{ csrf_field() }}
+                                                                <i class="fas fa-check-circle">
+                                                                </i>
+                                                                Yeniden Bilgilendir
+
+                                                            </button>
+                                                        </form>
+                                                    @endif
+
                                                     @if($transaction->status->key === 'approved')
-
-                                                            <form
-                                                                action="{{ route('financier.transactions.letclient', $transaction->id) }} "
-                                                                method="POST">
-                                                                <button type="submit"
-                                                                        class="btn btn-warning btn-sm mt-1">
-                                                                    {{ csrf_field() }}
-                                                                    <i class="fas fa-check-circle">
-                                                                    </i>
-                                                                    Yeniden Bilgilendir
-
-                                                                </button>
-                                                            </form>
 
                                                         @can('approve ' . $permissionKey)
                                                             <button type="submit"
