@@ -156,7 +156,7 @@ class TransactionController extends Controller
         return $this->setReturnPage($transaction);
     }
 
-    public function letclient(Request $request, $id)
+    public function letclient(Request $request, $id): \Illuminate\Http\RedirectResponse
     {
 
 
@@ -165,8 +165,8 @@ class TransactionController extends Controller
 
         if ($transaction->status->key === 'completed') {
             InformClientJob::dispatch($transaction, 'S', $transaction->edit_time, $transaction->status_id)->onQueue('information_queue');
-            $this->setFlash('error', 'Islem Bulunamadi ! ' . $id);
-        }else{
+            $this->setFlash('success', 'Bilgilendirme YAPILDI ! ' . $id);
+        } else {
             $this->setFlash('error', 'Bilgilendirme yapilamaz ! ' . $id);
         }
 
