@@ -341,7 +341,8 @@ class TransactionController extends Controller
                                 return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
                             });
                     });
-                })->with('accountable.bank', 'accountable.currency')
+                })
+                    ->with('accountable.bank', 'accountable.currency');
             }, function ($q) use ($transaction, $formFilter) {
                 return $q->whereHasMorph('accountable', PaparaAccount::class, function ($query) use ($transaction, $formFilter) {
 //                    return $query->whereHas('bank', function ($qq) use ($formFilter) {
@@ -361,7 +362,7 @@ class TransactionController extends Controller
 //                                return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
 //                            });
 //                    });
-                })->with('accountable.bank', 'accountable.currency')
+                })->with('accountable.bank', 'accountable.currency');
             })
             ->orderBy('created_at')
             ->get()
