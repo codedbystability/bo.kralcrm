@@ -360,7 +360,7 @@ class TransactionController extends Controller
             'fields' => $fields,
             'banks' => $banks,
             'bankName' => $bankName,
-            'theBankId' => $theBank->id,
+            'theBankId' => $theBank ? $theBank->id : null,
             'formFilter' => $formFilter
         ]);
     }
