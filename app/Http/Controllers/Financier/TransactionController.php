@@ -369,7 +369,7 @@ class TransactionController extends Controller
 //            ->paginate(20)
 //            ->appends($request->except('page'))
             ->sortBy(function ($item, $key) {
-                return $item->accountable->bank->name;
+                return $item->accountable->id;
             });
 
 
