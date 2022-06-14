@@ -362,7 +362,7 @@ class TransactionController extends Controller
 //                                return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
 //                            });
 //                    });
-                })->with('accountable.bank', 'accountable.currency');
+                })->with('accountable', 'accountable.currency');
             })
             ->orderBy('created_at')
             ->get()
