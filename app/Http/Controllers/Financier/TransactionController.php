@@ -322,25 +322,47 @@ class TransactionController extends Controller
 //                        return $query->where('currency_id', $transaction->currency_id);
 //                    })->with('accountable.bank', 'accountable.currency');
 //                })
-            ->whereHasMorph('accountable', BankAccount::class, function ($query) use ($transaction, $formFilter) {
-                return $query->whereHas('bank', function ($qq) use ($formFilter) {
-                    return $qq->where('name', $formFilter['bankName']);
-                })->where('currency_id', $transaction->currency_id)->where(function ($qqq) use ($formFilter) {
-                    return $qqq
-                        ->when($formFilter['owner'], function ($q) use ($formFilter) {
-                            return $q->orWhere('owner', 'like', '%' . $formFilter['owner'] . '%');
-                        })
-                        ->when($formFilter['iban'], function ($q) use ($formFilter) {
-                            return $q->orWhere('iban', 'like', '%' . $formFilter['iban'] . '%');
-                        })
-                        ->when($formFilter['accno'], function ($q) use ($formFilter) {
-                            return $q->orWhere('accno', 'like', '%' . $formFilter['accno'] . '%');
-                        })
-                        ->when($formFilter['branch'], function ($q) use ($formFilter) {
-                            return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
-                        });
-                });
-            })->with('accountable.bank', 'accountable.currency')
+            ->when($transaction->method->key === 'havale', function ($q) use ($transaction, $formFilter) {
+                return $q->whereHasMorph('accountable', BankAccount::class, function ($query) use ($transaction, $formFilter) {
+                    return $query->whereHas('bank', function ($qq) use ($formFilter) {
+                        return $qq->where('name', $formFilter['bankName']);
+                    })->where('currency_id', $transaction->currency_id)->where(function ($qqq) use ($formFilter) {
+                        return $qqq
+                            ->when($formFilter['owner'], function ($q) use ($formFilter) {
+                                return $q->orWhere('owner', 'like', '%' . $formFilter['owner'] . '%');
+                            })
+                            ->when($formFilter['iban'], function ($q) use ($formFilter) {
+                                return $q->orWhere('iban', 'like', '%' . $formFilter['iban'] . '%');
+                            })
+                            ->when($formFilter['accno'], function ($q) use ($formFilter) {
+                                return $q->orWhere('accno', 'like', '%' . $formFilter['accno'] . '%');
+                            })
+                            ->when($formFilter['branch'], function ($q) use ($formFilter) {
+                                return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
+                            });
+                    });
+                })->with('accountable.bank', 'accountable.currency')
+            }, function ($q) use ($transaction, $formFilter) {
+                return $q->whereHasMorph('accountable', PaparaAccount::class, function ($query) use ($transaction, $formFilter) {
+//                    return $query->whereHas('bank', function ($qq) use ($formFilter) {
+//                        return $qq->where('name', $formFilter['bankName']);
+//                    })->where('currency_id', $transaction->currency_id)->where(function ($qqq) use ($formFilter) {
+//                        return $qqq
+//                            ->when($formFilter['owner'], function ($q) use ($formFilter) {
+//                                return $q->orWhere('owner', 'like', '%' . $formFilter['owner'] . '%');
+//                            })
+//                            ->when($formFilter['iban'], function ($q) use ($formFilter) {
+//                                return $q->orWhere('iban', 'like', '%' . $formFilter['iban'] . '%');
+//                            })
+//                            ->when($formFilter['accno'], function ($q) use ($formFilter) {
+//                                return $q->orWhere('accno', 'like', '%' . $formFilter['accno'] . '%');
+//                            })
+//                            ->when($formFilter['branch'], function ($q) use ($formFilter) {
+//                                return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
+//                            });
+//                    });
+                })->with('accountable.bank', 'accountable.currency')
+            })
             ->orderBy('created_at')
             ->get()
 //            ->paginate(20)
