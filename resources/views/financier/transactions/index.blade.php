@@ -93,9 +93,15 @@
                                                 <td class="sorting_1 dtr-control">
                                                     <h5>{{$transaction->method->name}}</h5>
                                                 </td>
-                                                <td>{{$transaction->transactionable && $transaction->transactionable->bank?($transaction->transactionable->bank):'PAPARA'}}</td>
-                                                <td>{{$transaction->transactionable && $transaction->transactionable->fullname?($transaction->transactionable->fullname):'PAPARA'}}</td>
+                                                @if($transaction->method->key==='havale')
+                                                    <td>{{$transaction->transactionable && $transaction->transactionable->bank?($transaction->transactionable->bank):'PAPARA'}}</td>
+                                                    <td>{{$transaction->transactionable->fullname}}</td>
+                                                @else
+                                                    <td>{{'PAPARA'}}</td>
+                                                    <td>{{$transaction->transactionable->fullname || $transaction->transactionable->owner}}</td>
+                                                @endif
                                                 <td>{{$transaction->amount}} {{$transaction->currency_code}}</td>
+
                                                 <td>{{\App\Enums\TransactionTypeEnum::get($transaction->type->key)}}</td>
                                                 <td>{{\App\Enums\TransactionStatusEnum::get($transaction->status->key)}}</td>
 
