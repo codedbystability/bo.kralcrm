@@ -425,7 +425,7 @@
         let count = 0
         setInterval(function () {
             count++;
-            if (window.location.pathname === '/financier/transactions/havale/waiting-deposits' && count % 10 === 0) {
+            if (window.location.pathname === '/financier/transactions/havale/waiting-deposits' && count % 30 === 0) {
                 location.reload();
             }
         }, 1000);
