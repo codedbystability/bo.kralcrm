@@ -35,6 +35,12 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
+                                                #
+                                            </th>
+
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Rendering engine: activate to sort column descending">
                                                 METHOD
                                             </th>
 
@@ -81,6 +87,9 @@
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}"
                                                 id="waiting-deposits-{{$transaction->id}}">
 
+                                                <td class="sorting_1 dtr-control">
+                                                    <h5>#{{$transaction->id}}</h5>
+                                                </td>
                                                 <td class="sorting_1 dtr-control">
                                                     <h5>{{$transaction->method->name}}</h5>
                                                 </td>
