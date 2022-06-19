@@ -98,7 +98,7 @@
                                                     <td>{{$transaction->transactionable->fullname}}</td>
                                                 @else
                                                     <td>{{'PAPARA'}}</td>
-                                                    <td>{{$transaction->transactionable->fullname || $transaction->transactionable->owner}}</td>
+                                                    <td>{{$transaction->type->key==='deposit'?$transaction->transactionable->fullname :$transaction->transactionable->owner}}</td>
                                                 @endif
                                                 <td>{{$transaction->amount}} {{$transaction->currency_code}}</td>
 
