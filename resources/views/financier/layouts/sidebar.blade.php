@@ -125,7 +125,7 @@
                                         <a href="{{route('financier.transactions.papara.waiting-deposits-approve-checked')}}"
                                            class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/waiting-deposits-approve-checked' ?'active' : ''}}">
                                             <i class="fas fa-home nav-icon"></i>
-                                            <p>Bekleyen Yatirimlar Musteri Onayli</p>
+                                            <p>Bekleyen Musteri Onayli</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -241,7 +241,7 @@
                                         <a href="{{route('financier.transactions.havale.waiting-deposits-approve-checked')}}"
                                            class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/waiting-deposits-approve-checked' ?'active' : ''}}">
                                             <i class="fas fa-home nav-icon"></i>
-                                            <p>Bekleyen Yatirimlar Musteri Onayli</p>
+                                            <p>Bekleyen Musteri Onayli</p>
                                         </a>
                                     </li>
                                 </ul>
