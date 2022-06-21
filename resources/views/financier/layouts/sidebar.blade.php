@@ -123,7 +123,7 @@
                                     style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">
                                     <li class="nav-item ">
                                         <a href="{{route('financier.transactions.papara.waiting-deposits-approve-checked')}}"
-                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/waiting-deposits' ?'active' : ''}}">
+                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/papara/waiting-deposits-approve-checked' ?'active' : ''}}">
                                             <i class="fas fa-home nav-icon"></i>
                                             <p>Bekleyen Yatirimlar Musteri Onayli</p>
                                         </a>
@@ -235,6 +235,17 @@
                             @endcan
 
                             @can('observe havale deposit waiting')
+                                <ul class="nav nav-treeview"
+                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">
+                                    <li class="nav-item ">
+                                        <a href="{{route('financier.transactions.havale.waiting-deposits-approve-checked')}}"
+                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/waiting-deposits-approve-checked' ?'active' : ''}}">
+                                            <i class="fas fa-home nav-icon"></i>
+                                            <p>Bekleyen Yatirimlar Musteri Onayli</p>
+                                        </a>
+                                    </li>
+                                </ul>
+
                                 <ul class="nav nav-treeview"
                                     style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
                                     <li class="nav-item ">

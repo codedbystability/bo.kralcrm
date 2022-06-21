@@ -172,6 +172,10 @@ Route::prefix('financier')->group(function () {
                 Route::get('waiting-deposits', [\App\Http\Controllers\Financier\PaparaTransactionController::class, 'waitingDeposits'])
                     ->name('financier.transactions.papara.waiting-deposits');
 
+                Route::get('waiting-deposits-approve-checked', [\App\Http\Controllers\Financier\PaparaTransactionController::class, 'waitingDepositsApproveChecked'])
+                    ->name('financier.transactions.papara.waiting-deposits-approve-checked');
+
+
                 Route::get('approved-withdraws', [\App\Http\Controllers\Financier\PaparaTransactionController::class, 'approvedWithdraws'])
                     ->name('financier.transactions.papara.approved-withdraws');
                 Route::get('approved-deposits', [\App\Http\Controllers\Financier\PaparaTransactionController::class, 'approvedDeposits'])

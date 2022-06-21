@@ -39,6 +39,13 @@ class PaparaTransactionController extends Controller
         return $this->handleDynamicIndexData('waiting', 'deposit', 'Papara Bekleyen Yatirimlar', $permissionKey);
     }
 
+    public function waitingDepositsApproveChecked()
+    {
+        $permissionKey = 'papara deposit waiting';
+
+        return $this->handleDynamicIndexData('waiting', 'deposit', 'Papara Bekleyen Yatirimlar', $permissionKey, true);
+    }
+
     public function completedWithdraws()
     {
         $permissionKey = 'papara withdraw completed';
@@ -77,7 +84,7 @@ class PaparaTransactionController extends Controller
     }
 
 
-    private function handleDynamicIndexData($statusKey, $typeKey, $title, $permissionKey)
+    private function handleDynamicIndexData($statusKey, $typeKey, $title, $permissionKey, $approveChecked = false)
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
 
@@ -87,6 +94,9 @@ class PaparaTransactionController extends Controller
         $approvedStatus = $this->transactionStatusRepository->getByKey('approved');
 
         $transactions = Transaction::whereIn('client_id', $clientIds)
+            ->when($approveChecked === true, function ($qq) {
+                return $qq->where('check_performed_by_client', true);
+            })
             ->when($statusKey === 'waiting' && $typeKey === 'deposit', function ($q) use ($status, $approvedStatus) {
                 return $q->where('status_id', $status->id)
                     ->orWhere('status_id', $approvedStatus->id);

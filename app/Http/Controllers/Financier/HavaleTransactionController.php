@@ -98,7 +98,7 @@ class HavaleTransactionController extends Controller
         $type = $this->transactionTypeRepository->getByKey($typeKey);
 
         $transactions = Transaction::whereIn('client_id', $clientIds)
-            ->when($approveChecked, function ($qq) {
+            ->when($approveChecked === true, function ($qq) {
                 return $qq->where('check_performed_by_client', true);
             })
             ->when($statusKey === 'waiting' && $typeKey === 'deposit', function ($q) use ($status, $approvedStatus) {
