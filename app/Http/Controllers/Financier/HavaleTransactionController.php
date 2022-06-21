@@ -39,6 +39,13 @@ class HavaleTransactionController extends Controller
         return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey);
     }
 
+    public function waitingDepositsApproveChecked()
+    {
+        $permissionKey = 'havale deposit waiting';
+
+        return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, true);
+    }
+
     public function completedWithdraws()
     {
         $permissionKey = 'havale deposit completed';
@@ -82,7 +89,7 @@ class HavaleTransactionController extends Controller
         return $this->handleDynamicIndexData('approved', 'withdraw', 'Onaylanan Cekimler', $permissionKey);
     }
 
-    private function handleDynamicIndexData($statusKey, $typeKey, $title, $permissionKey)
+    private function handleDynamicIndexData($statusKey, $typeKey, $title, $permissionKey, $approveChecked = false)
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
 
@@ -91,6 +98,9 @@ class HavaleTransactionController extends Controller
         $type = $this->transactionTypeRepository->getByKey($typeKey);
 
         $transactions = Transaction::whereIn('client_id', $clientIds)
+            ->when($approveChecked, function ($qq) {
+                return $qq->where('check_performed_by_client', true);
+            })
             ->when($statusKey === 'waiting' && $typeKey === 'deposit', function ($q) use ($status, $approvedStatus) {
                 return $q->where('status_id', $status->id)
                     ->orWhere('status_id', $approvedStatus->id);
