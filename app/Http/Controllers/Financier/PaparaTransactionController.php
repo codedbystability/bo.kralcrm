@@ -84,9 +84,17 @@ class PaparaTransactionController extends Controller
         $status = $this->transactionStatusRepository->getByKey($statusKey);
         $type = $this->transactionTypeRepository->getByKey($typeKey);
 
+        $approvedStatus = $this->transactionStatusRepository->getByKey('approved');
 
         $transactions = Transaction::whereIn('client_id', $clientIds)
-            ->where('status_id', $status->id)
+            ->when($statusKey === 'waiting' && $typeKey === 'deposit', function ($q) use ($status, $approvedStatus) {
+                return $q->where('status_id', $status->id)
+                    ->orWhere('status_id', $approvedStatus->id);
+            }, function ($query) use ($status, $approvedStatus) {
+                return $query->where('status_id', $status->id);
+            })
+
+//            ->where('status_id', $status->id)
             ->where('method_id', $this->paparaMethod->id)
             ->where('type_id', $type->id)
             ->where('is_active', true)
