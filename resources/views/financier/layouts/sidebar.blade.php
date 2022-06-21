@@ -236,7 +236,7 @@
 
                             @can('observe havale deposit waiting')
                                 <ul class="nav nav-treeview"
-                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')  ?'block' : 'none'}};">
+                                    style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
                                     <li class="nav-item ">
                                         <a href="{{route('financier.transactions.havale.waiting-deposits-approve-checked')}}"
                                            class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/waiting-deposits-approve-checked' ?'active' : ''}}">
