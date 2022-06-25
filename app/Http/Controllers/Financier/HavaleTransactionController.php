@@ -102,8 +102,10 @@ class HavaleTransactionController extends Controller
                 return $qq->where('check_performed_by_client', true);
             })
             ->when($statusKey === 'waiting' && $typeKey === 'deposit', function ($q) use ($status, $approvedStatus) {
-                return $q->where('status_id', $status->id)
-                    ->orWhere('status_id', $approvedStatus->id);
+                return $q->where(function ($qqq) use ($status, $approvedStatus) {
+                    return $qqq->where('status_id', $status->id)
+                        ->orWhere('status_id', $approvedStatus->id);
+                });
             }, function ($query) use ($status, $approvedStatus) {
                 return $query->where('status_id', $status->id);
             })
