@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class HavaleTransactionController extends Controller
 {
-    private $paparaMethod, $transactionTypeRepository, $transactionStatusRepository;
+    private $havaleMethod, $transactionTypeRepository, $transactionStatusRepository;
 
     public function __construct()
     {
         $transactionMethodRepository = new TransactionMethodRepository();
-        $this->paparaMethod = $transactionMethodRepository->getByKey('havale');
+        $this->havaleMethod = $transactionMethodRepository->getByKey('havale');
 
         $this->transactionStatusRepository = new TransactionStatusRepository();
         $this->transactionTypeRepository = new TransactionTypeRepository();
@@ -109,7 +109,7 @@ class HavaleTransactionController extends Controller
             })
 
 //            ->where('status_id', $status->id)
-            ->where('method_id', $this->paparaMethod->id)
+            ->where('method_id', $this->havaleMethod->id)
             ->where('type_id', $type->id)
             ->where('is_active', true)
             ->select(['id', 'client_id', 'is_active', 'direct_approve', 'currency_code', 'status_id', 'type_id', 'method_id', 'account_id', 'amount', 'approved_amount', 'transactionable_id', 'transactionable_type', 'edit_time'])

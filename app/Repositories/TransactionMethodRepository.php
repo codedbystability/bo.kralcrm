@@ -32,10 +32,7 @@ class TransactionMethodRepository
 
     public function getByKey($key)
     {
-        Log::info($key);
-        return Cache::remember('transaction-method-' . $key, now()->addMinutes(5), function () use ($key) {
-            return $this->model->where('key', $key)->first();
-        });
+        return $this->model->where('key', $key)->first();
     }
 
 }
