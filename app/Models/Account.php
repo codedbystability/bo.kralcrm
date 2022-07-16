@@ -31,6 +31,11 @@ class Account extends Model
         return $this->belongsTo(AccountType::class, 'type_id');
     }
 
+    public function client(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(AccountType::class, 'client_id');
+    }
+
     public function getTodayCountAttribute(): int
     {
         return $this->transactions()->whereDate('updated_at', Carbon::today())->count();
