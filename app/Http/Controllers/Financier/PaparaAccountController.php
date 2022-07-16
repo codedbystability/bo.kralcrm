@@ -90,10 +90,10 @@ class PaparaAccountController extends Controller
         $accounts = $this->getPaparaAccountsToList($clientIds, $clientID, $currencyID);
 
 
-        return view('financier.bank-accounts.index')->with([
+        return view('financier.papara-accounts.index')->with([
             'data' => $accounts,
-            'clients' => $clients,
             'currencies' => $currencies,
+            'clients' => $clients,
             'currencyID' => $currencyID,
             'clientID' => $clientID
         ]);
