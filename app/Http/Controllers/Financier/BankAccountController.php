@@ -37,6 +37,7 @@ class BankAccountController extends Controller
                     ->when($currencyID, function ($query) use ($currencyID) {
                         return $query->where('currency_id', $currencyID);
                     })
+
                     ->with(['accountable' => function ($query) {
                         return $query
                             ->with(['bank' => function ($q) {
@@ -73,10 +74,10 @@ class BankAccountController extends Controller
     {
         $clientID = null;
         $currencyID = null;
-        if ($request->exist('client_id') && $request->get('client_id') != '') {
+        if ($request->exists('client_id') && $request->get('client_id') != '') {
             $clientID = $request->get('client_id');
         }
-        if ($request->exist('currency_id') && $request->get('currency_id') != '') {
+        if ($request->exists('currency_id') && $request->get('currency_id') != '') {
             $currencyID = $request->get('currency_id');
         }
 
@@ -86,6 +87,8 @@ class BankAccountController extends Controller
         $currencies = Currency::where('is_active', true)->get();
 
         $accounts = $this->getBankAccountsToList($clientID, $clientID, $currencyID);
+
+
         return view('financier.bank-accounts.index')->with([
             'data' => $accounts,
             'clients' => $clients,
