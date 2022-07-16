@@ -29,18 +29,11 @@ class PaparaAccountController extends Controller
 
     public function getPaparaAccountsToList($clientID = false, $currencyID = false)
     {
-        return Account::where('id', '!=', 0)
-            ->when($clientID, function ($query) use ($clientID) {
-                return $query->where('client_id', $clientID);
-            })
-            ->when($currencyID, function ($query) use ($currencyID) {
-                return $query->where('currency_id', $currencyID);
-            })
-            ->whereHasMorph('accountable', PaparaAccount::class, function ($query) {
-                return $query->with(['accountable' => function ($query) {
-                    return $query->select('id', 'currency_id', 'accno', 'owner', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
-                }]);
-            })
+        return Account::whereHasMorph('accountable', PaparaAccount::class, function ($query) {
+            return $query->with(['accountable' => function ($query) {
+                return $query->select('id', 'currency_id', 'accno', 'owner', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
+            }]);
+        })
             ->has('type')
             ->with(['type' => function ($q) {
                 return $q->select('id', 'name', 'key');
@@ -48,6 +41,12 @@ class PaparaAccountController extends Controller
             ->with(['currency' => function ($q) {
                 return $q->select('id', 'name', 'local_name', 'symbol');
             }])
+            ->when($clientID, function ($query) use ($clientID) {
+                return $query->where('client_id', $clientID);
+            })
+            ->when($currencyID, function ($query) use ($currencyID) {
+                return $query->where('currency_id', $currencyID);
+            })
             ->paginate(10);
 
     }
