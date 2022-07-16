@@ -58,6 +58,10 @@ class BankAccountController extends Controller
         ]);
     }
 
+    public function filter(Request $request){
+        dd($request->all());
+    }
+
     public function create()
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();

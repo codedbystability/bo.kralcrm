@@ -22,26 +22,47 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Musteri</label>
-                        <select name="client_id" id="client_id">
-                            @foreach($clients as $client)
-                                <option value="{{$client->id}}">{{$client->username}}</option>
-                            @endforeach
-                        </select>
+                    <form method="POST" action="{{ route('financier.bank-accounts.filter') }}">
+                        @csrf
+                        <div class="card-body">
 
-                    </div>
+                            <div class="form-group">
+                                <label for="client_id">Musteri</label>
+                                <select class="custom-select form-control-border" name="currency_id"
+                                        required
+                                        id="client_id">
+                                    @foreach($clients as $client)
+                                        <option value="{{$client->id}}">{{$client->username}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Para Birimi</label>
-                        <select name="currency_id" id="currency_id">
-                            @foreach($currencies as $currency)
-                                <option value="{{$currency->id}}">{{$client->symbol}}</option>
-                            @endforeach
-                        </select>
 
-                    </div>
+
+                            <div class="form-group">
+                                <label for="client_id">Para Birimi</label>
+                                <select class="custom-select form-control-border" name="currency_id"
+                                        required
+                                        id="client_id">
+                                    @foreach($currencies as $currency)
+                                        <option value="{{$currency->id}}">{{$currency->symbol}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
+
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+                        </div>
+                    </form>
+
+
+
 
                 </div>
                 <!-- /.card-body -->
