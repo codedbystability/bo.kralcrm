@@ -27,13 +27,14 @@ class PaparaAccountController extends Controller
         $this->paparaAccountRepository = new PaparaAccountRepository();
     }
 
-    public function getPaparaAccountsToList($clientID = false, $currencyID = false)
+    public function getPaparaAccountsToList($clientIds = [], $clientID = null, $currencyID = null)
     {
-        return Account::whereHasMorph('accountable', PaparaAccount::class, function ($query) {
-            return $query->with(['accountable' => function ($query) {
-                return $query->select('id', 'currency_id', 'accno', 'owner', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
-            }]);
-        })
+        return Account::whereIn('client_id', $clientIds)
+            ->whereHasMorph('accountable', PaparaAccount::class, function ($query) {
+                return $query->with(['accountable' => function ($query) {
+                    return $query->select('id', 'currency_id', 'accno', 'owner', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
+                }]);
+            })
             ->has('type')
             ->with(['type' => function ($q) {
                 return $q->select('id', 'name', 'key');
@@ -56,7 +57,7 @@ class PaparaAccountController extends Controller
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
 
-        $accounts = $this->getPaparaAccountsToList();
+        $accounts = $this->getPaparaAccountsToList($clientIds, null, null);
         $currencies = Currency::where('is_active', true)->get();
         $clients = Client::whereIn('id', $clientIds)->get();
 
@@ -86,7 +87,7 @@ class PaparaAccountController extends Controller
         $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
 
-        $accounts = $this->getPaparaAccountsToList($clientID, $currencyID);
+        $accounts = $this->getPaparaAccountsToList($clientIds, $clientID, $currencyID);
 
 
         return view('financier.bank-accounts.index')->with([
