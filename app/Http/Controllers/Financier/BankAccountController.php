@@ -28,15 +28,7 @@ class BankAccountController extends Controller
 
     public function getBankAccountsToList($clientIds, $clientID = null, $currencyID = null)
     {
-        return Account::where('id','!=',0)
-            ->when($clientID, function ($query) use ($clientID) {
-                return $query->where('client_id', $clientID);
-            })
-            ->when($currencyID, function ($query) use ($currencyID) {
-                return $query->where('currency_id', $currencyID);
-            })
-
-            ->whereIn('client_id', $clientIds)
+        return Account::whereIn('client_id', $clientIds)
             ->whereHasMorph('accountable', BankAccount::class, function ($query) use ($clientID, $currencyID) {
                 return $query
                     ->with(['accountable' => function ($query) {
@@ -44,15 +36,22 @@ class BankAccountController extends Controller
                             ->with(['bank' => function ($q) {
                                 return $q->select('id', 'name', 'image');
                             }])
-                            ->with(['currency' => function ($q) {
-                                return $q->select('id', 'name', 'local_name', 'symbol');
-                            }])
                             ->select('id', 'currency_id', 'bank_id', 'accno', 'iban', 'owner', 'branch', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
                     }]);
             })->with(['type' => function ($q) {
                 return $q->select('id', 'name', 'key');
             }])
             ->with('client')
+            ->with(['currency' => function ($q) {
+                return $q->select('id', 'name', 'local_name', 'symbol');
+            }])
+            ->when($clientID, function ($query) use ($clientID) {
+                return $query->where('client_id', $clientID);
+            })
+            ->when($currencyID, function ($query) use ($currencyID) {
+                return $query->where('currency_id', $currencyID);
+            })
+
             ->paginate(20);
     }
 

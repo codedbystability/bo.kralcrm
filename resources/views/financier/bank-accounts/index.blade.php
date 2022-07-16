@@ -174,7 +174,7 @@
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
                                                 <td>{{$agreement->id}}</td>
 
-                                                <td class="sorting_1 dtr-control">{{$agreement->accountable->currency->symbol}}</td>
+                                                <td class="sorting_1 dtr-control">{{$agreement->currency->symbol}}</td>
                                                 <td class="sorting_1 dtr-control">{{$agreement->accountable->bank->name}}</td>
                                                 <td class="sorting_1 dtr-control">{{\App\Enums\AccountTypeEnum::get($agreement->type->key)}}</td>
                                                 {{--                                            <td>{{$agreement->accountable->accno}}</td>--}}
