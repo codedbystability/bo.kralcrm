@@ -23,7 +23,6 @@ Route::get('/test-permissions/{financierName}', function ($financierName) {
 });
 
 
-
 Route::prefix('admin')->group(function () {
 
     Route::get('login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'loginUI'])->name('admin.loginUI');
@@ -119,8 +118,8 @@ Route::prefix('financier')->group(function () {
 
         Route::resource('banks', \App\Http\Controllers\Financier\BankController::class, ['as' => 'financier']);
         Route::get('banks/passive/{id}', [\App\Http\Controllers\Financier\BankController::class, 'deactivate'])->name('financier.banks.passive');
-        Route::post('/bank-accounts/filter',[ \App\Http\Controllers\Financier\BankAccountController::class,'filter'])->name('financier.bank-accounts.filter');
-        Route::resource('bank-accounts', \App\Http\Controllers\Financier\BankAccountController::class, ['as' => 'financier']);
+        Route::post('/bank-accounts/filter', [\App\Http\Controllers\Financier\BankAccountController::class, 'filter'])->name('financier.bank-accounts.filter');
+        Route::resource('bank-accounts', \App\Http\Controllers\Financier\BankAccountController::class, ['as' => 'financier', 'except' => 'show']);
         Route::get('/bank-accounts/activate/{id}', [\App\Http\Controllers\Financier\BankAccountController::class, 'activate'])->name('financier.bank-accounts.activate');
         Route::resource('papara-accounts', \App\Http\Controllers\Financier\PaparaAccountController::class, ['as' => 'financier']);
 
