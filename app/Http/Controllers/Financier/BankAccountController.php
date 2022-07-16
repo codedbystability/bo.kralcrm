@@ -86,7 +86,7 @@ class BankAccountController extends Controller
         $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
 
-        $accounts = $this->getBankAccountsToList($clientID, $clientID, $currencyID);
+        $accounts = $this->getBankAccountsToList($clientIds, $clientID, $currencyID);
 
 
         return view('financier.bank-accounts.index')->with([
