@@ -66,7 +66,9 @@ class BankAccountController extends Controller
         return view('financier.bank-accounts.index')->with([
             'data' => $accounts,
             'clients' => $clients,
-            'currencies' => $currencies
+            'currencies' => $currencies,
+            'currencyID' => null,
+            'clientID' => null
         ]);
     }
 
