@@ -22,6 +22,8 @@ Route::get('/test-permissions/{financierName}', function ($financierName) {
     ]);
 });
 
+
+
 Route::prefix('admin')->group(function () {
 
     Route::get('login', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'loginUI'])->name('admin.loginUI');

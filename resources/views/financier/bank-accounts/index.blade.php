@@ -21,6 +21,38 @@
 
                 </div>
                 <div class="card-body">
+
+                    <div class="col-lg-12">
+                        <select name="client_id" id="client_id">
+                            @foreach($clients as $client)
+                                <option value="{{$client->id}}">{{$client->username}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+        <!-- /.col -->
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+{{--                <div class="card-header text-right">--}}
+{{--                    @can('add bank account')--}}
+{{--                        <a href="{{route('financier.bank-accounts.create')}}" type="button" class="btn btn-primary">--}}
+{{--                            <i class="fa fa-plus-circle"></i> <strong>Yeni Kayit</strong>--}}
+{{--                        </a>--}}
+{{--                    @endcan--}}
+
+{{--                </div>--}}
+
+                <div class="card-body">
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">

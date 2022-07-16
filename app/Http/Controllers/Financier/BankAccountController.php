@@ -29,6 +29,8 @@ class BankAccountController extends Controller
     public function index()
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
+        $clients = Client::whereIn('id', $clientIds)->get();
+
         $accounts = Account::whereIn('client_id', $clientIds)
             ->whereHasMorph('accountable', BankAccount::class, function ($query) {
                 return $query->with(['accountable' => function ($query) {
@@ -44,11 +46,13 @@ class BankAccountController extends Controller
             })->with(['type' => function ($q) {
                 return $q->select('id', 'name', 'key');
             }])
+            ->with('client')
             ->paginate(20);
 
 
         return view('financier.bank-accounts.index')->with([
-            'data' => $accounts
+            'data' => $accounts,
+            'clients' => $clients
         ]);
     }
 
