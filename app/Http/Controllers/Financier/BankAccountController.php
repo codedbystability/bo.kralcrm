@@ -30,6 +30,7 @@ class BankAccountController extends Controller
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
         $clients = Client::whereIn('id', $clientIds)->get();
+        $currencies = Currency::where('is_active', true)->get();
 
         $accounts = Account::whereIn('client_id', $clientIds)
             ->whereHasMorph('accountable', BankAccount::class, function ($query) {
@@ -52,7 +53,8 @@ class BankAccountController extends Controller
 
         return view('financier.bank-accounts.index')->with([
             'data' => $accounts,
-            'clients' => $clients
+            'clients' => $clients,
+            'currencies' => $currencies
         ]);
     }
 
