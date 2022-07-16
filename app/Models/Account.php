@@ -36,6 +36,11 @@ class Account extends Model
         return $this->belongsTo(AccountType::class, 'client_id');
     }
 
+    public function currency(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
+
     public function getTodayCountAttribute(): int
     {
         return $this->transactions()->whereDate('updated_at', Carbon::today())->count();

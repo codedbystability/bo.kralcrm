@@ -143,26 +143,26 @@
                                     </thead>
                                     <tbody>
 
-                                    @foreach($data as $key=> $agreement)
+                                    @foreach($data as $key=> $account)
                                         <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
-                                            <td>{{$agreement->id}}</td>
-                                            <td>{{$agreement->accountable->currency->symbol}}</td>
+                                            <td>{{$account->id}}</td>
+                                            <td>{{$account->currency->symbol}}</td>
 
                                             <td>PAPARA</td>
-                                            <td class="sorting_1 dtr-control">{{\App\Enums\AccountTypeEnum::get($agreement->type->key)}}</td>
-                                            <td>{{$agreement->accountable->owner}}</td>
-                                            <td>{{$agreement->accountable->accno}}</td>
+                                            <td class="sorting_1 dtr-control">{{\App\Enums\AccountTypeEnum::get($account->type->key)}}</td>
+                                            <td>{{$account->accountable->owner}}</td>
+                                            <td>{{$account->accountable->accno}}</td>
 
-                                            <td>{{$agreement->todayCount}}</td>
-                                            <td>{{$agreement->todayDeposit}}</td>
-                                            <td>{{$agreement->todayWithdraw}}</td>
-                                            <td>{{$agreement->todayNet}}</td>
+                                            <td>{{$account->todayCount}}</td>
+                                            <td>{{$account->todayDeposit}}</td>
+                                            <td>{{$account->todayWithdraw}}</td>
+                                            <td>{{$account->todayNet}}</td>
                                             <td class="project-actions d-flex justify-content-around">
 
                                                 @can('update papara account')
 
                                                     <form
-                                                        action="{{ route('financier.papara-accounts.edit', $agreement->accountable->id) }}"
+                                                        action="{{ route('financier.papara-accounts.edit', $account->accountable->id) }}"
                                                         method="GET">
                                                         <button type="submit" class="btn btn-primary btn-sm mt-1">
                                                             <i class="fas fa-pencil-alt">
@@ -177,7 +177,7 @@
                                                 @can('delete papara account')
 
                                                     <form
-                                                        action="{{ route('financier.papara-accounts.destroy', $agreement->accountable->id) }}"
+                                                        action="{{ route('financier.papara-accounts.destroy', $account->accountable->id) }}"
                                                         method="POST">
                                                         <button type="submit" class="btn btn-danger btn-sm mt-1">
                                                             {{ method_field('DELETE') }}
