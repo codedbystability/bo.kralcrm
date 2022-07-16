@@ -279,54 +279,17 @@ class TransactionController extends Controller
         $accounts = Account::whereIn('client_id', $clientIds)
             ->where('is_active', true)
             ->has('accountable')
-            // CLIENT EGER KISISEL HESAPLARINI KULLANMAK ISTIYORSA
-//            ->when($clientAccountAgreement->accountType->key === 'personal',
-//                function ($query) use ($transaction) {
-//                    return $query->where(function ($qqq) use ($transaction) {
-//                        return $qqq->where('client_id', $transaction->client_id)
-//                            ->whereHas('type', function ($typeQuery) {
-//                                return $typeQuery->where('key', 'personal');
-//                            });
-//                    });
-//                })
-//            // CLIENT EGER SISTEMIN HESAPLARINI KULLANMAK ISTIYORSA
-//            ->when($clientAccountAgreement->accountType->key === 'global',
-//                function ($query) use ($transaction) {
-//                    return $query->where(function ($qqq) {
-//                        return $qqq->whereNull('client_id')
-//                            ->whereHas('type', function ($typeQuery) {
-//                                return $typeQuery->where('key', 'global');
-//                            });
-//                    });
-//                })
-//            // CLIENT EGER TUM HESAPLARI KULLANMAK ISTIYORSA
-//            ->when($clientAccountAgreement->accountType->key === 'all',
-//                function ($query) use ($transaction) {
-//                    return $query->where(function ($qqq) use ($transaction) {
-//                        return $qqq->whereNull('client_id')
-//                            ->orWhere('client_id', $transaction->client_id);
-//                    });
-//                })
             ->where(function ($qqq) use ($transaction) {
                 return $qqq->whereNull('client_id')
                     ->orWhere('client_id', $transaction->client_id);
             })
-            //            ->when($transaction->method->key === 'papara',
-//                function ($query) use ($transaction) {
-//                    return $query->whereHasMorph('accountable', PaparaAccount::class, function ($query) use ($transaction) {
-//                        return $query->where('currency_id', $transaction->currency_id);
-//                    })->with('accountable', 'accountable.currency');
-//                },
-//                function ($query) use ($transaction) {
-//                    return $query->whereHasMorph('accountable', BankAccount::class, function ($query) use ($transaction) {
-//                        return $query->where('currency_id', $transaction->currency_id);
-//                    })->with('accountable.bank', 'accountable.currency');
-//                })
             ->when($transaction->method->key === 'havale', function ($q) use ($transaction, $formFilter) {
                 return $q->whereHasMorph('accountable', BankAccount::class, function ($query) use ($transaction, $formFilter) {
                     return $query->whereHas('bank', function ($qq) use ($formFilter) {
                         return $qq->where('name', $formFilter['bankName']);
-                    })->where('currency_id', $transaction->currency_id)->where(function ($qqq) use ($formFilter) {
+                    })
+//                        ->where('currency_id', $transaction->currency_id)
+                        ->where(function ($qqq) use ($formFilter) {
                         return $qqq
                             ->when($formFilter['owner'], function ($q) use ($formFilter) {
                                 return $q->orWhere('owner', 'like', '%' . $formFilter['owner'] . '%');
