@@ -17,9 +17,8 @@
                             <i class="fa fa-plus-circle"></i> <strong>Yeni Kayit</strong>
                         </a>
                     @endcan
-
-
                 </div>
+
                 <div class="card-body">
 
                     <form method="POST" action="{{ route('financier.bank-accounts.filter') }}">
