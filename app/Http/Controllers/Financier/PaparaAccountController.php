@@ -86,6 +86,7 @@ class PaparaAccountController extends Controller
         $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
 
+        dd($clientID, $currencyID);
         $accounts = $this->getPaparaAccountsToList($clientID, $currencyID);
 
 
