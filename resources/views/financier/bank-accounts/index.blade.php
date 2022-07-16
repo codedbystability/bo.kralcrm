@@ -32,7 +32,7 @@
                                     @foreach($clients as $client)
                                         <option
                                             value="{{$client->id}}"
-                                            @if($clientID === $client->id)selected="selected"@endif>
+                                            @if($clientID == $client->id)selected="selected"@endif>
                                             {{$client->username}}
                                         </option>
                                     @endforeach
@@ -46,7 +46,7 @@
                                     <option value="" selected>Para Birimi Seciniz</option>
                                     @foreach($currencies as $currency)
                                         <option value="{{$currency->id}}"
-                                                @if($currencyID === $currency->id)
+                                                @if($currencyID == $currency->id)
                                                     selected="selected"
                                             @endif
                                         >{{$currency->symbol}}</option>
