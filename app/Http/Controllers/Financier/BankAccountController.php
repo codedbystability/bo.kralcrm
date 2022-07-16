@@ -28,16 +28,17 @@ class BankAccountController extends Controller
 
     public function getBankAccountsToList($clientIds, $clientID = null, $currencyID = null)
     {
-        return Account::whereIn('client_id', $clientIds)
+        return Account::where('id','!=',0)
+            ->when($clientID, function ($query) use ($clientID) {
+                return $query->where('client_id', $clientID);
+            })
+            ->when($currencyID, function ($query) use ($currencyID) {
+                return $query->where('currency_id', $currencyID);
+            })
+
+            ->whereIn('client_id', $clientIds)
             ->whereHasMorph('accountable', BankAccount::class, function ($query) use ($clientID, $currencyID) {
                 return $query
-                    ->when($clientID, function ($query) use ($clientID) {
-                        return $query->where('client_id', $clientID);
-                    })
-                    ->when($currencyID, function ($query) use ($currencyID) {
-                        return $query->where('currency_id', $currencyID);
-                    })
-
                     ->with(['accountable' => function ($query) {
                         return $query
                             ->with(['bank' => function ($q) {

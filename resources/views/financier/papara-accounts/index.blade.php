@@ -26,19 +26,19 @@
                         @csrf
                         <div class="card-body">
 
-{{--                            <div class="form-group">--}}
-{{--                                <label for="client_id">Musteri</label>--}}
-{{--                                <select class="custom-select form-control-border" name="client_id" id="client_id">--}}
-{{--                                    <option value="">Musteri Seciniz</option>--}}
-{{--                                    @foreach($clients as $client)--}}
-{{--                                        <option--}}
-{{--                                            value="{{$client->id}}"--}}
-{{--                                            @if($clientID == $client->id)selected="selected"@endif>--}}
-{{--                                            {{$client->username}}--}}
-{{--                                        </option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
+                            <div class="form-group">
+                                <label for="client_id">Musteri</label>
+                                <select class="custom-select form-control-border" name="client_id" id="client_id">
+                                    <option value="">Musteri Seciniz</option>
+                                    @foreach($clients as $client)
+                                        <option
+                                            value="{{$client->id}}"
+                                            @if($clientID == $client->id)selected="selected"@endif>
+                                            {{$client->username}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
 
                             <div class="form-group">

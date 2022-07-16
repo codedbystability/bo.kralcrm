@@ -27,15 +27,22 @@ class PaparaAccountController extends Controller
         $this->paparaAccountRepository = new PaparaAccountRepository();
     }
 
-    public function getPaparaAccountsToList( $currencyID = null)
+    public function getPaparaAccountsToList($clientID = null, $currencyID = null)
     {
-        return Account::whereHasMorph('accountable', PaparaAccount::class, function ($query) {
-            return $query->with(['accountable' => function ($query) {
-                return $query->with(['currency' => function ($q) {
-                    return $q->select('id', 'name', 'local_name', 'symbol');
-                }])->select('id', 'currency_id', 'accno', 'owner', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
-            }]);
-        })
+        return Account::where('id', '!=', 0)
+            ->when($clientID, function ($query) use ($clientID) {
+                return $query->where('client_id', $clientID);
+            })
+            ->when($currencyID, function ($query) use ($currencyID) {
+                return $query->where('currency_id', $currencyID);
+            })
+            ->whereHasMorph('accountable', PaparaAccount::class, function ($query) {
+                return $query->with(['accountable' => function ($query) {
+                    return $query->with(['currency' => function ($q) {
+                        return $q->select('id', 'name', 'local_name', 'symbol');
+                    }])->select('id', 'currency_id', 'accno', 'owner', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
+                }]);
+            })
             ->has('type')
             ->with(['type' => function ($q) {
                 return $q->select('id', 'name', 'key');
@@ -47,30 +54,36 @@ class PaparaAccountController extends Controller
 
     public function index()
     {
+        $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
+
         $accounts = $this->getPaparaAccountsToList();
         $currencies = Currency::where('is_active', true)->get();
+        $clients = Client::whereIn('id', $clientIds)->get();
 
         return view('financier.papara-accounts.index')->with([
             'data' => $accounts,
             'currencies' => $currencies,
-            'currencyID' => null
+            'clients' => $clients,
+            'currencyID' => null,
+            'clientID' => null
+
         ]);
     }
 
     public function filter(Request $request)
     {
-//        $clientID = null;
+        $clientID = null;
         $currencyID = null;
-//        if ($request->exists('client_id') && $request->get('client_id') != '') {
-//            $clientID = $request->get('client_id');
-//        }
+        if ($request->exists('client_id') && $request->get('client_id') != '') {
+            $clientID = $request->get('client_id');
+        }
         if ($request->exists('currency_id') && $request->get('currency_id') != '') {
             $currencyID = $request->get('currency_id');
         }
 
 
-//        $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
-//        $clients = Client::whereIn('id', $clientIds)->get();
+        $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
+        $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
 
         $accounts = $this->getPaparaAccountsToList($currencyID);
@@ -78,9 +91,10 @@ class PaparaAccountController extends Controller
 
         return view('financier.bank-accounts.index')->with([
             'data' => $accounts,
-//            'clients' => $clients,
+            'clients' => $clients,
             'currencies' => $currencies,
             'currencyID' => $currencyID,
+            'clientID' => $clientID
         ]);
     }
 
