@@ -27,30 +27,36 @@
 
                             <div class="form-group">
                                 <label for="client_id">Musteri</label>
-                                <select class="custom-select form-control-border" name="currency_id"
+                                <select class="custom-select form-control-border" name="client_id"
                                         required
                                         id="client_id">
+                                    <option value="">Musteri Seciniz</option>
                                     @foreach($clients as $client)
-                                        <option value="{{$client->id}}">{{$client->username}}</option>
+                                        <option value="{{$client->id}}"
+                                                @if(isset($clientID) && $clientID === $client->id)
+                                                    selected="selected"
+                                            @endif
+                                        >{{$client->username}}</option>
                                     @endforeach
                                 </select>
                             </div>
-
-
 
 
                             <div class="form-group">
                                 <label for="client_id">Para Birimi</label>
                                 <select class="custom-select form-control-border" name="currency_id"
                                         required
-                                        id="client_id">
+                                        id="currency_id">
+                                    <option value="" selected>Para Birimi Seciniz</option>
                                     @foreach($currencies as $currency)
-                                        <option value="{{$currency->id}}">{{$currency->symbol}}</option>
+                                        <option value="{{$currency->id}}"
+                                                @if(isset($currencyID) && $currencyID === $currency->id)
+                                                    selected="selected"
+                                            @endif
+                                        >{{$currency->symbol}}</option>
                                     @endforeach
                                 </select>
                             </div>
-
-
 
 
                         </div>
@@ -59,8 +65,6 @@
                             <button type="submit" class="btn btn-success">Kaydet</button>
                         </div>
                     </form>
-
-
 
 
                 </div>

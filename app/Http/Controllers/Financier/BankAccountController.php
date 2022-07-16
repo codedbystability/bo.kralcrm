@@ -26,30 +26,41 @@ class BankAccountController extends Controller
         $this->bankAccountRepository = new BankAccountRepository();
     }
 
+    public function getBankAccountsToList($clientIds, $clientID = null, $currencyID = null)
+    {
+        return Account::whereIn('client_id', $clientIds)
+            ->whereHasMorph('accountable', BankAccount::class, function ($query) use ($clientID, $currencyID) {
+                return $query
+                    ->when($clientID, function ($query) use ($clientID) {
+                        return $query->where('client_id', $clientID);
+                    })
+                    ->when($currencyID, function ($query) use ($currencyID) {
+                        return $query->where('currency_id', $currencyID);
+                    })
+                    ->with(['accountable' => function ($query) {
+                        return $query
+                            ->with(['bank' => function ($q) {
+                                return $q->select('id', 'name', 'image');
+                            }])
+                            ->with(['currency' => function ($q) {
+                                return $q->select('id', 'name', 'local_name', 'symbol');
+                            }])
+                            ->select('id', 'currency_id', 'bank_id', 'accno', 'iban', 'owner', 'branch', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
+                    }]);
+            })->with(['type' => function ($q) {
+                return $q->select('id', 'name', 'key');
+            }])
+            ->with('client')
+            ->paginate(20);
+    }
+
     public function index()
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
         $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
 
-        $accounts = Account::whereIn('client_id', $clientIds)
-            ->whereHasMorph('accountable', BankAccount::class, function ($query) {
-                return $query->with(['accountable' => function ($query) {
-                    return $query
-                        ->with(['bank' => function ($q) {
-                            return $q->select('id', 'name', 'image');
-                        }])
-                        ->with(['currency' => function ($q) {
-                            return $q->select('id', 'name', 'local_name', 'symbol');
-                        }])
-                        ->select('id', 'currency_id', 'bank_id', 'accno', 'iban', 'owner', 'branch', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
-                }]);
-            })->with(['type' => function ($q) {
-                return $q->select('id', 'name', 'key');
-            }])
-            ->with('client')
-            ->paginate(20);
-
+        $accounts = $this->getBankAccountsToList($clientIds, null, null);
 
         return view('financier.bank-accounts.index')->with([
             'data' => $accounts,
@@ -58,8 +69,30 @@ class BankAccountController extends Controller
         ]);
     }
 
-    public function filter(Request $request){
-        dd($request->all());
+    public function filter(Request $request)
+    {
+        $clientID = null;
+        $currencyID = null;
+        if ($request->exist('client_id') && $request->get('client_id') != '') {
+            $clientID = $request->get('client_id');
+        }
+        if ($request->exist('currency_id') && $request->get('currency_id') != '') {
+            $currencyID = $request->get('currency_id');
+        }
+
+
+        $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
+        $clients = Client::whereIn('id', $clientIds)->get();
+        $currencies = Currency::where('is_active', true)->get();
+
+        $accounts = $this->getBankAccountsToList($clientID, $clientID, $currencyID);
+        return view('financier.bank-accounts.index')->with([
+            'data' => $accounts,
+            'clients' => $clients,
+            'currencies' => $currencies,
+            'currencyID' => $currencyID,
+            'clientID' => $clientID
+        ]);
     }
 
     public function create()
