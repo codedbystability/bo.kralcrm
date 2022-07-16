@@ -27,14 +27,12 @@ class PaparaAccountController extends Controller
         $this->paparaAccountRepository = new PaparaAccountRepository();
     }
 
-    public function getPaparaAccountsToList($currencyID = null)
+    public function getPaparaAccountsToList( $currencyID = null)
     {
-        return Account::whereHasMorph('accountable', PaparaAccount::class, function ($query) use ($currencyID) {
-            return $query->with(['accountable' => function ($query) use ($currencyID) {
-                return $query->with(['currency' => function ($q) use ($currencyID) {
-                    return $q->when($currencyID, function ($qq) use ($currencyID) {
-                        return $qq->where('currency_id', $currencyID);
-                    })->select('id', 'name', 'local_name', 'symbol');
+        return Account::whereHasMorph('accountable', PaparaAccount::class, function ($query) {
+            return $query->with(['accountable' => function ($query) {
+                return $query->with(['currency' => function ($q) {
+                    return $q->select('id', 'name', 'local_name', 'symbol');
                 }])->select('id', 'currency_id', 'accno', 'owner', 'min_deposit', 'max_deposit', 'min_withdraw', 'max_withdraw');
             }]);
         })

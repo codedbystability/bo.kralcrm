@@ -49,7 +49,8 @@ class PaparaAccountRepository
 
         $account->account()->create([
             'type_id' => $req['type_id'],
-            'client_id' => $req['client_id']
+            'client_id' => $req['client_id'],
+            'currency_id' => $req['currency_id']
         ]);
 
         return $account;
