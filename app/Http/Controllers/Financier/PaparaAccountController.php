@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Bank;
 use App\Models\BankAccount;
 use App\Models\Client;
+use App\Models\ClientFinancier;
 use App\Models\Currency;
 use App\Models\PaparaAccount;
 use App\Repositories\PaparaAccountRepository;
@@ -26,9 +27,9 @@ class PaparaAccountController extends Controller
         $this->paparaAccountRepository = new PaparaAccountRepository();
     }
 
-    public function index()
+    public function getPaparaAccountsToList( $currencyID = null)
     {
-        $accounts = Account::whereHasMorph('accountable', PaparaAccount::class, function ($query) {
+        return Account::whereHasMorph('accountable', PaparaAccount::class, function ($query) {
             return $query->with(['accountable' => function ($query) {
                 return $query->with(['currency' => function ($q) {
                     return $q->select('id', 'name', 'local_name', 'symbol');
@@ -41,11 +42,49 @@ class PaparaAccountController extends Controller
             }])
             ->paginate(10);
 
+    }
+
+
+    public function index()
+    {
+        $accounts = $this->getPaparaAccountsToList();
+        $currencies = Currency::where('is_active', true)->get();
 
         return view('financier.papara-accounts.index')->with([
             'data' => $accounts,
+            'currencies' => $currencies,
+            'currencyID' => null
         ]);
     }
+
+    public function filter(Request $request)
+    {
+//        $clientID = null;
+        $currencyID = null;
+//        if ($request->exists('client_id') && $request->get('client_id') != '') {
+//            $clientID = $request->get('client_id');
+//        }
+        if ($request->exists('currency_id') && $request->get('currency_id') != '') {
+            $currencyID = $request->get('currency_id');
+        }
+
+
+//        $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
+//        $clients = Client::whereIn('id', $clientIds)->get();
+        $currencies = Currency::where('is_active', true)->get();
+
+        $accounts = $this->getPaparaAccountsToList($currencyID);
+
+
+        return view('financier.bank-accounts.index')->with([
+            'data' => $accounts,
+//            'clients' => $clients,
+            'currencies' => $currencies,
+            'currencyID' => $currencyID,
+            'clientID' => $clientID
+        ]);
+    }
+
 
     public function create()
     {

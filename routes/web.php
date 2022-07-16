@@ -121,6 +121,7 @@ Route::prefix('financier')->group(function () {
         Route::post('/bank-accounts/filter', [\App\Http\Controllers\Financier\BankAccountController::class, 'filter'])->name('financier.bank-accounts.filter');
         Route::resource('bank-accounts', \App\Http\Controllers\Financier\BankAccountController::class, ['as' => 'financier', 'except' => 'show']);
         Route::get('/bank-accounts/activate/{id}', [\App\Http\Controllers\Financier\BankAccountController::class, 'activate'])->name('financier.bank-accounts.activate');
+        Route::post('/papara-accounts/filter', [\App\Http\Controllers\Financier\PaparaAccountController::class, 'filter'])->name('financier.papara-accounts.filter');
         Route::resource('papara-accounts', \App\Http\Controllers\Financier\PaparaAccountController::class, ['as' => 'financier']);
 
         Route::get('notes/mark/{id}', [\App\Http\Controllers\Financier\NoteController::class, 'mark'])->name('financier.notes.mark');

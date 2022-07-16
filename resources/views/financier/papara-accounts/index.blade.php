@@ -7,7 +7,6 @@
 
 @section('content')
 
-
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -18,6 +17,67 @@
                             <i class="fa fa-plus-circle"></i> <strong>Yeni Kayit</strong></a>
 
                     @endcan
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST" action="{{ route('financier.papara-accounts.filter') }}">
+                        @csrf
+                        <div class="card-body">
+
+{{--                            <div class="form-group">--}}
+{{--                                <label for="client_id">Musteri</label>--}}
+{{--                                <select class="custom-select form-control-border" name="client_id" id="client_id">--}}
+{{--                                    <option value="">Musteri Seciniz</option>--}}
+{{--                                    @foreach($clients as $client)--}}
+{{--                                        <option--}}
+{{--                                            value="{{$client->id}}"--}}
+{{--                                            @if($clientID == $client->id)selected="selected"@endif>--}}
+{{--                                            {{$client->username}}--}}
+{{--                                        </option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+
+
+                            <div class="form-group">
+                                <label for="currency_id">Para Birimi</label>
+                                <select class="custom-select form-control-border" name="currency_id" id="currency_id">
+                                    <option value="" selected>Para Birimi Seciniz</option>
+                                    @foreach($currencies as $currency)
+                                        <option value="{{$currency->id}}"
+                                                @if($currencyID == $currency->id)
+                                                    selected="selected"
+                                            @endif
+                                        >{{$currency->symbol}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+                        </div>
+                    </form>
+
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+        <!-- /.col -->
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-header text-right">
 
                 </div>
                 <div class="card-body">
