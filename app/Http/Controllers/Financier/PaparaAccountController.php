@@ -27,7 +27,7 @@ class PaparaAccountController extends Controller
         $this->paparaAccountRepository = new PaparaAccountRepository();
     }
 
-    public function getPaparaAccountsToList($clientID = null, $currencyID = null)
+    public function getPaparaAccountsToList($clientID = false, $currencyID = false)
     {
         return Account::where('id', '!=', 0)
             ->when($clientID, function ($query) use ($clientID) {
@@ -86,7 +86,7 @@ class PaparaAccountController extends Controller
         $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
 
-        $accounts = $this->getPaparaAccountsToList($currencyID);
+        $accounts = $this->getPaparaAccountsToList($clientID, $currencyID);
 
 
         return view('financier.bank-accounts.index')->with([
