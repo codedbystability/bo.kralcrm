@@ -41,6 +41,22 @@
 
 
                             <div class="form-group">
+                                <label for="currency_id">Banka</label>
+                                <select class="custom-select form-control-border" name="bank_id" id="bank_id">
+                                    <option value="" selected>Banka Seciniz</option>
+                                    @foreach($banks as $bank)
+                                        <option value="{{$bank->id}}"
+                                                @if($bankID == $bank->id)
+                                                    selected="selected"
+                                            @endif
+                                        >{{$bank->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
+                            <div class="form-group">
                                 <label for="currency_id">Para Birimi</label>
                                 <select class="custom-select form-control-border" name="currency_id" id="currency_id">
                                     <option value="" selected>Para Birimi Seciniz</option>

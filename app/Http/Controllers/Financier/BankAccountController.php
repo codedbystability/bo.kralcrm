@@ -26,11 +26,14 @@ class BankAccountController extends Controller
         $this->bankAccountRepository = new BankAccountRepository();
     }
 
-    public function getBankAccountsToList($clientIds, $clientID = null, $currencyID = null)
+    public function getBankAccountsToList($clientIds, $clientID = null, $currencyID = null, $bankID = null)
     {
         return Account::whereIn('client_id', $clientIds)
-            ->whereHasMorph('accountable', BankAccount::class, function ($query) use ($clientID, $currencyID) {
+            ->whereHasMorph('accountable', BankAccount::class, function ($query) use ($clientID, $currencyID, $bankID) {
                 return $query
+                    ->when($bankID, function ($qq) use ($bankID) {
+                        return $qq->where('bank_id', $bankID);
+                    })
                     ->with(['accountable' => function ($query) {
                         return $query
                             ->with(['bank' => function ($q) {
@@ -51,7 +54,6 @@ class BankAccountController extends Controller
             ->when($currencyID, function ($query) use ($currencyID) {
                 return $query->where('currency_id', $currencyID);
             })
-
             ->paginate(20);
     }
 
@@ -60,6 +62,7 @@ class BankAccountController extends Controller
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
         $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
+        $banks = Bank::all();
 
         $accounts = $this->getBankAccountsToList($clientIds, null, null);
 
@@ -67,14 +70,18 @@ class BankAccountController extends Controller
             'data' => $accounts,
             'clients' => $clients,
             'currencies' => $currencies,
+            'banks' => $banks,
             'currencyID' => null,
-            'clientID' => null
+            'clientID' => null,
+            'bankID' => null,
+
         ]);
     }
 
     public function filter(Request $request)
     {
         $clientID = null;
+        $bankID = null;
         $currencyID = null;
         if ($request->exists('client_id') && $request->get('client_id') != '') {
             $clientID = $request->get('client_id');
@@ -84,16 +91,24 @@ class BankAccountController extends Controller
         }
 
 
+        if ($request->exists('bank_id') && $request->get('bank_id') != '') {
+            $bankID = $request->get('bank_id');
+        }
+
+
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
         $clients = Client::whereIn('id', $clientIds)->get();
         $currencies = Currency::where('is_active', true)->get();
+        $banks = Bank::all();
 
-        $accounts = $this->getBankAccountsToList($clientIds, $clientID, $currencyID);
+        $accounts = $this->getBankAccountsToList($clientIds, $clientID, $currencyID, $bankID);
 
 
         return view('financier.bank-accounts.index')->with([
             'data' => $accounts,
             'clients' => $clients,
+            'banks' => $banks,
+            'bankID' => $bankID,
             'currencies' => $currencies,
             'currencyID' => $currencyID,
             'clientID' => $clientID
