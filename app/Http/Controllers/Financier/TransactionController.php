@@ -285,11 +285,11 @@ class TransactionController extends Controller
             })
             ->when($transaction->method->key === 'havale', function ($q) use ($transaction, $formFilter) {
                 return $q->whereHasMorph('accountable', BankAccount::class, function ($query) use ($transaction, $formFilter) {
-                    return $query->whereHas('bank', function ($qq) use ($formFilter) {
-                        return $qq->where('name', $formFilter['bankName']);
-                    })
+//                    return $query->whereHas('bank', function ($qq) use ($formFilter) {
+//                        return $qq->where('name', $formFilter['bankName']);
+//                    })
 //                        ->where('currency_id', $transaction->currency_id)
-                        ->where(function ($qqq) use ($formFilter) {
+                        return $query->where(function ($qqq) use ($formFilter) {
                         return $qqq
                             ->when($formFilter['owner'], function ($q) use ($formFilter) {
                                 return $q->orWhere('owner', 'like', '%' . $formFilter['owner'] . '%');
