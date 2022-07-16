@@ -81,7 +81,6 @@ class PaparaAccountController extends Controller
 //            'clients' => $clients,
             'currencies' => $currencies,
             'currencyID' => $currencyID,
-            'clientID' => $clientID
         ]);
     }
 
