@@ -262,7 +262,7 @@
                                     style="display: {{\Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
                                     <li class="nav-item ">
                                         <a href="{{route('financier.transactions.havale.waiting-deposits-account')}}"
-                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/waiting-deposits' ?'active' : ''}}">
+                                           class="nav-link {{\Illuminate\Support\Facades\Request::path() === 'financier/transactions/havale/waiting-deposits-account' ?'active' : ''}}">
                                             <i class="fas fa-home nav-icon"></i>
                                             <p>Hesap Bekleyen Yatirimlar</p>
                                         </a>
