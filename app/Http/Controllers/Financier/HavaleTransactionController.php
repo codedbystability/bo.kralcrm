@@ -71,8 +71,9 @@ class HavaleTransactionController extends Controller
     {
         $permissionKey = 'havale deposit waiting';
 
-        return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, true, false);
+        $dd = $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, true, false);
 
+        dd($dd);
     }
 
     public function approvedDeposits()
@@ -116,7 +117,7 @@ class HavaleTransactionController extends Controller
             }, function ($query) use ($status, $approvedStatus) {
                 return $query->where('status_id', $status->id);
             })
-            ->when(!$bankInfoSent , function ($query) {
+            ->when(!$bankInfoSent, function ($query) {
                 return $query->whereNull('account_id');
             })
 
