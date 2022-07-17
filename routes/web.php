@@ -204,6 +204,9 @@ Route::prefix('financier')->group(function () {
                 Route::get('waiting-deposits', [\App\Http\Controllers\Financier\HavaleTransactionController::class, 'waitingDeposits'])
                     ->name('financier.transactions.havale.waiting-deposits');
 
+                Route::get('waiting-deposits-account', [\App\Http\Controllers\Financier\HavaleTransactionController::class, 'waitingDepositsAccount'])
+                    ->name('financier.transactions.havale.waiting-deposits-account');
+
 
                 Route::get('waiting-deposits-approve-checked', [\App\Http\Controllers\Financier\HavaleTransactionController::class, 'waitingDepositsApproveChecked'])
                     ->name('financier.transactions.havale.waiting-deposits-approve-checked');

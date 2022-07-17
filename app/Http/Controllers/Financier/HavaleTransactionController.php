@@ -67,6 +67,13 @@ class HavaleTransactionController extends Controller
         return $this->handleDynamicIndexData('cancelled', 'deposit', 'Havale Iptal Edilen Yatirimlar', $permissionKey);
     }
 
+    public function waitingDepositsAccount()
+    {
+        $permissionKey = 'havale deposit waiting';
+
+        return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, false);
+
+    }
 
     public function approvedDeposits()
     {
@@ -89,7 +96,7 @@ class HavaleTransactionController extends Controller
         return $this->handleDynamicIndexData('approved', 'withdraw', 'Onaylanan Cekimler', $permissionKey);
     }
 
-    private function handleDynamicIndexData($statusKey, $typeKey, $title, $permissionKey, $approveChecked = false)
+    private function handleDynamicIndexData($statusKey, $typeKey, $title, $permissionKey, $approveChecked = false, $bankInfoSent = true)
     {
         $clientIds = ClientFinancier::where('financier_id', Auth::id())->pluck('client_id')->toArray();
 
@@ -108,6 +115,9 @@ class HavaleTransactionController extends Controller
                 });
             }, function ($query) use ($status, $approvedStatus) {
                 return $query->where('status_id', $status->id);
+            })
+            ->when($bankInfoSent === false, function ($query) {
+                return $query->whereNull('account_id');
             })
 
 //            ->where('status_id', $status->id)
