@@ -39,6 +39,15 @@ class HavaleTransactionController extends Controller
         return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey);
     }
 
+    public function waitingDepositsAccount()
+    {
+        $permissionKey = 'havale deposit waiting';
+
+        return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, false, false);
+
+    }
+
+
     public function waitingDepositsApproveChecked()
     {
         $permissionKey = 'havale deposit waiting';
@@ -67,13 +76,6 @@ class HavaleTransactionController extends Controller
         return $this->handleDynamicIndexData('cancelled', 'deposit', 'Havale Iptal Edilen Yatirimlar', $permissionKey);
     }
 
-    public function waitingDepositsAccount()
-    {
-        $permissionKey = 'havale deposit waiting';
-
-        return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, true, false);
-
-    }
 
     public function approvedDeposits()
     {
