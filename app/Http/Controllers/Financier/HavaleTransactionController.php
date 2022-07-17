@@ -116,7 +116,7 @@ class HavaleTransactionController extends Controller
             }, function ($query) use ($status, $approvedStatus) {
                 return $query->where('status_id', $status->id);
             })
-            ->when($bankInfoSent === false, function ($query) {
+            ->when(!$bankInfoSent , function ($query) {
                 return $query->whereNull('account_id');
             })
 
