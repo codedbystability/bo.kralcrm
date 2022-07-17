@@ -71,7 +71,7 @@ class HavaleTransactionController extends Controller
     {
         $permissionKey = 'havale deposit waiting';
 
-        return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, false);
+        return $this->handleDynamicIndexData('waiting', 'deposit', 'Havale Bekleyen Yatirimlar', $permissionKey, true, false);
 
     }
 
