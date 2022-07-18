@@ -144,6 +144,10 @@ class TransactionController extends Controller
 
         InformClientJob::dispatch($transaction, 'F', $editTime, $statusId)->onQueue('information_queue');
 
+        $message = $transaction->id . ' IPTAL EDILDI ❌';
+        TelegramJob2::dispatch($transaction, $message)->onQueue('telegram_queue2');
+
+
         return $this->setReturnPage($oldTransaction);
     }
 
