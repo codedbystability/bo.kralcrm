@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Financier;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\InformClientJob;
+use App\Jobs\TelegramJob;
 use App\Models\Account;
 use App\Models\Bank;
 use App\Models\BankAccount;
@@ -57,6 +58,14 @@ class TransactionController extends Controller
 
         InformClientJob::dispatch($transaction, 'S', $editTime, $statusId)->onQueue('information_queue');
         $this->setFlash('success', 'Islem Tamamladi !');
+
+        try {
+            $message = $transaction->id . ' ODEME YAPILDI ✅';
+            TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue');
+
+        } catch (\Exception $exception) {
+
+        }
         return $this->setReturnPage($oldTransaction);
     }
 
@@ -389,11 +398,8 @@ class TransactionController extends Controller
             InformClientJob::dispatch($transaction, 'S', $editTime, $statusId)->onQueue('information_queue');
 
             try {
-
                 $message = $transaction->id . ' ODEME YAPILDI ✅';
-                $telegramService = new TelegramService($transaction->client->username, $message, $transaction->type->key, $transaction->method->key);
-                $telegramService->sendMessage();
-
+                TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue');
             } catch (\Exception $exception) {
 
             }

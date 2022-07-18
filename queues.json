@@ -15,5 +15,11 @@
         "script": "artisan",
         "interpreter": "php",
         "args": "queue:work --queue=information_queue --tries=1 --sleep=0"
+    },
+    {
+        "name": "telegram_queue",
+        "script": "artisan",
+        "interpreter": "php",
+        "args": "queue:work --queue=telegram_queue --tries=1 --sleep=0"
     }
 ]
