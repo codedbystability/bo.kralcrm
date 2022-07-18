@@ -14,6 +14,7 @@ use App\Models\PaparaAccount;
 use App\Models\Transaction;
 use App\Repositories\TransactionActionRepository;
 use App\Repositories\TransactionStatusRepository;
+use App\Services\TelegramService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -290,20 +291,20 @@ class TransactionController extends Controller
                     })
 //                        ->where('currency_id', $transaction->currency_id)
                         ->where(function ($qqq) use ($formFilter) {
-                        return $qqq
-                            ->when($formFilter['owner'], function ($q) use ($formFilter) {
-                                return $q->orWhere('owner', 'like', '%' . $formFilter['owner'] . '%');
-                            })
-                            ->when($formFilter['iban'], function ($q) use ($formFilter) {
-                                return $q->orWhere('iban', 'like', '%' . $formFilter['iban'] . '%');
-                            })
-                            ->when($formFilter['accno'], function ($q) use ($formFilter) {
-                                return $q->orWhere('accno', 'like', '%' . $formFilter['accno'] . '%');
-                            })
-                            ->when($formFilter['branch'], function ($q) use ($formFilter) {
-                                return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
-                            });
-                    });
+                            return $qqq
+                                ->when($formFilter['owner'], function ($q) use ($formFilter) {
+                                    return $q->orWhere('owner', 'like', '%' . $formFilter['owner'] . '%');
+                                })
+                                ->when($formFilter['iban'], function ($q) use ($formFilter) {
+                                    return $q->orWhere('iban', 'like', '%' . $formFilter['iban'] . '%');
+                                })
+                                ->when($formFilter['accno'], function ($q) use ($formFilter) {
+                                    return $q->orWhere('accno', 'like', '%' . $formFilter['accno'] . '%');
+                                })
+                                ->when($formFilter['branch'], function ($q) use ($formFilter) {
+                                    return $q->orWhere('branch', 'like', '%' . $formFilter['branch'] . '%');
+                                });
+                        });
                 })
                     ->with('accountable.bank', 'accountable.currency');
             }, function ($q) use ($transaction, $formFilter) {
@@ -381,10 +382,29 @@ class TransactionController extends Controller
 
 
             InformClientJob::dispatch($transaction, 'S', $editTime, $statusId)->onQueue('information_queue');
+
+            try {
+
+                $message = $transaction->id . ' ODEME YAPILDI ✅';
+                $telegramService = new TelegramService($transaction->client->username, $message, $transaction->type->key, $transaction->method->key);
+                $telegramService->sendMessage();
+
+            } catch (\Exception $exception) {
+
+            }
         } else {
 
             $approved = $this->transactionStatusRepository->getByKey($transaction->type->key === 'deposit' ? 'approved' : 'completed');
 
+            try {
+
+                $message = $transaction->id . ' ATAMA YAPILDI ✅';
+                $telegramService = new TelegramService($transaction->client->username, $message, $transaction->type->key, $transaction->method->key);
+                $telegramService->sendMessage();
+
+            } catch (\Exception $exception) {
+
+            }
             $transaction->update([
                 'account_id' => $account->id,
                 'status_id' => $approved->id
