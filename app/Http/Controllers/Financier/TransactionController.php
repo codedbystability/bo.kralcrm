@@ -363,7 +363,7 @@ class TransactionController extends Controller
             return Redirect::back();
         }
 
-        if (!$transaction->status->key !== 'waiting' || !$transaction->staus->key !== 'approved') {
+        if (!$transaction->status->key !== 'waiting' || !$transaction->status->key !== 'approved') {
             $this->setFlash('error', 'Islem Durum Izin Vermemektedir. !');
             return Redirect::back();
         }
