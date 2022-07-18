@@ -17,9 +17,9 @@
         "args": "queue:work --queue=information_queue --tries=1 --sleep=0"
     },
     {
-        "name": "telegram_queue",
+        "name": "telegram_queue2",
         "script": "artisan",
         "interpreter": "php",
-        "args": "queue:work --queue=telegram_queue --tries=1 --sleep=0"
+        "args": "queue:work --queue=telegram_queue2 --tries=1 --sleep=0"
     }
 ]

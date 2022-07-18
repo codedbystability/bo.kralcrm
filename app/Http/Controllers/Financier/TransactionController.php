@@ -61,7 +61,7 @@ class TransactionController extends Controller
 
         try {
             $message = $transaction->id . ' ODEME YAPILDI ✅';
-            TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue');
+            TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue2');
 
         } catch (\Exception $exception) {
 
@@ -399,7 +399,7 @@ class TransactionController extends Controller
 
             try {
                 $message = $transaction->id . ' ODEME YAPILDI ✅';
-                TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue');
+                TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue2');
             } catch (\Exception $exception) {
 
             }
