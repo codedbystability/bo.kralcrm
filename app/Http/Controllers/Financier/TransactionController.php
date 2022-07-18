@@ -363,6 +363,11 @@ class TransactionController extends Controller
             return Redirect::back();
         }
 
+        if (!$transaction->status->key !== 'waiting'){
+            $this->setFlash('error', 'Islem Durum Izin Vermemektedir. !');
+            return Redirect::back();
+        }
+
         $oldTransaction = $transaction;
 
         $account = Account::find($id);
