@@ -15,12 +15,9 @@ use App\Models\PaparaAccount;
 use App\Models\Transaction;
 use App\Repositories\TransactionActionRepository;
 use App\Repositories\TransactionStatusRepository;
-use App\Services\TelegramService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -410,8 +407,7 @@ class TransactionController extends Controller
             try {
 
                 $message = $transaction->id . ' ATAMA YAPILDI ✅';
-                $telegramService = new TelegramService($transaction->client->username, $message, $transaction->type->key, $transaction->method->key);
-                $telegramService->sendMessage();
+                TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue2');
 
             } catch (\Exception $exception) {
 
