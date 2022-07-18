@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Financier;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\InformClientJob;
-use App\Jobs\TelegramJob;
+use App\Jobs\TelegramJob2;
 use App\Models\Account;
 use App\Models\Bank;
 use App\Models\BankAccount;
@@ -58,7 +58,7 @@ class TransactionController extends Controller
 
         try {
             $message = $transaction->id . ' ODEME YAPILDI ✅';
-            TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue2');
+            TelegramJob2::dispatch($transaction, $message)->onQueue('telegram_queue2');
 
         } catch (\Exception $exception) {
 
@@ -396,7 +396,7 @@ class TransactionController extends Controller
 
             try {
                 $message = $transaction->id . ' ODEME YAPILDI ✅';
-                TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue2');
+                TelegramJob2::dispatch($transaction, $message)->onQueue('telegram_queue2');
             } catch (\Exception $exception) {
 
             }
@@ -407,7 +407,7 @@ class TransactionController extends Controller
             try {
 
                 $message = $transaction->id . ' ATAMA YAPILDI ✅';
-                TelegramJob::dispatch($transaction, $message)->onQueue('telegram_queue2');
+                TelegramJob2::dispatch($transaction, $message)->onQueue('telegram_queue2');
 
             } catch (\Exception $exception) {
 
