@@ -49,7 +49,7 @@ class InformClientJob implements ShouldQueue
                 $this->setOldTransaction();
             }
         } catch (\Exception $exception) {
-            InformClientJob::dispatch($this->transaction->id, $this->statusKey, $this->editTime, $this->statusId)
+            InformClientJob::dispatch($this->transaction, $this->statusKey, $this->editTime, $this->statusId)
                 ->onQueue('information_queue')
                 ->delay(Carbon::now()->addSeconds(20));
 
