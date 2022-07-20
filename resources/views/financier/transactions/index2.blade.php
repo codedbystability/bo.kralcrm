@@ -80,7 +80,7 @@
                                                     <h5>#{{$transaction->id}}</h5>
                                                 </td>
                                                 <td class="sorting_1 dtr-control">
-                                                    <h5>{{$transaction->method->name}}</h5>
+                                                    <h5>--</h5>
                                                 </td>
 
                                                 <td>--</td>
@@ -119,16 +119,6 @@
                                                     </form>
 
 
-
-                                                    <button type="submit" class="btn btn-primary btn-sm mt-1"
-                                                            onclick="document.getElementById('transaction_id').value = {{$transaction->id}}"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-lg-note">
-                                                        <i class="fas fa-pen">
-                                                        </i>
-                                                        Not Ekle
-                                                    </button>
-
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -140,11 +130,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-12 table-responsive">
-                                {{$transactions->links("pagination::bootstrap-4")}}
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -152,73 +138,6 @@
 
         </div>
         <!-- /.col -->
-    </div>
-
-    <div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title">ISLEM IPTAL !</h6>
-                </div>
-                <form
-                    action="{{ route('financier.transactions.cancel') }}"
-                    method="POST"
-                    onsubmit="return confirmDelete('Islem Silinecek. Emin misiniz ?')">
-                    @csrf
-                    <div class="modal-body">
-
-                        <input type="hidden" id="transaction_to_cancel" name="transaction_to_cancel">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="owner">Detay Giriniz</label>
-                                <textarea class="form-control" rows="3" placeholder=""
-                                          name="message"
-                                          required
-                                ></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                        <button type="submit" class="btn btn-primary">Islemi Iptal Et</button>
-                    </div>
-
-                </form>
-
-            </div>
-            {{--            <button id="audio-button" onclick="playAudio()" style="visibility: hidden">--}}
-            {{--            </button>--}}
-            {{--            <audio id="audio" type="audio/mp3" src="http://127.0.0.1:8000/audio/notification.mp3" autoplay="true" muted="true"/>--}}
-
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
-    <div class="modal fade" id="modal-lg-note">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <form action="{{route('financier.transactions.add-note')}}" method="POST">
-                    @csrf
-
-                    <div class="modal-body">
-                        <label for="note">Note Giriniz</label>
-                        <textarea class="form-control" name="note" required id="note" cols="30" rows="10"></textarea>
-                        <input type="text" style="display: none" name="transaction_id" id="transaction_id">
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Geri Don</button>
-                        <button type="submit" class="btn btn-primary">Kaydet</button>
-                    </div>
-                </form>
-
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
     </div>
 
 @endsection
