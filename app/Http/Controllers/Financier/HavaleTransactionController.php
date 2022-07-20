@@ -76,7 +76,6 @@ class HavaleTransactionController extends Controller
         return $this->handleDynamicIndexData('cancelled', 'deposit', 'Havale Iptal Edilen Yatirimlar', $permissionKey);
     }
 
-
     public function approvedDeposits()
     {
         $permissionKey = 'havale deposit approved';
