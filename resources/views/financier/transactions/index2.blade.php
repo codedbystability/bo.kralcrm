@@ -367,38 +367,6 @@
         <!-- /.modal-dialog -->
     </div>
 
-    <div class="modal fade" id="modal-lg-approve-payment">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <form
-                    action="{{ route('financier.transactions.complete', isset($transaction) ? $transaction->id : 1) }}"
-                    onsubmit="return confirmDelete('Para sistem hesabina geldi olarak tamamlanacak! Emin misiniz?')"
-                    method="POST">
-
-                    @csrf
-
-                    <div class="modal-body">
-                        <label for="approved_amount">Miktar</label>
-
-
-                        <input type="number" step=".01" class="form-control" name="approved_amount" id="approved_amount">
-                        <span style="color: red;font-size: 10px">*** Gerçekleşen tutar belirtilen tutardan farklıysa lütfen gerçekleşen tutarı giriniz</span>
-
-                        <input type="text" class="form-control" style="display: none" name="complete_transaction_id"
-                               id="complete_transaction_id">
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Geri Don</button>
-                        <button type="submit" class="btn btn-primary">Kaydet</button>
-                    </div>
-                </form>
-
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
 
 @endsection
 

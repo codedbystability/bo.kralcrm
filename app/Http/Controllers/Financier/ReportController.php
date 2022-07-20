@@ -472,6 +472,8 @@ class ReportController extends Controller
             ->where('id', $id)->get();
 
         $theTransaction = $transactions[0];
+
+        dd($theTransaction);
         $permissionKey = '';
         $title = '';
         return view('financier.transactions.index2')->with([
