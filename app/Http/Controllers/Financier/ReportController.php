@@ -134,7 +134,7 @@ class ReportController extends Controller
         })
             ->when($request->get('bank_name'), function ($query) use ($request) {
                 return $query->whereHas('account', function ($qq) use ($request) {
-                    $bank = Bank::where('name',$request->get('bank_name'))->first();
+                    $bank = Bank::where('name', $request->get('bank_name'))->first();
 
                     return $qq->whereHasMorph('accountable', BankAccount::class, function ($query) use ($bank) {
                         return $query->where('bank_id', $bank->id);
@@ -143,7 +143,6 @@ class ReportController extends Controller
 //                    where('key', $request->get('status_name'));
                 });
             })
-
             ->when($request->get('account_id'), function ($query) use ($request) {
                 return $query->whereHas('account', function ($qq) use ($request) {
                     return $qq->whereHasMorph('accountable', BankAccount::class, function ($query) use ($request) {
@@ -152,7 +151,7 @@ class ReportController extends Controller
 
 //                    where('key', $request->get('status_name'));
                 });
-                return $query->where('account_id',$request->get('account_id'));
+                return $query->where('account_id', $request->get('account_id'));
             })
             ->when($request->get('status_name'), function ($query) use ($request) {
                 return $query->whereHas('status', function ($qq) use ($request) {
@@ -204,7 +203,7 @@ class ReportController extends Controller
                 return $query->where('name', $request->get('bank_name'));
             })
                 ->with('currency')
-                ->select('id','iban','branch','currency_id')
+                ->select('id', 'iban', 'branch', 'currency_id')
                 ->get() : [],
             'methods' => $methods,
             'currencies' => $this->currencies,
@@ -469,10 +468,19 @@ class ReportController extends Controller
     public function detailInList(Request $request, $id)
     {
         dd($id);
-//        $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')
-//            ->with('type')
-//            ->where('id', $id)->get();
-//
+        $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable')
+            ->with('type')
+            ->where('id', $id)->get();
+
+        $theTransaction = $transactions[0];
+        $permissionKey = '';
+        $title = '';
+        return view('financier.transactions.index2')->with([
+            'transactions' => $transactions,
+            'permissionKey' => '$permissionKey',
+            'title' => '$title'
+        ]);
+
 //        $theTransactions = $transactions[0];
 //
 //        if ($theTransactions->type->key)
