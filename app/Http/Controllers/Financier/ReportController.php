@@ -473,7 +473,6 @@ class ReportController extends Controller
 
         $theTransaction = $transactions[0];
 
-        dd($theTransaction);
         $permissionKey = '';
         $title = '';
         return view('financier.transactions.index2')->with([
