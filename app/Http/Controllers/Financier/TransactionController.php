@@ -196,8 +196,8 @@ class TransactionController extends Controller
 
         return view('financier.transactions.index')->with([
             'transactions' => $transactions,
-            'permissionKey' => $permissionKey,
-            'title' => $title
+//            'permissionKey' => $permissionKey,
+//            'title' => $title
         ]);
 
 
