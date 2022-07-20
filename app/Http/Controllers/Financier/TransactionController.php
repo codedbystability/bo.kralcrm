@@ -202,7 +202,7 @@ class TransactionController extends Controller
 
         $fields = array_merge($transaction->transactionable->toArray(), [
             'amount' => $transaction->amount,
-            'created_at' => '$transaction->created_at',
+            'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d H:i:s') ,
             'test' => '-'
         ]);
 
