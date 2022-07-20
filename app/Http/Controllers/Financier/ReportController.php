@@ -468,10 +468,7 @@ class ReportController extends Controller
     public function detailInList(Request $request, $id)
     {
         $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable')
-            ->with('type')
             ->where('id', $id)->get();
-
-        $theTransaction = $transactions[0];
 
         $permissionKey = '';
         $title = '';
