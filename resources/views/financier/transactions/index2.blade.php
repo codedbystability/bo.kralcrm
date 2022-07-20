@@ -93,170 +93,31 @@
                                                 <td class="project-actions flex-row flex-lg-wrap">
 
 
-                                                    @if($transaction->status->key === 'waiting')
-                                                        @can('approve ' . $permissionKey)
-                                                            <form
-                                                                action="{{ route('financier.transactions.assign', $transaction->id) }} "
-                                                                method="POST">
-                                                                <button type="submit"
-                                                                        class="btn btn-success btn-sm mt-1">
-                                                                    {{ csrf_field() }}
-                                                                    <i class="fas fa-check-circle">
-                                                                    </i>
-                                                                    {{$transaction->type->key==='deposit' ? 'Hesap Yolla' : 'Islemi Tamamla'}}
-
-                                                                </button>
-                                                            </form>
-
-                                                            {{--                                                            @if($transaction->type->key === 'deposit')--}}
-                                                            {{--                                                                <form--}}
-                                                            {{--                                                                    action="{{ route('financier.transactions.oto-assign', $transaction->id) }}"--}}
-                                                            {{--                                                                    method="POST"--}}
-                                                            {{--                                                                    onsubmit="return confirmDelete('Islem Onaylanacak. Emin misiniz ?')">--}}
-                                                            {{--                                                                    <button type="submit"--}}
-                                                            {{--                                                                            class="btn btn-info btn-sm mt-1">--}}
-                                                            {{--                                                                        {{ csrf_field() }}--}}
-                                                            {{--                                                                        <i class="fas fa-dolly">--}}
-                                                            {{--                                                                        </i>--}}
-                                                            {{--                                                                        Oto Hesap At !--}}
-                                                            {{--                                                                    </button>--}}
-                                                            {{--                                                                </form>--}}
-                                                            {{--                                                            @endif--}}
-
-                                                        @endcan
-
-
-                                                        @can('cancel ' . $permissionKey)
-                                                            <button type="submit" class="btn btn-danger btn-sm mt-1"
-                                                                    data-toggle="modal"
-                                                                    onclick="showCancelModal({{$transaction->id}})"
-                                                                    data-target="#modal-lg">
-                                                                {{ csrf_field() }}
-                                                                <i class="fas fa-trash">
-                                                                </i>
-                                                                Iptal Et
-                                                            </button>
-                                                        @endcan
-
-                                                    @elseif($transaction->status->key === 'approved')
-
-                                                        @can('cancel ' . $permissionKey)
-
-                                                            {{--                                                        && \Carbon\Carbon::now()->diffInSeconds($transaction->edit_time) < 120--}}
-                                                            @if( !$transaction->direct_approve && $transaction->status->key === 'completed' && $transaction->edit_time )
-                                                                <button type="submit" class="btn btn-danger btn-sm mt-1"
-                                                                        data-toggle="modal"
-                                                                        onclick="showCancelModal({{$transaction->id}})"
-                                                                        data-target="#modal-lg">
-                                                                    {{ csrf_field() }}
-                                                                    <i class="fas fa-trash">
-                                                                    </i>
-                                                                    Iptal Et
-                                                                </button>
-
-                                                                @if(!$transaction->direct_approve)
-
-                                                                    <a href="{{route('financier.transactions.direct-approve',['id' => $transaction->id])}}"
-                                                                       class="btn btn-outline-danger btn-sm mt-1">
-                                                                        <i class="fas fa-bomb">
-                                                                        </i>
-                                                                        Beklemeden Onayla !
-                                                                    </a>
-                                                                @endif
-                                                            @endif
 
 
 
-                                                            <form
-                                                                action="{{ route('financier.transactions.bank-info', $transaction->id) }}"
-                                                                method="POST">
-                                                                <button type="submit"
-                                                                        class="btn btn-success btn-sm mt-1">
-                                                                    {{ csrf_field() }}
-                                                                    <i class="fas fa-eye">
-                                                                    </i>
-                                                                    Banka Bilgileri
-                                                                </button>
-                                                            </form>
+                                                    <form
+                                                        action="{{ route('financier.transactions.detail', $transaction->id) }}"
+                                                        method="GET">
+                                                        <button type="submit" class="btn btn-info btn-sm mt-1">
+                                                            <i class="fas fa-eye">
+                                                            </i>
+                                                            Talep Bilgileri
 
-                                                        @endcan
+                                                        </button>
+                                                    </form>
+                                                    <form
+                                                        action="{{ route('financier.transactions.letclient', $transaction->id) }} "
+                                                        method="GET">
+                                                        <button type="submit"
+                                                                class="btn btn-warning btn-sm mt-1">
+                                                            <i class="fas fa-check-circle">
+                                                            </i>
+                                                            Yeniden Bilgilendir
 
-                                                    @endif
+                                                        </button>
+                                                    </form>
 
-
-
-                                                    @can('observe ' . $permissionKey)
-                                                        <form
-                                                            action="{{ route('financier.transactions.detail', $transaction->id) }}"
-                                                            method="GET">
-                                                            <button type="submit" class="btn btn-info btn-sm mt-1">
-                                                                <i class="fas fa-eye">
-                                                                </i>
-                                                                Talep Bilgileri
-
-                                                            </button>
-                                                        </form>
-                                                    @endcan
-
-                                                    @if($transaction->status->key ==='completed')
-                                                        <form
-                                                            action="{{ route('financier.transactions.letclient', $transaction->id) }} "
-                                                            method="GET">
-                                                            <button type="submit"
-                                                                    class="btn btn-warning btn-sm mt-1">
-                                                                <i class="fas fa-check-circle">
-                                                                </i>
-                                                                Yeniden Bilgilendir
-
-                                                            </button>
-                                                        </form>
-                                                    @endif
-
-                                                    @if($transaction->status->key === 'approved')
-
-                                                        @can('approve ' . $permissionKey)
-                                                            <button type="submit"
-                                                                    class="btn btn-outline-danger btn-sm mt-1"
-                                                                    onclick="
-                                                                        document.getElementById('complete_transaction_id').value = {{$transaction->id}};
-                                                                        document.getElementById('approved_amount').value = {{$transaction->amount}};"
-                                                                    data-toggle="modal"
-                                                                    data-target="#modal-lg-approve-payment">
-                                                                <i class="fas fa-wallet">
-                                                                </i>
-                                                                PARA GELDI !
-                                                            </button>
-                                                        @endcan
-
-                                                        @can('cancel ' . $permissionKey)
-                                                            <button type="submit" class=" btn btn-danger btn-sm mt-1"
-                                                                    data-toggle="modal"
-                                                                    onclick="showCancelModal({{$transaction->id}})"
-                                                                    data-target="#modal-lg">
-                                                                {{ csrf_field() }}
-                                                                <i class="fas fa-trash">
-                                                                </i>
-                                                                Iptal Et
-                                                            </button>
-                                                        @endcan
-
-                                                    @endif
-
-                                                    @if($transaction->status->key === 'completed')
-
-                                                        @can('cancel ' . $permissionKey)
-                                                            <button type="submit" class=" btn btn-danger btn-sm mt-1"
-                                                                    data-toggle="modal"
-                                                                    onclick="showCancelModal({{$transaction->id}})"
-                                                                    data-target="#modal-lg">
-                                                                {{ csrf_field() }}
-                                                                <i class="fas fa-trash">
-                                                                </i>
-                                                                Iptal Et
-                                                            </button>
-                                                        @endcan
-
-                                                    @endif
 
 
                                                     <button type="submit" class="btn btn-primary btn-sm mt-1"
