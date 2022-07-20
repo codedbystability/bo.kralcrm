@@ -7,8 +7,6 @@
 
 @section('content')
 
-
-
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -84,17 +82,12 @@
                                                 <td class="sorting_1 dtr-control">
                                                     <h5>{{$transaction->method->name}}</h5>
                                                 </td>
-                                                @if($transaction->method->key==='havale')
-                                                    <td>{{$transaction->transactionable && $transaction->transactionable->bank?($transaction->transactionable->bank):'PAPARA'}}</td>
-                                                    <td>{{$transaction->transactionable->fullname}}</td>
-                                                @else
-                                                    <td>{{$transaction->type->key==='deposit'?'PAPARA' :$transaction->transactionable->accno}}</td>
-                                                    <td>{{$transaction->type->key==='deposit'?$transaction->transactionable->fullname :$transaction->transactionable->owner}}</td>
-                                                @endif
+
+                                                <td>--</td>
                                                 <td>{{$transaction->amount}} {{$transaction->currency_code}}</td>
 
-                                                <td>{{\App\Enums\TransactionTypeEnum::get($transaction->type->key)}}</td>
-                                                <td>{{\App\Enums\TransactionStatusEnum::get($transaction->status->key)}}</td>
+                                                <td>--</td>
+                                                <td>--</td>
 
 
                                                 <td class="project-actions flex-row flex-lg-wrap">
@@ -366,7 +359,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
 
 @endsection
 
