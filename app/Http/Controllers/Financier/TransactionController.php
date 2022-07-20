@@ -174,7 +174,7 @@ class TransactionController extends Controller
         $transaction = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')
             ->find($id);
 
-        if ($transaction->status->key === 'completed') {
+        if ($transaction->status->key === 'completed' || $transaction->status->key === 'informed') {
             InformClientJob::dispatch($transaction, 'S', $transaction->edit_time, $transaction->status_id)->onQueue('information_queue');
             $this->setFlash('success', 'Bilgilendirme YAPILDI ! ' . $id);
         } else {
