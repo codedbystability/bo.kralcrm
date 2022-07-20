@@ -157,6 +157,7 @@ Route::prefix('financier')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Financier\ReportController::class, 'index'])->name('financier.transactions.reports.index');
                 Route::get('accounts', [\App\Http\Controllers\Financier\ReportController::class, 'accounts'])->name('financier.transactions.reports.accounts');
                 Route::get('detail/{id}', [\App\Http\Controllers\Financier\ReportController::class, 'detail'])->name('financier.transactions.reports.detail');
+                Route::get('detail-in-list/{id}', [\App\Http\Controllers\Financier\ReportController::class, 'detailInList'])->name('financier.transactions.reports.detail-in-list');
                 Route::any('filter', [\App\Http\Controllers\Financier\ReportController::class, 'filter'])->name('financier.transactions.reports.filter');
                 Route::any('accounts-filter', [\App\Http\Controllers\Financier\ReportController::class, 'accountsFilter'])->name('financier.transactions.reports.accounts-filter');
                 Route::post('get-websites', [\App\Http\Controllers\Financier\ReportController::class, 'getWebsites'])->name('financier.transactions.reports.get-websites');

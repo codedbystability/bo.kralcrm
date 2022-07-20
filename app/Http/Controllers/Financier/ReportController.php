@@ -53,6 +53,7 @@ class ReportController extends Controller
         return view('financier.reports.index')->with([
             'data' => $transactions->appends($request->all()),
             'dateActive' => false,
+
             'widgets' => $widgets,
             'clients' => $clients,
             'statutes' => $statutes,
@@ -60,6 +61,7 @@ class ReportController extends Controller
             'websites' => [],
             'methods' => $methods,
             'currencies' => $this->currencies,
+
             'currency_name' => null,
             'client_name' => null,
             'website_name' => null,
@@ -462,6 +464,26 @@ class ReportController extends Controller
             'request' => $transactionRequest,
             'bank_info' => $transaction->type->key === 'deposit' ? $bankInfo : null
         ]);
+    }
+
+    public function detailInList(Request $request, $id)
+    {
+        dd($id);
+//        $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')
+//            ->with('type')
+//            ->where('id', $id)->get();
+//
+//        $theTransactions = $transactions[0];
+//
+//        if ($theTransactions->type->key)
+//
+//        return view('financier.transactions.index')->with([
+//            'transactions' => $transactions,
+////            'permissionKey' => $permissionKey,
+////            'title' => $title
+//        ]);
+
+
     }
 
     public function getWebsites(Request $request): \Illuminate\Http\JsonResponse
