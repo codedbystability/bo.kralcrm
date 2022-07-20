@@ -184,6 +184,11 @@ class TransactionController extends Controller
         return Redirect::back();
     }
 
+    public function detailInList(Request $request, $id)
+    {
+        dd($id);
+    }
+
     public function detail(Request $request, $id)
     {
         $transaction = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')
@@ -202,8 +207,8 @@ class TransactionController extends Controller
 
         $fields = array_merge($transaction->transactionable->toArray(), [
             'amount' => $transaction->amount,
-            'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d H:i:s') ,
-            'updated_at' => Carbon::parse($transaction->updated_at)->format('Y-m-d H:i:s') ,
+            'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::parse($transaction->updated_at)->format('Y-m-d H:i:s'),
             'test' => '-'
         ]);
 

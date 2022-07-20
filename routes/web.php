@@ -46,6 +46,8 @@ Route::prefix('admin')->group(function () {
                 Route::get('detail/{id}', [\App\Http\Controllers\Admin\ReportController::class, 'detail'])->name('admin.transactions.reports.detail');
                 Route::any('filter', [\App\Http\Controllers\Admin\ReportController::class, 'filter'])->name('admin.transactions.reports.filter');
             });
+
+
         });
 
         Route::prefix('managers')->group(function () {
@@ -127,6 +129,11 @@ Route::prefix('financier')->group(function () {
         Route::get('notes/mark/{id}', [\App\Http\Controllers\Financier\NoteController::class, 'mark'])->name('financier.notes.mark');
 
         Route::prefix('transactions')->group(function () {
+
+
+
+            Route::get('detail-in-list/{id}', [\App\Http\Controllers\Financier\TransactionController::class, 'detailInList'])
+                ->name('financier.transactions.detail-in-list');
 
             Route::get('detail/{id}', [\App\Http\Controllers\Financier\TransactionController::class, 'detail'])
                 ->name('financier.transactions.detail');
