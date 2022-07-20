@@ -31,19 +31,13 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
-                                                AD-SOYAD
-                                            </th>
-
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending">
                                                 MIKTAR
                                             </th>
 
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
-                                                TIP
+                                                AD-SOYAD
                                             </th>
 
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
@@ -73,13 +67,7 @@
 
                                                 <td>{{$transaction->amount}} {{$transaction->currency_code}}</td>
 
-                                                @if($transaction->method->key==='havale')
-                                                    <td>{{$transaction->transactionable && $transaction->transactionable->bank?($transaction->transactionable->bank):'PAPARA'}}</td>
-                                                    <td>{{$transaction->transactionable->fullname}}</td>
-                                                @else
-                                                    <td>{{$transaction->type->key==='deposit'?'PAPARA' :$transaction->transactionable->accno}}</td>
-                                                    <td>{{$transaction->type->key==='deposit'?$transaction->transactionable->fullname :$transaction->transactionable->owner}}</td>
-                                                @endif
+
 
                                                 <td class="project-actions flex-row flex-lg-wrap">
 
