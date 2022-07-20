@@ -92,10 +92,6 @@
 
                                                 <td class="project-actions flex-row flex-lg-wrap">
 
-
-
-
-
                                                     <form
                                                         action="{{ route('financier.transactions.detail', $transaction->id) }}"
                                                         method="GET">
@@ -106,6 +102,10 @@
 
                                                         </button>
                                                     </form>
+
+                                                </td>
+
+                                                <td>
                                                     <form
                                                         action="{{ route('financier.transactions.letclient', $transaction->id) }} "
                                                         method="GET">
@@ -117,8 +117,6 @@
 
                                                         </button>
                                                     </form>
-
-
                                                 </td>
                                             </tr>
                                         @endforeach
