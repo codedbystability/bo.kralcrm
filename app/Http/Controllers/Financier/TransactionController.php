@@ -200,7 +200,11 @@ class TransactionController extends Controller
             return Redirect::back();
         }
 
-        $fields = array_merge($transaction->transactionable->toArray(), ['amount' => $transaction->amount]);
+        $fields = array_merge($transaction->transactionable->toArray(), [
+            'amount' => $transaction->amount,
+            'created_at' => $transaction->created_at,
+            'test' => '-'
+        ]);
 
 
         return view('financier.transactions.detail')->with([
