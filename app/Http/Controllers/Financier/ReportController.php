@@ -467,7 +467,6 @@ class ReportController extends Controller
 
     public function detailInList(Request $request, $id)
     {
-        dd($id);
         $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable')
             ->with('type')
             ->where('id', $id)->get();
