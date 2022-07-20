@@ -422,14 +422,26 @@
 
 
                                                     <form
-                                                        action="{{ route('financier.transactions.reports.detail-in-list', $agreement->id) }}"
+                                                        action="{{ route('financier.transactions.letclient', $agreement->id) }} "
                                                         method="GET">
-                                                        <button type="submit" class="btn btn-warning btn-sm ">
-                                                            <i class="fas fa-pencil-alt">
+                                                        <button type="submit"
+                                                                class="btn btn-warning btn-sm mt-1">
+                                                            <i class="fas fa-check-circle">
                                                             </i>
-                                                            Listede Gor
+                                                            Yeniden Bilgilendir
+
                                                         </button>
                                                     </form>
+
+{{--                                                    <form--}}
+{{--                                                        action="{{ route('financier.transactions.reports.detail-in-list', $agreement->id) }}"--}}
+{{--                                                        method="GET">--}}
+{{--                                                        <button type="submit" class="btn btn-warning btn-sm ">--}}
+{{--                                                            <i class="fas fa-pencil-alt">--}}
+{{--                                                            </i>--}}
+{{--                                                            Listede Gor--}}
+{{--                                                        </button>--}}
+{{--                                                    </form>--}}
 
 
                                                 </td>

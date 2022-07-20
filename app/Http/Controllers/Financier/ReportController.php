@@ -17,6 +17,7 @@ use App\Repositories\TransactionStatusRepository;
 use App\Repositories\TransactionTypeRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ReportController extends Controller
 {
@@ -467,6 +468,11 @@ class ReportController extends Controller
 
     public function detailInList(Request $request, $id)
     {
+
+        $this->setFlash('successs', 'Islem bulunamadi !');
+
+
+        return redirect()->back();
         $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable')
             ->where('id', $id)->get();
 
@@ -541,5 +547,10 @@ class ReportController extends Controller
         ];
     }
 
+    private function setFlash($type, $message)
+    {
+        Session::flash('message', $message);
+        Session::flash('type', $type);
+    }
 
 }
