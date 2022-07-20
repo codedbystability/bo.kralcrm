@@ -186,19 +186,20 @@ class TransactionController extends Controller
 
     public function detailInList(Request $request, $id)
     {
-        $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')
-            ->with('type')
-            ->where('id', $id)->get();
-
-        $theTransactions = $transactions[0];
-
-        if ($theTransactions->type->key)
-
-        return view('financier.transactions.index')->with([
-            'transactions' => $transactions,
-//            'permissionKey' => $permissionKey,
-//            'title' => $title
-        ]);
+        dd($id);
+//        $transactions = Transaction::with('client', 'method', 'status', 'type', 'transactionable', 'account.accountable')
+//            ->with('type')
+//            ->where('id', $id)->get();
+//
+//        $theTransactions = $transactions[0];
+//
+//        if ($theTransactions->type->key)
+//
+//        return view('financier.transactions.index')->with([
+//            'transactions' => $transactions,
+////            'permissionKey' => $permissionKey,
+////            'title' => $title
+//        ]);
 
 
     }

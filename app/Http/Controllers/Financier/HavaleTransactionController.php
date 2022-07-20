@@ -47,6 +47,7 @@ class HavaleTransactionController extends Controller
 
     }
 
+
     public function waitingDepositsApproveChecked()
     {
         $permissionKey = 'havale deposit waiting';
