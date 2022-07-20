@@ -66,6 +66,12 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
+                                                ONAYLANAN
+                                            </th>
+
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Rendering engine: activate to sort column descending">
                                                 TIP
                                             </th>
 
@@ -102,6 +108,9 @@
                                                     <td>{{$transaction->type->key==='deposit'?$transaction->transactionable->fullname :$transaction->transactionable->owner}}</td>
                                                 @endif
                                                 <td>{{$transaction->amount}} {{$transaction->currency_code}}</td>
+
+
+                                                <td>{{$transaction->approved_amount}} </td>
 
                                                 <td>{{\App\Enums\TransactionTypeEnum::get($transaction->type->key)}}</td>
                                                 <td>{{\App\Enums\TransactionStatusEnum::get($transaction->status->key)}}</td>
