@@ -27,17 +27,6 @@
                                                 #
                                             </th>
 
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending">
-                                                METHOD
-                                            </th>
-
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending">
-                                                BANKA
-                                            </th>
 
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
@@ -79,16 +68,18 @@
                                                 <td class="sorting_1 dtr-control">
                                                     <h5>#{{$transaction->id}}</h5>
                                                 </td>
-                                                <td class="sorting_1 dtr-control">
-                                                    <h5>--</h5>
-                                                </td>
 
-                                                <td>--</td>
+
+
                                                 <td>{{$transaction->amount}} {{$transaction->currency_code}}</td>
 
-                                                <td>--</td>
-                                                <td>--</td>
-
+                                                @if($transaction->method->key==='havale')
+                                                    <td>{{$transaction->transactionable && $transaction->transactionable->bank?($transaction->transactionable->bank):'PAPARA'}}</td>
+                                                    <td>{{$transaction->transactionable->fullname}}</td>
+                                                @else
+                                                    <td>{{$transaction->type->key==='deposit'?'PAPARA' :$transaction->transactionable->accno}}</td>
+                                                    <td>{{$transaction->type->key==='deposit'?$transaction->transactionable->fullname :$transaction->transactionable->owner}}</td>
+                                                @endif
 
                                                 <td class="project-actions flex-row flex-lg-wrap">
 
