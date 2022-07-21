@@ -208,15 +208,22 @@ class TransactionController extends Controller
             'test' => '-'
         ]);
 
-        $bankInfo=null;
+        $bankInfo = null;
         if ($transaction->account_id) {
-            if ($transaction->transactionable_type === 'App\Models\PaparaDeposit'){
+            if ($transaction->transactionable_type === 'App\Models\PaparaDeposit') {
                 $bank = Account::with('accountable')->find($transaction->account_id);
-            }elseif ($transaction->transactionable_type === 'App\Models\HavaleDeposit'){
+            } elseif ($transaction->transactionable_type === 'App\Models\HavaleDeposit') {
                 $bank = Account::with('accountable')->find($transaction->account_id);
             }
+
+            if ($bankInfo){
+                $bank = array_merge($bank->accountable->toArray());
+            }
         }
-        $bankInfo = array_merge($bank->accountable->toArray());
+
+        if ($bankInfo){
+            dd($bankInfo);
+        }
 
         return view('financier.transactions.detail')->with([
             'transaction' => $transaction,
