@@ -2,10 +2,10 @@
 
 
 {{--@section('content-title')--}}
-{{--    @include('layouts.content-title',['title' =>'Islem Raporlari','first' => '','second' => ''])--}}
+    @include('layouts.content-title',['title' =>'Islem Raporlari','first' => '','second' => ''])
 @endsection
 
-{{--@section('content')--}}
+@section('content')
 
     <style>
         .table-striped > tbody > tr:nth-child(odd) > td,
@@ -32,7 +32,7 @@
 
                 </div>
                 <div class="card-body">
-{{--                    <form action="{{route('financier.transactions.reports.filter')}}" method="POST">--}}
+                    <form action="{{route('financier.transactions.reports.filter')}}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="form-group col-12 p-0 d-flex">
@@ -40,7 +40,7 @@
                                     <label for="client">Musteriler</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-{{--                                          <span class="input-group-text @if(isset($client_name)) bg-primary @endif">--}}
+                                          <span class="input-group-text @if(isset($client_name)) bg-primary @endif">
                                             <i class="fas fa-people-arrows"></i>
                                           </span>
                                         </div>
@@ -50,13 +50,13 @@
                                                id="client-input"
                                                placeholder="Tum Musteriler"
                                                onfocus="this.value = null"
-{{--                                               value="{{$client_name}}"--}}
+                                               value="{{$client_name}}"
                                                onchange="dataListChanged(this)"
                                         >
                                     </div>
                                     <datalist id="client">
-{{--                                        @foreach($clients as $client)--}}
-{{--                                            <option value="{{$client->name}}">--}}
+                                        @foreach($clients as $client)
+                                            <option value="{{$client->name}}">
                                         @endforeach
                                     </datalist>
                                 </div>
@@ -303,36 +303,36 @@
                 <!-- /.card-body -->
             </div>
 
-{{--            @if($data && count($data) >= 1)--}}
-{{--                <div class="row">--}}
-{{--                    @foreach($widgets as $widget)--}}
+            @if($data && count($data) >= 1)
+                <div class="row">
+                    @foreach($widgets as $widget)
 
-{{--                        @if($widget)--}}
+                        @if($widget)
 
-{{--                            <div class="col-lg-6 ">--}}
-{{--                                <!-- small card -->--}}
-{{--                                <div class="small-box {{$widget['bg']}}">--}}
-{{--                                    <div class="inner">--}}
-{{--                                        <span>{{$widget['subValue']}} ₺</span>--}}
-{{--                                        <br>--}}
-{{--                                        <span>{{$widget['value']}} adet</span>--}}
+                            <div class="col-lg-6 ">
+                                <!-- small card -->
+                                <div class="small-box {{$widget['bg']}}">
+                                    <div class="inner">
+                                        <span>{{$widget['subValue']}} ₺</span>
+                                        <br>
+                                        <span>{{$widget['value']}} adet</span>
 
-{{--                                        <span>{{$widget['title']}}</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="icon">--}}
-{{--                                        <i class="fas {{$widget['icon']}}" style="font-size: 25px"></i>--}}
-{{--                                    </div>--}}
+                                        <span>{{$widget['title']}}</span>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas {{$widget['icon']}}" style="font-size: 25px"></i>
+                                    </div>
 
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
+                                </div>
+                            </div>
+                        @endif
 
-{{--                    @endforeach--}}
+                    @endforeach
 
 
-{{--                </div>--}}
+                </div>
 
-{{--            @endif--}}
+            @endif
 
             <div class="card">
 
@@ -401,46 +401,48 @@
                                         </thead>
                                         <tbody>
 
-{{--                                        @foreach($data as $key=> $agreement)--}}
-{{--                                            <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">--}}
-{{--                                                <td class="sorting_1 dtr-control">{{$agreement->id}}</td>--}}
-{{--                                                <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>--}}
-{{--                                                <td>{{$agreement->method ? $agreement->method->name:''}}</td>--}}
-{{--                                                <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>--}}
-{{--                                                <td>{{$agreement->status ?\App\Enums\TransactionStatusEnum::get($agreement->status->key):'---'}}</td>--}}
-{{--                                                <td>{{$agreement->amount}}</td>--}}
-{{--                                                <td>{{$agreement->currency?$agreement->currency->symbol:'TRY - 2'}}</td>--}}
-{{--                                                <td>{{$agreement->created_at}}</td>--}}
+                                        @foreach($data as $key=> $agreement)
+                                            <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
+                                                <td class="sorting_1 dtr-control">{{$agreement->id}}</td>
+                                                <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>
+                                                <td>{{$agreement->method ? $agreement->method->name:''}}</td>
+                                                <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>
+                                                <td>{{$agreement->status ?\App\Enums\TransactionStatusEnum::get($agreement->status->key):'---'}}</td>
+                                                <td>{{$agreement->amount}}</td>
+                                                <td>{{$agreement->currency?$agreement->currency->symbol:'TRY - 2'}}</td>
+                                                <td>{{$agreement->created_at}}</td>
 
 
-{{--                                                <td class="project-actions d-flex justify-content-around">--}}
+                                                <td class="project-actions d-flex justify-content-around">
 
-{{--                                                    <form--}}
-{{--                                                        action="{{ route('financier.transactions.reports.detail', $agreement->id) }}"--}}
-{{--                                                        method="GET">--}}
-{{--                                                        <button type="submit" class="btn btn-primary btn-sm ">--}}
-{{--                                                            <i class="fas fa-pencil-alt">--}}
-{{--                                                            </i>--}}
-{{--                                                            Detayli Goruntule--}}
-{{--                                                        </button>--}}
-{{--                                                    </form>--}}
+                                                    <form
+                                                        action="{{ route('financier.transactions.reports.detail', $agreement->id) }}"
+                                                        method="GET">
+                                                        <button type="submit" class="btn btn-primary btn-sm ">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Detayli Goruntule
+                                                        </button>
+                                                    </form>
 
 
-{{--                                                    <form--}}
-{{--                                                        action="{{ route('financier.transactions.letclient', $agreement->id) }} "--}}
-{{--                                                        method="GET">--}}
-{{--                                                        <button type="submit"--}}
-{{--                                                                class="btn btn-warning btn-sm mt-1">--}}
-{{--                                                            <i class="fas fa-check-circle">--}}
-{{--                                                            </i>--}}
-{{--                                                            Yeniden Bilgilendir--}}
+                                                    <form
+                                                        action="{{ route('financier.transactions.letclient', $agreement->id) }} "
+                                                        method="GET">
+                                                        <button type="submit"
+                                                                class="btn btn-warning btn-sm mt-1">
+                                                            <i class="fas fa-check-circle">
+                                                            </i>
+                                                            Yeniden Bilgilendir
 
-{{--                                                        </button>--}}
-{{--                                                    </form>--}}
+                                                        </button>
+                                                    </form>
 
-{{--                                                </td>--}}
-{{--                                            </tr>--}}
-{{--                                        @endforeach--}}
+
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
                                         </tbody>
 
@@ -457,7 +459,7 @@
                             {{--                                </div>--}}
                             {{--                            </div>--}}
                             <div class="col-sm-12 table-responsive">
-{{--                                {{$data->links("pagination::bootstrap-4")}}--}}
+                                {{$data->links("pagination::bootstrap-4")}}
                             </div>
                         </div>
                     </div>
