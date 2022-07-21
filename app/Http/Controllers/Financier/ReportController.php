@@ -42,11 +42,14 @@ class ReportController extends Controller
         $statutes = $this->transactionStatusRepository->getAll();
         $dateFrom = Carbon::now()->subMonth(1)->format('Y-m-d');
         $dateTo = Carbon::now()->format('Y-m-d');
+
         $transactions = Transaction::with('website', 'client', 'status', 'type', 'method', 'currency')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d', $dateFrom))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d', $dateTo))
             ->orderBy('id', 'desc')
             ->paginate(20);
+
+        dd($transactions);
 
         $widgets = $this->getWidgets($transactions);
 
