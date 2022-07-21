@@ -52,6 +52,29 @@ class ReportController extends Controller
 
         $widgets = $this->getWidgets($transactions);
 
+        return [
+            'data' => $transactions->appends($request->all()),
+            'dateActive' => false,
+
+            'widgets' => $widgets,
+            'clients' => $clients,
+            'statutes' => $statutes,
+            'types' => $types,
+            'websites' => [],
+            'methods' => $methods,
+            'currencies' => $this->currencies,
+
+            'currency_name' => null,
+            'client_name' => null,
+            'website_name' => null,
+            'status_name' => null,
+            'type_name' => null,
+            'method_name' => null,
+            'min_amount' => null,
+            'max_amount' => null,
+            'dateFrom' => $dateFrom,
+            'dateTo' => $dateTo
+        ];
         return view('financier.reports.index')->with([
             'data' => $transactions->appends($request->all()),
             'dateActive' => false,
