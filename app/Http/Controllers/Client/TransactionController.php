@@ -68,6 +68,7 @@ class TransactionController extends Controller
             return $this->reports($request);
         }
 
+        dd($request->all());
         $today = Carbon::now()->format('d-m-Y') . ' 00:00:00';
 
         if ($request->get('date_range')) {
