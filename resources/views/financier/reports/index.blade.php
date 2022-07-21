@@ -438,15 +438,6 @@
                                                         </button>
                                                     </form>
 
-                                                                                                        <form
-                                                                                                            action="{{ route('financier.transactions.reports.detail-in-list', $agreement->id) }}"
-                                                                                                            method="GET">
-                                                                                                            <button type="submit" class="btn btn-warning btn-sm ">
-                                                                                                                <i class="fas fa-pencil-alt">
-                                                                                                                </i>
-                                                                                                                Listede Gor
-                                                                                                            </button>
-                                                                                                        </form>
 
 
                                                 </td>
