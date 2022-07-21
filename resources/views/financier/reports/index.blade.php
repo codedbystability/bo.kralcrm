@@ -409,7 +409,7 @@
                                                     @if($agreement->transactionable->fullname)
                                                         <td>{{ $agreement->transactionable->fullname}}</td>
                                                     @elseif($agreement->transactionable->owner)
-                                                        <td>{{ $agreement->widgetRequest->owner}}</td>
+                                                        <td>{{ $agreement->transactionable->owner}}</td>
                                                     @endif
                                                 @else
                                                     <td>---</td>
