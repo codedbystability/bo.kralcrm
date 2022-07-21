@@ -52,7 +52,6 @@ class ReportController extends Controller
 
         $widgets = $this->getWidgets($transactions);
 
-dd($widgets);
         return view('financier.reports.index')->with([
             'data' => $transactions->appends($request->all()),
             'dateActive' => false,
