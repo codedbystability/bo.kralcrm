@@ -435,16 +435,23 @@
 
         $(document).ready(function () {
             const waitingDeposits = $('[id^="waiting-deposits-"]');
-            if (waitingDeposits.length >= 1 && window.location.pathname === '/financier/transactions/havale/waiting-deposits') {
-                //BEKLEYEN DEPOSIT VAR ALARM CAL !
-                const alertContainer = document.getElementById('alert-container');
-                alertContainer.style.display = 'block';
-                const alertTitle = document.getElementById('alert-message');
-                alertTitle.innerHTML = waitingDeposits.length + ' Adet Islem Bekleme Durumuda !!!'
+            if (
+                window.location.pathname === '/financier/transactions/havale/waiting-deposits' ||
+                window.location.pathname === '/financier/transactions/papara/waiting-deposits' ||
+                window.location.pathname === '/financier/transactions/havale/waiting-deposits-account'
+            ) {
+                if (waitingDeposits.length >= 1) {
+                    //BEKLEYEN DEPOSIT VAR ALARM CAL !
+                    const alertContainer = document.getElementById('alert-container');
+                    alertContainer.style.display = 'block';
+                    const alertTitle = document.getElementById('alert-message');
+                    alertTitle.innerHTML = waitingDeposits.length + ' Adet Islem Bekleme Durumuda !!!'
 
 
-                playAudio();
+                    playAudio();
+                }
             }
+
 
         });
 
