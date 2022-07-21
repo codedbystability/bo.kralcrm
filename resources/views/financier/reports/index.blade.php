@@ -11,7 +11,6 @@
         .table-striped > tbody > tr:nth-child(odd) > td,
         .table-striped > tbody > tr:nth-child(odd) > th {
             background-color: rgba(0, 0, 0, 0.3);
-        / / Choose your own color here
         }
     </style>
 
