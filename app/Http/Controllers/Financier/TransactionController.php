@@ -208,11 +208,16 @@ class TransactionController extends Controller
             'test' => '-'
         ]);
 
+        $bankInfo=null;
+        if ($transaction->account_id) {
+            $bankInfo = $transaction->transactionable;
+        }
+
 
         return view('financier.transactions.detail')->with([
             'transaction' => $transaction,
             'fields' => $fields,
-            'bankInfo' => null,
+            'bankInfo' => $bankInfo,
             'notes' => $transaction->notes,
 //            'banka' => $bank ? $bank->name : ''
 
