@@ -457,7 +457,7 @@
                             {{--                                </div>--}}
                             {{--                            </div>--}}
                             <div class="col-sm-12 table-responsive">
-                                {{$data->links("pagination::bootstrap-4")}}
+{{--                                {{$data->links("pagination::bootstrap-4")}}--}}
                             </div>
                         </div>
                     </div>
