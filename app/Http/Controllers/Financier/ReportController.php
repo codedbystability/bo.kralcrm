@@ -272,14 +272,15 @@ class ReportController extends Controller
             ->when($request->get('max_amount'), function ($query) use ($request) {
                 return $query->where('amount', '<=', $request->get('max_amount'));
             })
-            ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d', $dateFrom))
-            ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d', $dateTo))
+//            ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d', $dateFrom))
+//            ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d', $dateTo))
             ->with('website', 'client', 'status', 'type', 'method', 'currency')
             ->orderBy('id', 'desc')
             ->paginate(20)
             ->appends($request->except('page'));
 
 
+        dd($request->all(),$transactions);
         $clients = Client::get();
         $types = $this->transactionTypeRepository->getAll();
         $methods = $this->transactionMethodRepository->getAll();
