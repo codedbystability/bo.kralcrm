@@ -63,7 +63,6 @@ class TransactionController extends Controller
 
     public function filter(Request $request)
     {
-        dd($request->all());
 
         if ($request->get('clear') && $request->get('clear') === 'clear-filter') {
             return $this->reports($request);
