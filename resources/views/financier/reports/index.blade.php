@@ -2,10 +2,10 @@
 
 
 {{--@section('content-title')--}}
-    @include('layouts.content-title',['title' =>'Islem Raporlari','first' => '','second' => ''])
+{{--    @include('layouts.content-title',['title' =>'Islem Raporlari','first' => '','second' => ''])--}}
 @endsection
 
-@section('content')
+{{--@section('content')--}}
 
     <style>
         .table-striped > tbody > tr:nth-child(odd) > td,
@@ -32,7 +32,7 @@
 
                 </div>
                 <div class="card-body">
-                    <form action="{{route('financier.transactions.reports.filter')}}" method="POST">
+{{--                    <form action="{{route('financier.transactions.reports.filter')}}" method="POST">--}}
                         @csrf
                         <div class="row">
                             <div class="form-group col-12 p-0 d-flex">
@@ -40,7 +40,7 @@
                                     <label for="client">Musteriler</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                          <span class="input-group-text @if(isset($client_name)) bg-primary @endif">
+{{--                                          <span class="input-group-text @if(isset($client_name)) bg-primary @endif">--}}
                                             <i class="fas fa-people-arrows"></i>
                                           </span>
                                         </div>
@@ -50,13 +50,13 @@
                                                id="client-input"
                                                placeholder="Tum Musteriler"
                                                onfocus="this.value = null"
-                                               value="{{$client_name}}"
+{{--                                               value="{{$client_name}}"--}}
                                                onchange="dataListChanged(this)"
                                         >
                                     </div>
                                     <datalist id="client">
-                                        @foreach($clients as $client)
-                                            <option value="{{$client->name}}">
+{{--                                        @foreach($clients as $client)--}}
+{{--                                            <option value="{{$client->name}}">--}}
                                         @endforeach
                                     </datalist>
                                 </div>
@@ -404,13 +404,13 @@
                                         @foreach($data as $key=> $agreement)
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
                                                 <td class="sorting_1 dtr-control">{{$agreement->id}}</td>
-                                                <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>
-                                                <td>{{$agreement->method ? $agreement->method->name:''}}</td>
-                                                <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>
-                                                <td>{{$agreement->status ?\App\Enums\TransactionStatusEnum::get($agreement->status->key):'---'}}</td>
-                                                <td>{{$agreement->amount}}</td>
-                                                <td>{{$agreement->currency?$agreement->currency->symbol:'TRY - 2'}}</td>
-                                                <td>{{$agreement->created_at}}</td>
+{{--                                                <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>--}}
+{{--                                                <td>{{$agreement->method ? $agreement->method->name:''}}</td>--}}
+{{--                                                <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>--}}
+{{--                                                <td>{{$agreement->status ?\App\Enums\TransactionStatusEnum::get($agreement->status->key):'---'}}</td>--}}
+{{--                                                <td>{{$agreement->amount}}</td>--}}
+{{--                                                <td>{{$agreement->currency?$agreement->currency->symbol:'TRY - 2'}}</td>--}}
+{{--                                                <td>{{$agreement->created_at}}</td>--}}
 
 
                                                 <td class="project-actions d-flex justify-content-around">
@@ -437,8 +437,6 @@
 
                                                         </button>
                                                     </form>
-
-
 
                                                 </td>
                                             </tr>
