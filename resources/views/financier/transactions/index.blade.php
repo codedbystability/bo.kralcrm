@@ -401,7 +401,8 @@
                         <label for="approved_amount">Miktar</label>
 
 
-                        <input type="number" step=".01" class="form-control" name="approved_amount" id="approved_amount">
+                        <input type="number" step=".01" class="form-control" name="approved_amount"
+                               id="approved_amount">
                         <span style="color: red;font-size: 10px">*** Gerçekleşen tutar belirtilen tutardan farklıysa lütfen gerçekleşen tutarı giriniz</span>
 
                         <input type="text" class="form-control" style="display: none" name="complete_transaction_id"
@@ -450,7 +451,11 @@
         let count = 0
         setInterval(function () {
             count++;
-            if(window.location.pathname === '/financier/transactions/havale/waiting-deposits' || window.location.pathname === '/financier/transactions/havale/waiting-deposits-account'){
+            if (
+                window.location.pathname === '/financier/transactions/havale/waiting-deposits' ||
+                window.location.pathname === '/financier/transactions/papara/waiting-deposits' ||
+                window.location.pathname === '/financier/transactions/havale/waiting-deposits-account'
+            ) {
                 if (count % 20 === 0) {
                     location.reload();
                 }
