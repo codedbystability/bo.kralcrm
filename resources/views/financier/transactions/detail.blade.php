@@ -38,6 +38,9 @@
 
                 @if(isset($bankInfo))
 
+                    {{
+    dd($bankInfo)
+}}
                     <div class="card-body">
                         <div class="form-group">
                             <h6>Onaylanan Banka Bilgileri</h6>
