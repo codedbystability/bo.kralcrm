@@ -450,8 +450,10 @@
         let count = 0
         setInterval(function () {
             count++;
-            if (window.location.pathname === '/financier/transactions/havale/waiting-deposits' && count % 30 === 0) {
-                location.reload();
+            if(window.location.pathname === '/financier/transactions/havale/waiting-deposits' || window.location.pathname === '/financier/transactions/havale/waiting-deposits-account'){
+                if (count % 20 === 0) {
+                    location.reload();
+                }
             }
         }, 1000);
 
