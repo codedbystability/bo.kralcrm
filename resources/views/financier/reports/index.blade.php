@@ -401,8 +401,8 @@
                                         </thead>
                                         <tbody>
 
-                                        @foreach($data as $key=> $agreement)
-                                            <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
+{{--                                        @foreach($data as $key=> $agreement)--}}
+{{--                                            <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">--}}
 {{--                                                <td class="sorting_1 dtr-control">{{$agreement->id}}</td>--}}
 {{--                                                <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>--}}
 {{--                                                <td>{{$agreement->method ? $agreement->method->name:''}}</td>--}}
@@ -439,8 +439,8 @@
 {{--                                                    </form>--}}
 
 {{--                                                </td>--}}
-                                            </tr>
-                                        @endforeach
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
 
                                         </tbody>
 
