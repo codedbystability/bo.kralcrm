@@ -404,6 +404,16 @@
                                         @foreach($data as $key=> $agreement)
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
                                                 <td class="sorting_1 dtr-control">{{$agreement->id}}</td>
+
+                                                @if($agreement->transactionable)
+                                                    @if($agreement->transactionable->fullname)
+                                                        <td>{{ $agreement->transactionable->fullname}}</td>
+                                                    @elseif($agreement->transactionable->owner)
+                                                        <td>{{ $agreement->widgetRequest->owner}}</td>
+                                                    @endif
+                                                @else
+                                                    <td>---</td>
+                                                @endif
                                                 <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>
                                                 <td>{{$agreement->method ? $agreement->method->name:''}}</td>
                                                 <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>
@@ -437,7 +447,6 @@
 
                                                         </button>
                                                     </form>
-
 
 
                                                 </td>

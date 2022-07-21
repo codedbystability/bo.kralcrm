@@ -43,7 +43,7 @@ class ReportController extends Controller
         $dateFrom = Carbon::now()->subMonth(1)->format('Y-m-d');
         $dateTo = Carbon::now()->format('Y-m-d');
 
-        $transactions = Transaction::with('website', 'client', 'status', 'type', 'method', 'currency')
+        $transactions = Transaction::with('website', 'client', 'status', 'type', 'method', 'currency','transactionable')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d', $dateFrom))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d', $dateTo))
             ->orderBy('id', 'desc')
