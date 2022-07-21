@@ -8,9 +8,10 @@
 @section('content')
 
     <style>
-        .table-striped>tbody>tr:nth-child(odd)>td,
-        .table-striped>tbody>tr:nth-child(odd)>th {
-            background-color: rgba(0,0,0,0.3); // Choose your own color here
+        .table-striped > tbody > tr:nth-child(odd) > td,
+        .table-striped > tbody > tr:nth-child(odd) > th {
+            background-color: rgba(0, 0, 0, 0.3);
+        / / Choose your own color here
         }
     </style>
 
@@ -306,22 +307,27 @@
             @if($data && count($data) >= 1)
                 <div class="row">
                     @foreach($widgets as $widget)
-                        <div class="col-lg-6 ">
-                            <!-- small card -->
-                            <div class="small-box {{$widget['bg']}}">
-                                <div class="inner">
-                                    <span>{{$widget['subValue']}} ₺</span>
-                                    <br>
-                                    <span>{{$widget['value']}} adet</span>
 
-                                    <span>{{$widget['title']}}</span>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas {{$widget['icon']}}" style="font-size: 25px"></i>
-                                </div>
+                        @if($widget)
 
+                            <div class="col-lg-6 ">
+                                <!-- small card -->
+                                <div class="small-box {{$widget['bg']}}">
+                                    <div class="inner">
+                                        <span>{{$widget['subValue']}} ₺</span>
+                                        <br>
+                                        <span>{{$widget['value']}} adet</span>
+
+                                        <span>{{$widget['title']}}</span>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas {{$widget['icon']}}" style="font-size: 25px"></i>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
                     @endforeach
 
 
@@ -399,10 +405,10 @@
                                         @foreach($data as $key=> $agreement)
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
                                                 <td class="sorting_1 dtr-control">{{$agreement->id}}</td>
-                                                <td>{{$agreement->website->domain}}</td>
-                                                <td>{{$agreement->method->name}}</td>
-                                                <td>{{\App\Enums\TransactionTypeEnum::get($agreement->type->key)}}</td>
-                                                <td>{{\App\Enums\TransactionStatusEnum::get($agreement->status->key)}}</td>
+                                                <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>
+                                                <td>{{$agreement->method?$agreement->method->name:''}}</td>
+                                                <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>
+                                                <td>{{$agreement->status?\App\Enums\TransactionStatusEnum::get($agreement->status->key):'---'}}</td>
                                                 <td>{{$agreement->amount}}</td>
                                                 <td>{{$agreement->currency->symbol}}</td>
                                                 <td>{{$agreement->created_at}}</td>
@@ -433,15 +439,15 @@
                                                         </button>
                                                     </form>
 
-{{--                                                    <form--}}
-{{--                                                        action="{{ route('financier.transactions.reports.detail-in-list', $agreement->id) }}"--}}
-{{--                                                        method="GET">--}}
-{{--                                                        <button type="submit" class="btn btn-warning btn-sm ">--}}
-{{--                                                            <i class="fas fa-pencil-alt">--}}
-{{--                                                            </i>--}}
-{{--                                                            Listede Gor--}}
-{{--                                                        </button>--}}
-{{--                                                    </form>--}}
+                                                    {{--                                                    <form--}}
+                                                    {{--                                                        action="{{ route('financier.transactions.reports.detail-in-list', $agreement->id) }}"--}}
+                                                    {{--                                                        method="GET">--}}
+                                                    {{--                                                        <button type="submit" class="btn btn-warning btn-sm ">--}}
+                                                    {{--                                                            <i class="fas fa-pencil-alt">--}}
+                                                    {{--                                                            </i>--}}
+                                                    {{--                                                            Listede Gor--}}
+                                                    {{--                                                        </button>--}}
+                                                    {{--                                                    </form>--}}
 
 
                                                 </td>

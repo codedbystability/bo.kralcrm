@@ -49,11 +49,10 @@ class ReportController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(20);
 
-        dd($transactions);
 
         $widgets = $this->getWidgets($transactions);
 
-
+dd($widgets);
         return view('financier.reports.index')->with([
             'data' => $transactions->appends($request->all()),
             'dateActive' => false,
