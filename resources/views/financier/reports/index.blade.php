@@ -303,36 +303,36 @@
                 <!-- /.card-body -->
             </div>
 
-            @if($data && count($data) >= 1)
-                <div class="row">
-                    @foreach($widgets as $widget)
+{{--            @if($data && count($data) >= 1)--}}
+{{--                <div class="row">--}}
+{{--                    @foreach($widgets as $widget)--}}
 
-                        @if($widget)
+{{--                        @if($widget)--}}
 
-                            <div class="col-lg-6 ">
-                                <!-- small card -->
-                                <div class="small-box {{$widget['bg']}}">
-                                    <div class="inner">
-                                        <span>{{$widget['subValue']}} ₺</span>
-                                        <br>
-                                        <span>{{$widget['value']}} adet</span>
+{{--                            <div class="col-lg-6 ">--}}
+{{--                                <!-- small card -->--}}
+{{--                                <div class="small-box {{$widget['bg']}}">--}}
+{{--                                    <div class="inner">--}}
+{{--                                        <span>{{$widget['subValue']}} ₺</span>--}}
+{{--                                        <br>--}}
+{{--                                        <span>{{$widget['value']}} adet</span>--}}
 
-                                        <span>{{$widget['title']}}</span>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas {{$widget['icon']}}" style="font-size: 25px"></i>
-                                    </div>
+{{--                                        <span>{{$widget['title']}}</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="icon">--}}
+{{--                                        <i class="fas {{$widget['icon']}}" style="font-size: 25px"></i>--}}
+{{--                                    </div>--}}
 
-                                </div>
-                            </div>
-                        @endif
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
 
-                    @endforeach
+{{--                    @endforeach--}}
 
 
-                </div>
+{{--                </div>--}}
 
-            @endif
+{{--            @endif--}}
 
             <div class="card">
 
