@@ -279,7 +279,7 @@ class ReportController extends Controller
             ->appends($request->except('page'));
 
 
-        dd($request->all(),$transactions);
+//        dd($request->all(),$transactions);
         $clients = Client::get();
         $types = $this->transactionTypeRepository->getAll();
         $methods = $this->transactionMethodRepository->getAll();
