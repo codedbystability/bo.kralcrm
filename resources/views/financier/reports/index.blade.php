@@ -403,7 +403,7 @@
 
                                         @foreach($data as $key=> $agreement)
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
-                                                <td class="sorting_1 dtr-control">{{$agreement->id}}</td>
+{{--                                                <td class="sorting_1 dtr-control">{{$agreement->id}}</td>--}}
 {{--                                                <td>{{$agreement->website ? $agreement->website->domain: ''}}</td>--}}
 {{--                                                <td>{{$agreement->method ? $agreement->method->name:''}}</td>--}}
 {{--                                                <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>--}}
@@ -413,32 +413,32 @@
 {{--                                                <td>{{$agreement->created_at}}</td>--}}
 
 
-                                                <td class="project-actions d-flex justify-content-around">
+{{--                                                <td class="project-actions d-flex justify-content-around">--}}
 
-                                                    <form
-                                                        action="{{ route('financier.transactions.reports.detail', $agreement->id) }}"
-                                                        method="GET">
-                                                        <button type="submit" class="btn btn-primary btn-sm ">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Detayli Goruntule
-                                                        </button>
-                                                    </form>
+{{--                                                    <form--}}
+{{--                                                        action="{{ route('financier.transactions.reports.detail', $agreement->id) }}"--}}
+{{--                                                        method="GET">--}}
+{{--                                                        <button type="submit" class="btn btn-primary btn-sm ">--}}
+{{--                                                            <i class="fas fa-pencil-alt">--}}
+{{--                                                            </i>--}}
+{{--                                                            Detayli Goruntule--}}
+{{--                                                        </button>--}}
+{{--                                                    </form>--}}
 
 
-                                                    <form
-                                                        action="{{ route('financier.transactions.letclient', $agreement->id) }} "
-                                                        method="GET">
-                                                        <button type="submit"
-                                                                class="btn btn-warning btn-sm mt-1">
-                                                            <i class="fas fa-check-circle">
-                                                            </i>
-                                                            Yeniden Bilgilendir
+{{--                                                    <form--}}
+{{--                                                        action="{{ route('financier.transactions.letclient', $agreement->id) }} "--}}
+{{--                                                        method="GET">--}}
+{{--                                                        <button type="submit"--}}
+{{--                                                                class="btn btn-warning btn-sm mt-1">--}}
+{{--                                                            <i class="fas fa-check-circle">--}}
+{{--                                                            </i>--}}
+{{--                                                            Yeniden Bilgilendir--}}
 
-                                                        </button>
-                                                    </form>
+{{--                                                        </button>--}}
+{{--                                                    </form>--}}
 
-                                                </td>
+{{--                                                </td>--}}
                                             </tr>
                                         @endforeach
 
