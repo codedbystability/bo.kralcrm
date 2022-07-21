@@ -63,12 +63,12 @@ class TransactionController extends Controller
 
     public function filter(Request $request)
     {
+        dd($request->all());
 
         if ($request->get('clear') && $request->get('clear') === 'clear-filter') {
             return $this->reports($request);
         }
 
-        dd($request->all());
         $today = Carbon::now()->format('d-m-Y') . ' 00:00:00';
 
         if ($request->get('date_range')) {
