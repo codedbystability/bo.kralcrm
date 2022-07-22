@@ -425,7 +425,7 @@
                                                 <td>{{$agreement->method ? $agreement->method->name:''}}</td>
                                                 <td>{{$agreement->type ? \App\Enums\TransactionTypeEnum::get($agreement->type->key) : '--'}}</td>
                                                 <td>{{$agreement->status ?\App\Enums\TransactionStatusEnum::get($agreement->status->key):'---'}}</td>
-                                                <td>{{$agreement->amount}}</td>
+                                                <td>{{number_format( $agreement->amount, 2, '.', ',' )}}</td>
                                                 <td>{{$agreement->currency?$agreement->currency->symbol:'TRY - 2'}}</td>
                                                 <td>{{$agreement->created_at}}</td>
 

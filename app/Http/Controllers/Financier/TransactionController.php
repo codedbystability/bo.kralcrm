@@ -208,24 +208,12 @@ class TransactionController extends Controller
             'test' => '-'
         ]);
 
-        $bankInfo = null;
-        if ($transaction->account_id) {
-            $bank = Account::with('accountable')->find($transaction->account_id);
 
-
-            if ($bankInfo){
-                $bank = array_merge($bank->accountable->toArray());
-            }
-        }
-
-        if ($bankInfo){
-            dd($bankInfo);
-        }
 
         return view('financier.transactions.detail')->with([
             'transaction' => $transaction,
             'fields' => $fields,
-            'bankInfo' => $bankInfo,
+            'bankInfo' => null,
             'notes' => $transaction->notes,
 //            'banka' => $bank ? $bank->name : ''
 
