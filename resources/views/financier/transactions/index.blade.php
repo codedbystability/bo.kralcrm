@@ -78,6 +78,12 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
+                                                TARIH
+                                            </th>
+
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Rendering engine: activate to sort column descending">
                                                 DURUM
                                             </th>
 
@@ -113,6 +119,9 @@
                                                 <td>{{ number_format( $transaction->approved_amount, 2, '.', ',' )  }} </td>
 
                                                 <td>{{\App\Enums\TransactionTypeEnum::get($transaction->type->key)}}</td>
+
+                                                <td>{{$transaction->created_at}}</td>
+
                                                 <td>{{\App\Enums\TransactionStatusEnum::get($transaction->status->key)}}</td>
 
 
