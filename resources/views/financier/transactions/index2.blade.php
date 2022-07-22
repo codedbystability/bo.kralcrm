@@ -59,7 +59,7 @@
 
 
 
-                                                <td>{{number_format( $transaction->amount, 2, '.', ',' ) }} {{$transaction->currency_code}}</td>
+                                                <td>{{number_format( $transaction->amount, 2, ',', '.' ) }} {{$transaction->currency_code}}</td>
 
 
 

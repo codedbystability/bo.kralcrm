@@ -335,7 +335,7 @@
                                             <td>{{$agreement->method->name}}</td>
                                             <td>{{\App\Enums\TransactionTypeEnum::get($agreement->type->key)}}</td>
                                             <td>{{\App\Enums\TransactionStatusEnum::get($agreement->status->key)}}</td>
-                                            <td>{{number_format( $agreement->amount, 2, '.', ',' )  }}</td>
+                                            <td>{{number_format( $agreement->amount, 2, ',', '.' )  }}</td>
                                             <td>{{$agreement->created_at}}</td>
 
 

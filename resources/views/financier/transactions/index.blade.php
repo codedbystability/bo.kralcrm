@@ -113,10 +113,10 @@
                                                     <td>{{$transaction->type->key==='deposit'?'PAPARA' :$transaction->transactionable->accno}}</td>
                                                     <td>{{$transaction->type->key==='deposit'?$transaction->transactionable->fullname :$transaction->transactionable->owner}}</td>
                                                 @endif
-                                                <td>{{  number_format( $transaction->amount, 2, '.', ',' ) }} {{$transaction->currency_code}}</td>
+                                                <td>{{  number_format( $transaction->amount, 2, ',', '.' ) }} {{$transaction->currency_code}}</td>
 
 
-                                                <td>{{ number_format( $transaction->approved_amount, 2, '.', ',' )  }} </td>
+                                                <td>{{ number_format( $transaction->approved_amount, 2, ',', '.' )  }} </td>
 
                                                 <td>{{\App\Enums\TransactionTypeEnum::get($transaction->type->key)}}</td>
 
