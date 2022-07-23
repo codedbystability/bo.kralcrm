@@ -55,11 +55,6 @@
                                                value="{{$customer_name}}"
                                          >
                                     </div>
-                                    <datalist id="client">
-                                        @foreach($clients as $client)
-                                            <option value="{{$client->name}}">
-                                        @endforeach
-                                    </datalist>
                                 </div>
 
 
