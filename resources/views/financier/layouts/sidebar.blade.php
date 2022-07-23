@@ -357,7 +357,7 @@
                     </li>
                 @endcan
 
-                @can('observe accountreports')
+{{--                @can('observe accountreports')--}}
                     <li class="nav-item">
                         <a href="{{route('financier.transactions.reports.accounts')}}"
                            class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts-filter') ? 'active' : ''}}">
@@ -367,7 +367,7 @@
                             </p>
                         </a>
                     </li>
-                @endcan
+{{--                @endcan--}}
 
 
                 <li class="nav-item">
