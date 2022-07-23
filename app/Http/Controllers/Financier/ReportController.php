@@ -254,7 +254,7 @@ class ReportController extends Controller
             ->when($request->get('customer_name'), function ($query) use ($request, $t2) {
                 // ISIMLE ARAMA geldiginde
                 return $query->whereHasMorph('transactionable', HavaleDeposit::class, function ($qq) use ($request, $t2) {
-                    return $qq->where('fullname', 'like', $t2)->get();
+                    return $qq->where('havale_deposits.fullname', 'like', $t2)->get();
                 });
 
             })
