@@ -42,7 +42,7 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
-                                                ISIM
+                                                #ISIM
                                             </th>
 
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
@@ -106,11 +106,11 @@
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}"
                                                 id="waiting-deposits-{{$transaction->id}}">
 
-                                                @if($agreement->transactionable)
-                                                    @if($agreement->transactionable->fullname)
-                                                        <td>{{ $agreement->transactionable->fullname}}</td>
-                                                    @elseif($agreement->transactionable->owner)
-                                                        <td>{{ $agreement->transactionable->owner}}</td>
+                                                @if($transaction->transactionable)
+                                                    @if($transaction->transactionable->fullname)
+                                                        <td>{{ $transaction->transactionable->fullname}}</td>
+                                                    @elseif($transaction->transactionable->owner)
+                                                        <td>{{ $transaction->transactionable->owner}}</td>
                                                     @endif
                                                 @else
                                                     <td>---</td>
