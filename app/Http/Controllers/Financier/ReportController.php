@@ -246,7 +246,7 @@ class ReportController extends Controller
             });
         })
             ->has('transactionable')
-            ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
+            ->with('website', 'client', 'status', 'type', 'method', 'currency')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
             ->orderBy('id', 'desc')
@@ -254,7 +254,7 @@ class ReportController extends Controller
                 // ISIMLE ARAMA geldiginde
                 return $query->whereHasMorph('transactionable', HavaleDeposit::class, function ($qq) use ($request) {
                     return $qq->where('fullname', 'like', '%' . $request->get('customer_name') . '%')->get();
-                });
+                })->with('transactionable');
 
             })
             ->when($request->get('currency_name'), function ($query) use ($request) {
