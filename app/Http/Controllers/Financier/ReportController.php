@@ -251,7 +251,7 @@ class ReportController extends Controller
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
             ->orderBy('id', 'desc')
-            ->when($request->get('customer_name'), function ($query) use ($request) {
+            ->when($request->get('customer_name'), function ($query) use ($txt) {
                 // ISIMLE ARAMA geldiginde
                 return $query->whereHasMorph('transactionable', HavaleDeposit::class, function ($qq) use ($txt ) {
                     return $qq->where('havale_deposits.fullname', 'like', '%' .$txt  . '%')->get();
