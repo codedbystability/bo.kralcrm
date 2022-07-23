@@ -362,7 +362,7 @@
                                    class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports') ? 'active' : ''}}">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        Raporlar
+                                        İşlem Raporları
                                     </p>
                                 </a>
                             </li>
