@@ -253,8 +253,10 @@ class ReportController extends Controller
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
             ->when($request->get('customer_name'), function ($query) use ($txt) {
                 // ISIMLE ARAMA geldiginde
-                return $query->whereHasMorph('transactionable', [HavaleDeposit::class,HavaleWithdraw::class], function (Builder $qq) use ($txt ) {
-                    return $qq->where('fullname', 'like', "%" . $txt  . "%")->get();
+                return $query->whereHasMorph('transactionable', [HavaleDeposit::class, HavaleWithdraw::class, PaparaDeposit::class, PaparaWithdraw::class], function (Builder $query, $type) use ($txt) {
+                    $column = $type === PaparaWithdraw::class ? 'owner' : 'fullname';
+
+                    return $query->where($column, 'like', "%" . $txt . "%")->get();
                 });
 
             })
