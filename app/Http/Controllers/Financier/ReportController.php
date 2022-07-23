@@ -293,6 +293,7 @@ class ReportController extends Controller
                 return $query->where('amount', '<=', $request->get('max_amount'));
             })
             ->orderBy('id', 'desc')
+            ->where('is_active', true)
             ->limmit(20)
             ->get();
 
