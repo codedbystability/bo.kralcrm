@@ -47,8 +47,7 @@
                                           </span>
                                         </div>
                                         <input class="form-control"
-                                               list="client"
-                                               name="customer_name"
+                                                name="customer_name"
                                                id="client-input"
                                                placeholder="Tum Musteriler"
                                                onfocus="this.value = null"
