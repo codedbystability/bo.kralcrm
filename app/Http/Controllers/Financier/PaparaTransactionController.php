@@ -111,7 +111,7 @@ class PaparaTransactionController extends Controller
             ->where('type_id', $type->id)
             ->where('is_active', true)
             ->with('transactionable')
-            ->select(['id', 'client_id', 'direct_approve', 'is_active','created_at', 'currency_code', 'status_id', 'type_id', 'method_id', 'account_id', 'amount', 'approved_amount', 'transactionable_id', 'transactionable_type', 'edit_time'])
+            ->select(['id', 'client_id', 'direct_approve','description', 'is_active','created_at', 'currency_code', 'status_id', 'type_id', 'method_id', 'account_id', 'amount', 'approved_amount', 'transactionable_id', 'transactionable_type', 'edit_time'])
             ->with(['status' => function ($query) {
                 return $query->select('id', 'name', 'key');
             }, 'type' => function ($query) {
