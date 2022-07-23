@@ -254,7 +254,7 @@ class ReportController extends Controller
                 // ISIMLE ARAMA geldiginde
                 return $query->whereHasMorph(
                     'transactionable',
-                    [HavaleDeposit::class, HavaleWithdraw::class, PaparaDeposit::class, PaparaWithdraw::class],
+                    '*',
                     function (Builder $query, $type) use ($txt) {
                         $column = $type === PaparaWithdraw::class ? 'owner' : 'fullname';
                         return $query->where($column, 'like', '%' . $txt . '%')->get();
