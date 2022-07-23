@@ -53,12 +53,14 @@
                                                placeholder="Tum Musteriler"
                                                onfocus="this.value = null"
                                                value="{{$customer_name}}"
-                                         >
+                                        >
                                     </div>
                                 </div>
 
+                            </div>
+                            <div class="form-group col-12 p-0 d-flex">
 
-                                <div class="form-group col-6 p-0">
+                                 <div class="form-group col-6 p-0">
                                     <label for="client">Musteriler</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
