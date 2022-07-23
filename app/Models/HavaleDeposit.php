@@ -17,9 +17,9 @@ class HavaleDeposit extends Model
         'updated_at' => 'date:Y-m-d h:i:s'
     ];
 
-    public function transaction(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    public function transaction(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphOne(Transaction::class, 'transactionable','transactionable_type','transactionable_id','id');
+        return $this->morphMany(Transaction::class, 'transactionable','transactionable_type','transactionable_id','id');
     }
 
     public function account(): \Illuminate\Database\Eloquent\Relations\BelongsTo
