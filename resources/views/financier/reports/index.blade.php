@@ -39,7 +39,7 @@
 
 
                                 <div class="form-group col-12 p-0">
-                                    <label for="client">isimle ara ..</label>
+                                    <label for="client">Yatırımcı ismiyle arayın...</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text @if(isset($customer_name)) bg-primary @endif">
@@ -49,7 +49,7 @@
                                         <input class="form-control"
                                                 name="customer_name"
                                                id="client-input"
-                                               placeholder="Tum Musteriler"
+                                               placeholder="Tüm Yatırımcılar"
                                                onfocus="this.value = null"
                                                value="{{$customer_name}}"
                                         >
