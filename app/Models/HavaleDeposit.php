@@ -19,7 +19,7 @@ class HavaleDeposit extends Model
 
     public function transaction(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
-        return $this->morphOne(Transaction::class, 'transactionable');
+        return $this->morphOne(Transaction::class, 'transactionable','transactionable_type','transactionable_id','id');
     }
 
     public function account(): \Illuminate\Database\Eloquent\Relations\BelongsTo
