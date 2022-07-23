@@ -48,6 +48,12 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
+                                                #MUSTERI ACIKLAMA
+                                            </th>
+
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Rendering engine: activate to sort column descending">
                                                 METHOD
                                             </th>
 
@@ -120,6 +126,10 @@
                                                 @else
                                                     <td>---</td>
                                                 @endif
+
+                                                <td class="sorting_1 dtr-control">
+                                                    <h5>{{$transaction->description}}</h5>
+                                                </td>
 
                                                 <td class="sorting_1 dtr-control">
                                                     <h5>{{$transaction->method->name}}</h5>
