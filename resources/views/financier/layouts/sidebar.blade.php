@@ -365,7 +365,7 @@
 
                             <li class="nav-item">
                                 <a href="{{route('financier.transactions.reports.index')}}"
-                                   class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports') ? 'active' : ''}}">
+                                   class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports')  || \Illuminate\Support\Facades\Request::path() === 'financier/transactions/reports'|| \Illuminate\Support\Facades\Request::is('financier/transactions/reports') ? 'active' : ''}}">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         İşlem Raporları
@@ -377,7 +377,7 @@
                             {{--                @can('observe accountreports')--}}
                             <li class="nav-item">
                                 <a href="{{route('financier.transactions.reports.accounts')}}"
-                                   class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts-filter') ? 'active' : ''}}">
+                                   class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts') || \Illuminate\Support\Facades\Request::path() === 'financier/transactions/reports/accounts' || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts-filter') ? 'active' : ''}}">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Hesap Raporlar
