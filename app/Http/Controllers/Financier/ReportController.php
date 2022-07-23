@@ -261,13 +261,8 @@ class ReportController extends Controller
 //                    });
 //
 //            })
-            ->whereHasMorph(
-                'transactionable',
-                '*',
-                function (Builder $query, $type) use ($txt) {
-                    $column = $type === PaparaWithdraw::class ? 'owner' : 'fullname';
-                    return $query->where($column, 'like', '%' . $txt . '%')->get();
-                })
+            ->whereHasMorph('transactionable', HavaleDeposit::class)
+
             ->when($request->get('currency_name'), function ($query) use ($request) {
                 return $query->whereHas('currency', function ($qq) use ($request) {
                     return $qq->where('code', $request->get('currency_name'));
