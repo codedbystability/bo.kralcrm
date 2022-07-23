@@ -346,13 +346,7 @@
 
                 @can('observe reports')
 
-                    <li class="nav-item menu-{{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*')
- || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts')
- || \Illuminate\Support\Facades\Request::path() === 'financier/transactions/reports/accounts'
- || \Illuminate\Support\Facades\Request::path() === 'financier/transactions/reports'
-
- || \Illuminate\Support\Facades\Request::is('financier/transactions/reports')
- || \Illuminate\Support\Facades\Request::is('financier/transactions/havale/*') ? 'open' : ''}}">
+                    <li class="nav-item menu-{{ true ? 'open' : ''}}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>
