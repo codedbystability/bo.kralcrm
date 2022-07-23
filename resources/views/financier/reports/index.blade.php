@@ -42,7 +42,7 @@
                                     <label for="client">isimle ara ..</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                          <span class="input-group-text @if(isset($client_name)) bg-primary @endif">
+                                          <span class="input-group-text @if(isset($customer_name)) bg-primary @endif">
                                             <i class="fas fa-people-arrows"></i>
                                           </span>
                                         </div>
