@@ -19,7 +19,7 @@ class HavaleDeposit extends Model
 
     public function transaction(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphMany(Transaction::class, 'transactionable',HavaleDeposit::class,'id');
+        return $this->morphMany(Transaction::class, 'transactionable');
     }
 
     public function account(): \Illuminate\Database\Eloquent\Relations\BelongsTo
