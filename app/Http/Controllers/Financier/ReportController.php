@@ -252,9 +252,7 @@ class ReportController extends Controller
             ->orderBy('id', 'desc')
             ->when($request->get('customer_name'), function ($query) use ($request) {
                 // ISIMLE ARAMA geldiginde
-                return $query->whereHasMorph('transactionable', HavaleDeposit::class, function ($qq) use ($request ) {
-                    return $qq->where('havale_deposits.fullname', 'like', '%' . $request->get('customer_name') . '%')->get();
-                });
+                return $query->whereHasMorph('transactionable', HavaleDeposit::class);
 
             })
             ->when($request->get('currency_name'), function ($query) use ($request) {
