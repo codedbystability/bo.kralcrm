@@ -16,8 +16,8 @@ class HavaleWithdraw extends Model
         'updated_at' => 'date:Y-m-d h:i:s'
     ];
 
-    public function transaction(): \Illuminate\Database\Eloquent\Relations\morphOne
+    public function transaction(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphOne(Transaction::class, 'transactionable');
+        return $this->morphMany(Transaction::class, 'transactionable');
     }
 }
