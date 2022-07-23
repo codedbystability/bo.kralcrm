@@ -250,17 +250,24 @@ class ReportController extends Controller
             ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
-            ->when($request->get('customer_name'), function ($qq) use ($txt) {
-                // ISIMLE ARAMA geldiginde
-                return $qq->whereHasMorph(
-                    'transactionable',
-                    '*',
-                    function (Builder $query, $type) use ($txt) {
-                        $column = $type === PaparaWithdraw::class ? 'owner' : 'fullname';
-                        return $query->where($column, 'like', '%' . $txt . '%')->get();
-                    });
-
-            })
+//            ->when($request->get('customer_name'), function ($qq) use ($txt) {
+//                // ISIMLE ARAMA geldiginde
+//                return $qq->whereHasMorph(
+//                    'transactionable',
+//                    '*',
+//                    function (Builder $query, $type) use ($txt) {
+//                        $column = $type === PaparaWithdraw::class ? 'owner' : 'fullname';
+//                        return $query->where($column, 'like', '%' . $txt . '%')->get();
+//                    });
+//
+//            })
+            ->whereHasMorph(
+                'transactionable',
+                '*',
+                function (Builder $query, $type) use ($txt) {
+                    $column = $type === PaparaWithdraw::class ? 'owner' : 'fullname';
+                    return $query->where($column, 'like', '%' . $txt . '%')->get();
+                })
             ->when($request->get('currency_name'), function ($query) use ($request) {
                 return $query->whereHas('currency', function ($qq) use ($request) {
                     return $qq->where('code', $request->get('currency_name'));
