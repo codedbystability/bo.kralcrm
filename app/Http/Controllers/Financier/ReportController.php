@@ -239,7 +239,7 @@ class ReportController extends Controller
         $dateFrom = $request->get('date_from');
         $dateTo = $request->get('date_to');
 
-        $t2 = '%' . $request->get('customer_name') . '%';
+        $t2 = "'%' . $request->get('customer_name') . '%'";
 
         $transactions = Transaction::when($request->get('website_name'), function ($query) use ($request) {
             return $query->whereHas('website', function ($qq) use ($request) {
