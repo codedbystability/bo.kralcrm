@@ -294,7 +294,7 @@ class ReportController extends Controller
             })
             ->orderBy('id', 'desc')
             ->where('is_active', true)
-            ->limmit(20)
+            ->limit(20)
             ->get();
 
         dd($transactions);
