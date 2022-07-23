@@ -289,11 +289,12 @@ class ReportController extends Controller
                 return $query->where('amount', '<=', $request->get('max_amount'));
             })
             ->orderBy('id', 'desc')
+            ->limmit(20)
             ->get();
 
         dd($transactions);
-            ->paginate(20)
-            ->appends($request->except('page'));
+//            ->paginate(20)
+//            ->appends($request->except('page'));
 
 
 //        dd($request->all(),$transactions);
