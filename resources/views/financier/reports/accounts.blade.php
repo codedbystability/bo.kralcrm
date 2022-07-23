@@ -398,6 +398,13 @@
                                         <thead>
                                         <tr role="row">
                                             <th style="width: 10px">#</th>
+
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Rendering engine: activate to sort column descending">
+                                                ISIM-
+                                            </th>
+
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending">
@@ -452,6 +459,15 @@
                                         @foreach($data as $key=> $agreement)
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}">
                                                 <td class="sorting_1 dtr-control">{{$agreement->id}}</td>
+                                                @if($agreement->transactionable)
+                                                    @if($agreement->transactionable->fullname)
+                                                        <td>{{ $agreement->transactionable->fullname}}</td>
+                                                    @elseif($agreement->transactionable->owner)
+                                                        <td>{{ $agreement->transactionable->owner}}</td>
+                                                    @endif
+                                                @else
+                                                    <td>---</td>
+                                                @endif
                                                 <td>{{$agreement->website->domain}}</td>
                                                 <td>{{$agreement->method->name}}</td>
                                                 <td>{{\App\Enums\TransactionTypeEnum::get($agreement->type->key)}}</td>
