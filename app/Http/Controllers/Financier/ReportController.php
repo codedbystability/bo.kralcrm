@@ -250,9 +250,9 @@ class ReportController extends Controller
             ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
-            ->when($request->get('customer_name'), function ($query) use ($txt) {
+            ->when($request->get('customer_name'), function ($qq) use ($txt) {
                 // ISIMLE ARAMA geldiginde
-                return $query->whereHasMorph(
+                return $qq->whereHasMorph(
                     'transactionable',
                     '*',
                     function (Builder $query, $type) use ($txt) {
