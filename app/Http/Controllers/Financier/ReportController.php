@@ -246,7 +246,7 @@ class ReportController extends Controller
                 return $qq->where('domain', $request->get('website_name'));
             });
         })
-            ->whereNotNull('transactionable')
+            ->whereNotNull('transactionable_type')
             ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
