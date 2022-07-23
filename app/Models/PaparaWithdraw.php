@@ -18,6 +18,8 @@ class PaparaWithdraw extends Model
 
     public function transaction(): \Illuminate\Database\Eloquent\Relations\morphOne
     {
-        return $this->morphOne(Transaction::class, 'transactionable');
+        return $this->morphOne(Transaction::class, 'transactionable')
+            ->where('transactions.transactionable_type', PaparaWithdraw::class);
+        ;
     }
 }
