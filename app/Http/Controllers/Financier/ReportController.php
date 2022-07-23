@@ -245,10 +245,10 @@ class ReportController extends Controller
                 return $qq->where('domain', $request->get('website_name'));
             });
         })
+            ->has('transactionable')
 
             ->when($request->get('customer_name'), function ($query) use ($request) {
                 // ISIMLE ARAMA geldiginde
-
                 return  $query->whereHasMorph('transactionable', PaparaWithdraw::class, function ($query) use ($request) {
                     return $query->where('owner', 'like', '%' . $request->get('customer_name') . '%')->get();
                 })->orWhereHasMorph('transactionable', PaparaDeposit::class, function ($query) use ($request) {
