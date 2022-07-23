@@ -106,6 +106,11 @@
                                             <tr class="{{$key % 2 === 0 ? 'even':'odd'}}"
                                                 id="waiting-deposits-{{$transaction->id}}">
 
+
+                                                <td class="sorting_1 dtr-control">
+                                                    <h5>#{{$transaction->id}}</h5>
+                                                </td>
+
                                                 @if($transaction->transactionable)
                                                     @if($transaction->transactionable->fullname)
                                                         <td>{{ $transaction->transactionable->fullname}}</td>
@@ -116,9 +121,6 @@
                                                     <td>---</td>
                                                 @endif
 
-                                                <td class="sorting_1 dtr-control">
-                                                    <h5>#{{$transaction->id}}</h5>
-                                                </td>
                                                 <td class="sorting_1 dtr-control">
                                                     <h5>{{$transaction->method->name}}</h5>
                                                 </td>
