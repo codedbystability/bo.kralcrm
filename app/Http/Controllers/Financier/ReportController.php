@@ -241,7 +241,6 @@ class ReportController extends Controller
         $dateTo = $request->get('date_to');
         $txt = $request->get('customer_name');
 
-        $txt = 'demo';
         $transactions = Transaction::when($request->get('website_name'), function ($query) use ($request) {
             return $query->whereHas('website', function ($qq) use ($request) {
                 return $qq->where('domain', $request->get('website_name'));
