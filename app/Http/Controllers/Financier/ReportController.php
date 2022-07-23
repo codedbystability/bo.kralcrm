@@ -299,10 +299,10 @@ class ReportController extends Controller
             ->where('is_active', true)
             ->orderBy('id', 'desc')
             ->limit(20)
-            ->get();
+//            ->get();
 
-//            ->paginate(20)
-//            ->appends($request->except('page'));
+            ->paginate(20)
+            ->appends($request->except('page'));
 
 
 //        dd($request->all(),$transactions);
