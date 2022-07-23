@@ -240,7 +240,7 @@ class ReportController extends Controller
         $dateTo = $request->get('date_to');
         $txt = $request->get('customer_name');
 
-        $txt = 'demmo';
+        $txt = 'demo';
         $transactions = Transaction::when($request->get('website_name'), function ($query) use ($request) {
             return $query->whereHas('website', function ($qq) use ($request) {
                 return $qq->where('domain', $request->get('website_name'));
@@ -248,9 +248,9 @@ class ReportController extends Controller
         })
             ->has('transactionable')
             ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
-//            ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
-//            ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
-//            ->orderBy('id', 'desc')
+            ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
+            ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
+            ->orderBy('id', 'desc')
             ->when($request->get('customer_name'), function ($query) use ($txt) {
                 // ISIMLE ARAMA geldiginde
                 return $query->whereHasMorph('transactionable', [HavaleDeposit::class], function ($qq) use ($txt ) {
