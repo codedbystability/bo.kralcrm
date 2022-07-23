@@ -252,7 +252,7 @@ class ReportController extends Controller
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
             ->when($request->get('customer_name'), function ($query) use ($txt) {
                 // ISIMLE ARAMA geldiginde
-                return $query->whereHasMorph('transactionable', HavaleDeposit::class, function ($qq) use ($txt ) {
+                return $query->whereHasMorph('transactionable', [HavaleDeposit::class,HavaleWithdraw::class], function ($qq) use ($txt ) {
                     return $qq->where('fullname', 'like', "%" . $txt  . "%")->get();
                 });
 
@@ -289,6 +289,9 @@ class ReportController extends Controller
                 return $query->where('amount', '<=', $request->get('max_amount'));
             })
             ->orderBy('id', 'desc')
+            ->get();
+
+        dd($transactions);
             ->paginate(20)
             ->appends($request->except('page'));
 
