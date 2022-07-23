@@ -9,6 +9,10 @@ use App\Models\Bank;
 use App\Models\BankAccount;
 use App\Models\Client;
 use App\Models\Currency;
+use App\Models\HavaleDeposit;
+use App\Models\HavaleWithdraw;
+use App\Models\PaparaDeposit;
+use App\Models\PaparaWithdraw;
 use App\Models\Transaction;
 use App\Models\Website;
 use App\Repositories\BankAccountRepository;
@@ -64,6 +68,7 @@ class ReportController extends Controller
             'methods' => $methods,
             'currencies' => $this->currencies,
 
+            'customer_name' => null,
             'currency_name' => null,
             'client_name' => null,
             'website_name' => null,
@@ -240,6 +245,20 @@ class ReportController extends Controller
                 return $qq->where('domain', $request->get('website_name'));
             });
         })
+
+            ->when($request->get('customer_name'), function ($query) use ($request) {
+                // ISIMLE ARAMA geldiginde
+
+                return  $query->whereHasMorph('transactionable', PaparaWithdraw::class, function ($query) use ($request) {
+                    return $query->where('owner', 'like', '%' . $request->get('customer_name') . '%')->get();
+                })->orWhereHasMorph('transactionable', PaparaDeposit::class, function ($query) use ($request) {
+                    return $query->where('fullnae', 'like', '%' . $request->get('customer_name') . '%')->get();
+                })->orWhereHasMorph('transactionable', HavaleDeposit::class, function ($query) use ($request) {
+                    return $query->where('fullnae', 'like', '%' . $request->get('customer_name') . '%')->get();
+                })->orWhereHasMorph('transactionable', HavaleWithdraw::class, function ($query) use ($request) {
+                    return $query->where('fullnae', 'like', '%' . $request->get('customer_name') . '%')->get();
+                });
+            })
             ->when($request->get('currency_name'), function ($query) use ($request) {
                 return $query->whereHas('currency', function ($qq) use ($request) {
                     return $qq->where('code', $request->get('currency_name'));
@@ -299,6 +318,7 @@ class ReportController extends Controller
             'methods' => $methods,
             'currencies' => $this->currencies,
             'currency_name' => $request->get('currency_name'),
+            'customer_name' => $request->get('customer_name'),
             'client_name' => $request->get('client_name'),
             'website_name' => $request->get('website_name'),
             'status_name' => $request->get('status_name'),
@@ -486,15 +506,6 @@ class ReportController extends Controller
             'title' => '$title'
         ]);
 
-//        $theTransactions = $transactions[0];
-//
-//        if ($theTransactions->type->key)
-//
-//        return view('financier.transactions.index')->with([
-//            'transactions' => $transactions,
-////            'permissionKey' => $permissionKey,
-////            'title' => $title
-//        ]);
 
 
     }

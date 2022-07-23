@@ -36,6 +36,33 @@
                         @csrf
                         <div class="row">
                             <div class="form-group col-12 p-0 d-flex">
+
+
+                                <div class="form-group col-12 p-0">
+                                    <label for="client">isimle ara ..</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text @if(isset($client_name)) bg-primary @endif">
+                                            <i class="fas fa-people-arrows"></i>
+                                          </span>
+                                        </div>
+                                        <input class="form-control"
+                                               list="client"
+                                               name="customer_name"
+                                               id="client-input"
+                                               placeholder="Tum Musteriler"
+                                               onfocus="this.value = null"
+                                               value="{{$customer_name}}"
+                                         >
+                                    </div>
+                                    <datalist id="client">
+                                        @foreach($clients as $client)
+                                            <option value="{{$client->name}}">
+                                        @endforeach
+                                    </datalist>
+                                </div>
+
+
                                 <div class="form-group col-6 p-0">
                                     <label for="client">Musteriler</label>
                                     <div class="input-group">
