@@ -301,7 +301,6 @@ class ReportController extends Controller
             ->limit(20)
             ->get();
 
-        dd($transactions);
 //            ->paginate(20)
 //            ->appends($request->except('page'));
 
