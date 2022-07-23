@@ -47,7 +47,7 @@ class ReportController extends Controller
         $dateFrom = Carbon::now()->subMonth(1)->format('Y-m-d');
         $dateTo = Carbon::now()->format('Y-m-d');
 
-        $transactions = Transaction::with('website', 'client', 'status', 'type', 'method', 'currency','transactionable')
+        $transactions = Transaction::with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d', $dateFrom))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d', $dateTo))
             ->orderBy('id', 'desc')
@@ -246,15 +246,13 @@ class ReportController extends Controller
             });
         })
             ->has('transactionable')
-            ->with('website', 'client', 'status', 'type', 'method', 'currency','transactionable')
-
+            ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
             ->orderBy('id', 'desc')
-
             ->when($request->get('customer_name'), function ($query) use ($request) {
                 // ISIMLE ARAMA geldiginde
-                return  $query->whereHasMorph('transactionable', [PaparaDeposit::class, HavaleDeposit::class,HavaleWithdraw::class], function($query) use ($request){
+                return $query->whereHasMorph('transactionable', HavaleDeposit::class, function ($query) use ($request) {
                     return $query->where('fullname', 'like', '%' . $request->get('customer_name') . '%')->get();
                 });
 
@@ -290,8 +288,6 @@ class ReportController extends Controller
             ->when($request->get('max_amount'), function ($query) use ($request) {
                 return $query->where('amount', '<=', $request->get('max_amount'));
             })
-
-
             ->paginate(20)
             ->appends($request->except('page'));
 
@@ -503,7 +499,6 @@ class ReportController extends Controller
             'permissionKey' => '$permissionKey',
             'title' => '$title'
         ]);
-
 
 
     }

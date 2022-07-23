@@ -17,9 +17,9 @@ class PaparaDeposit extends Model
         'updated_at' => 'date:Y-m-d h:i:s'
     ];
 
-    public function transaction(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    public function transaction(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
-        return $this->morphMany(Transaction::class, 'transactionable');
+        return $this->morphOne(Transaction::class, 'transactionable');
     }
 
     public function account(): \Illuminate\Database\Eloquent\Relations\BelongsTo
