@@ -246,8 +246,7 @@ class ReportController extends Controller
                 return $qq->where('domain', $request->get('website_name'));
             });
         })
-            ->whereNotNull('transactionable_type')
-            ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
+//            ->whereNotNull('transactionable_type')
             ->whereDate('created_at', ">=", Carbon::createFromFormat('Y-m-d H:i:s', $dateFrom . ' 00:00:00'))
             ->whereDate('created_at', "<=", Carbon::createFromFormat('Y-m-d H:i:s', $dateTo . ' 23:59:59'))
 //            ->when($request->get('customer_name'), function ($qq) use ($txt) {
@@ -261,10 +260,9 @@ class ReportController extends Controller
 //                    });
 //
 //            })
-            ->whereHasMorph('transactionable', HavaleDeposit::class, function ($query) use ($txt) {
-//                $column = $type === PaparaWithdraw::class ? 'owner' : 'fullname';
-                return $query->where('fullname', 'like', '%' . $txt . '%')->get();
-            })
+            ->whereHasMorph('transactionable', HavaleDeposit::class)
+            ->with('website', 'client', 'status', 'type', 'method', 'currency', 'transactionable')
+
             ->when($request->get('currency_name'), function ($query) use ($request) {
                 return $query->whereHas('currency', function ($qq) use ($request) {
                     return $qq->where('code', $request->get('currency_name'));
