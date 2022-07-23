@@ -239,7 +239,7 @@ class ReportController extends Controller
         $dateFrom = $request->get('date_from');
         $dateTo = $request->get('date_to');
 
-        $t2 = "'%' . $request->get('customer_name') . '%'";
+        $t2 = ;
 
         $transactions = Transaction::when($request->get('website_name'), function ($query) use ($request) {
             return $query->whereHas('website', function ($qq) use ($request) {
@@ -254,7 +254,7 @@ class ReportController extends Controller
             ->when($request->get('customer_name'), function ($query) use ($request, $t2) {
                 // ISIMLE ARAMA geldiginde
                 return $query->whereHasMorph('transactionable', HavaleDeposit::class, function ($qq) use ($request, $t2) {
-                    return $qq->where('havale_deposits.fullname', 'like', $t2)->get();
+                    return $qq->where('havale_deposits.fullname', 'like', '%' . $request->get('customer_name') . '%')->get();
                 });
 
             })
