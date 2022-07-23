@@ -48,9 +48,9 @@ class Transaction extends Model
         return $this->hasMany(Note::class);
     }
 
-    public function transactionable(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    public function transactionable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
-        return $this->morphMany();
+        return $this->morphTo();
     }
 
     public function actions(): \Illuminate\Database\Eloquent\Relations\HasMany
