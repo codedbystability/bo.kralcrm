@@ -346,28 +346,47 @@
 
                 @can('observe reports')
 
-                    <li class="nav-item">
-                        <a href="{{route('financier.transactions.reports.index')}}"
-                           class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports') ? 'active' : ''}}">
-                            <i class="nav-icon fas fa-th"></i>
+                    <li class="nav-item menu-{{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*') || \Illuminate\Support\Facades\Request::is('financier/transactions/havale/*') ? 'open' : ''}}">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-book-open"></i>
                             <p>
-                                Raporlar
+                                Rapor Yonetimi
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview"
+                            style="display:  {{\Illuminate\Support\Facades\Request::is('financier/transactions/papara/*') || \Illuminate\Support\Facades\Request::is('financier/transactions/havale/*')  ?'block' : 'none'}};">
+
+                            <li class="nav-item">
+                                <a href="{{route('financier.transactions.reports.index')}}"
+                                   class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports') ? 'active' : ''}}">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Raporlar
+                                    </p>
+                                </a>
+                            </li>
+
+
+                            {{--                @can('observe accountreports')--}}
+                            <li class="nav-item">
+                                <a href="{{route('financier.transactions.reports.accounts')}}"
+                                   class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts-filter') ? 'active' : ''}}">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Hesap Raporlar
+                                    </p>
+                                </a>
+                            </li>
+                            {{--                @endcan--}}
+
+                        </ul>
                     </li>
+
+
                 @endcan
 
-{{--                @can('observe accountreports')--}}
-                    <li class="nav-item">
-                        <a href="{{route('financier.transactions.reports.accounts')}}"
-                           class="nav-link {{\Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts') || \Illuminate\Support\Facades\Request::is('financier/transactions/reports/accounts-filter') ? 'active' : ''}}">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Hesap Raporlar
-                            </p>
-                        </a>
-                    </li>
-{{--                @endcan--}}
+
 
 
                 <li class="nav-item">
