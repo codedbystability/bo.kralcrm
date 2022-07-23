@@ -251,12 +251,6 @@ class ReportController extends Controller
                 // ISIMLE ARAMA geldiginde
                 return  $query->whereHasMorph('transactionable', PaparaWithdraw::class, function ($query) use ($request) {
                     return $query->where('owner', 'like', '%' . $request->get('customer_name') . '%')->get();
-                })->orWhereHasMorph('transactionable', PaparaDeposit::class, function ($query) use ($request) {
-                    return $query->where('fullname', 'like', '%' . $request->get('customer_name') . '%')->get();
-                })->orWhereHasMorph('transactionable', HavaleDeposit::class, function ($query) use ($request) {
-                    return $query->where('fullname', 'like', '%' . $request->get('customer_name') . '%')->get();
-                })->orWhereHasMorph('transactionable', HavaleWithdraw::class, function ($query) use ($request) {
-                    return $query->where('fullname', 'like', '%' . $request->get('customer_name') . '%')->get();
                 });
             })
             ->when($request->get('currency_name'), function ($query) use ($request) {
