@@ -50,7 +50,7 @@ class Transaction extends Model
 
     public function transactionable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo(__FUNCTION__, 'transactionable_type', 'transactionable_id');
     }
 
     public function actions(): \Illuminate\Database\Eloquent\Relations\HasMany
