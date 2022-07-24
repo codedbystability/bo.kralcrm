@@ -36,28 +36,8 @@
                         @csrf
                         <div class="row">
 
-
-                            <div class="form-group col-12">
-                                <label for="client">Yatırımcı ismiyle arayın...</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                          <span class="input-group-text @if(isset($customer_name)) bg-primary @endif">
-                                            <i class="fas fa-people-arrows"></i>
-                                          </span>
-                                    </div>
-                                    <input class="form-control"
-                                           name="customer_name"
-                                           id="client-input"
-                                           placeholder="Tüm Yatırımcılar"
-                                           onfocus="this.value = null"
-                                           value="{{$customer_name}}"
-                                    >
-                                </div>
-                            </div>
-
                             <div class="form-group col-12  d-flex">
-
-                                <div class="form-group col-6 ">
+                                <div class="form-group col-4 ">
                                     <label for="client">Musteriler</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -81,9 +61,7 @@
                                         @endforeach
                                     </datalist>
                                 </div>
-
-
-                                <div class="form-group col-6 ">
+                                <div class="form-group col-4 ">
                                     <label for="client">Para Birimi</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -107,11 +85,7 @@
                                         @endforeach
                                     </datalist>
                                 </div>
-                            </div>
-
-                            <div class="form-group col-12 d-flex">
-
-                                <div class="form-group col-6 " id="website-content">
+                                <div class="form-group col-4 " id="website-content">
                                     <label for="website" id="website-label">Siteler</label>
 
                                     <div class="input-group" id="website-container">
@@ -136,7 +110,10 @@
                                         @endforeach
                                     </datalist>
                                 </div>
-                                <div class="form-group col-6">
+                            </div>
+
+                            <div class="form-group col-12 d-flex">
+                                <div class="form-group col-4">
 
                                     <label for="status">Islem Sonucu</label>
 
@@ -165,6 +142,36 @@
                                         @endforeach
                                     </datalist>
 
+                                </div>
+                                <div class="form-group col-4 ">
+                                    <label for="min_amount">Miktar Minimum</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text @if(isset($min_amount)) bg-primary @endif">
+                                            <i class="fas fa-minus-circle"></i>
+                                          </span>
+                                        </div>
+                                        <input type="number" min="0" name="min_amount" class="form-control"
+                                               placeholder="Minimum miktar giriniz .."
+                                               value="{{$min_amount}}"
+                                               id="min_amount">
+                                    </div>
+                                </div>
+                                <div class="form-group col-4 ">
+
+                                    <label for="max_amount">Miktar Maksimum</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text  @if(isset($max_amount)) bg-primary @endif">
+                                            <i class="fas fa-plus-circle"></i>
+                                          </span>
+                                        </div>
+                                        <input type="number" min="1" name="max_amount" class="form-control"
+                                               placeholder="Maksimum miktar giriniz .."
+                                               value="{{$max_amount}}"
+                                               id="max_amount">
+                                    </div>
                                 </div>
                             </div>
 
@@ -222,41 +229,28 @@
                             </div>
 
                             <div class="form-group col-12  d-flex">
-                                <div class="form-group col-6 ">
-                                    <label for="min_amount">Miktar Minimum</label>
 
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <span class="input-group-text @if(isset($min_amount)) bg-primary @endif">
-                                            <i class="fas fa-minus-circle"></i>
-                                          </span>
-                                        </div>
-                                        <input type="number" min="0" name="min_amount" class="form-control"
-                                               placeholder="Minimum miktar giriniz .."
-                                               value="{{$min_amount}}"
-                                               id="min_amount">
-                                    </div>
-                                </div>
-                                <div class="form-group col-6 ">
-
-                                    <label for="max_amount">Miktar Maksimum</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <span class="input-group-text  @if(isset($max_amount)) bg-primary @endif">
-                                            <i class="fas fa-plus-circle"></i>
-                                          </span>
-                                        </div>
-                                        <input type="number" min="1" name="max_amount" class="form-control"
-                                               placeholder="Maksimum miktar giriniz .."
-                                               value="{{$max_amount}}"
-                                               id="max_amount">
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="form-group col-12  d-flex">
-
-                                <div class="form-group col-6 ">
+                                <div class="form-group col-4">
+                                    <label for="client">Yatırımcı ismiyle arayın...</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text @if(isset($customer_name)) bg-primary @endif">
+                                            <i class="fas fa-people-arrows"></i>
+                                          </span>
+                                        </div>
+                                        <input class="form-control"
+                                               name="customer_name"
+                                               id="client-input"
+                                               placeholder="Tüm Yatırımcılar"
+                                               onfocus="this.value = null"
+                                               value="{{$customer_name}}"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="form-group col-4 ">
                                     <label>Tarih Baslangic:</label>
 
                                     <div class="input-group">
@@ -274,7 +268,7 @@
                                     </div>
                                     <!-- /.input group -->
                                 </div>
-                                <div class="form-group col-6 ">
+                                <div class="form-group col-4 ">
                                     <label>Tarih Bitis:</label>
 
                                     <div class="input-group">
