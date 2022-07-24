@@ -37,7 +37,7 @@
                         <div class="row">
 
 
-                            <div class="form-group col-12 ">
+                            <div class="form-group col-12">
                                 <label for="client">Yatırımcı ismiyle arayın...</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12d-flex">
+                            <div class="form-group col-12 d-flex">
 
                                 <div class="form-group col-6 " id="website-content">
                                     <label for="website" id="website-label">Siteler</label>
