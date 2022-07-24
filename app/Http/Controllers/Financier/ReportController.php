@@ -443,13 +443,12 @@ class ReportController extends Controller
         foreach ($transactionable as $key => $item) {
 
 
-            array_push($transactionRequest,
-                [
-                    'key' => $key,
-                    'class' => $index >= 3 ? 'col-lg-6' : 'col-lg-6',
-                    'value' => $item,
-                    'title' => $this->getTransactionableTitle($key)
-                ]);
+            $transactionRequest[] = [
+                'key' => $key,
+                'class' => $index >= 3 ? 'col-lg-6' : 'col-lg-6',
+                'value' => $item,
+                'title' => $this->getTransactionableTitle($key)
+            ];
             $index++;
         }
 
