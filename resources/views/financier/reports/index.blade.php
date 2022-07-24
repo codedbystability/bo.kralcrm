@@ -36,9 +36,9 @@
                         @csrf
                         <div class="row">
 
-                            <div class="form-group col-12  d-flex">
-                                <div class="form-group col-4 ">
-                                    <label for="client">Musteriler</label>
+                            <div style="margin: 0" class="form-group col-12  d-flex">
+                                <div style="margin: 0" class="form-group col-4 ">
+                                    <label style="margin-top: 10px;margin-top: 0" for="client">Musteriler</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text @if(isset($client_name)) bg-primary @endif">
@@ -61,8 +61,8 @@
                                         @endforeach
                                     </datalist>
                                 </div>
-                                <div class="form-group col-4 ">
-                                    <label for="client">Para Birimi</label>
+                                <div style="margin: 0" class="form-group col-4 ">
+                                    <label style="margin-top: 10px;margin-top: 0" for="client">Para Birimi</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text @if(isset($currency_name)) bg-primary @endif">
@@ -85,8 +85,8 @@
                                         @endforeach
                                     </datalist>
                                 </div>
-                                <div class="form-group col-4 " id="website-content">
-                                    <label for="website" id="website-label">Siteler</label>
+                                <div style="margin: 0" class="form-group col-4 " id="website-content">
+                                    <label style="margin-top: 10px;margin-top: 0" for="website" id="website-label">Siteler</label>
 
                                     <div class="input-group" id="website-container">
                                         <div class="input-group-prepend">
@@ -112,10 +112,10 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12 d-flex">
-                                <div class="form-group col-4">
+                            <div style="margin: 0" class="form-group col-12 d-flex">
+                                <div style="margin: 0" class="form-group col-4">
 
-                                    <label for="status">Islem Sonucu</label>
+                                    <label style="margin-top: 10px;margin-top: 0" for="status">Islem Sonucu</label>
 
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -143,8 +143,8 @@
                                     </datalist>
 
                                 </div>
-                                <div class="form-group col-4 ">
-                                    <label for="min_amount">Miktar Minimum</label>
+                                <div style="margin: 0" class="form-group col-4 ">
+                                    <label style="margin-top: 10px;margin-top: 0" for="min_amount">Miktar Minimum</label>
 
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -158,9 +158,9 @@
                                                id="min_amount">
                                     </div>
                                 </div>
-                                <div class="form-group col-4 ">
+                                <div style="margin: 0" class="form-group col-4 ">
 
-                                    <label for="max_amount">Miktar Maksimum</label>
+                                    <label style="margin-top: 10px;margin-top: 0" for="max_amount">Miktar Maksimum</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text  @if(isset($max_amount)) bg-primary @endif">
@@ -175,10 +175,10 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12 d-flex">
+                            <div style="margin: 0" class="form-group col-12 d-flex">
 
-                                <div class="form-group col-6 ">
-                                    <label for="type">Tipi</label>
+                                <div style="margin: 0" class="form-group col-6 ">
+                                    <label style="margin-top: 10px;margin-top: 0" for="type">Tipi</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text @if(isset($type_name)) bg-primary @endif">
@@ -201,8 +201,8 @@
                                         @endforeach
                                     </datalist>
                                 </div>
-                                <div class="form-group col-6 ">
-                                    <label for="type">Method</label>
+                                <div style="margin: 0" class="form-group col-6 ">
+                                    <label style="margin-top: 10px;margin-top: 0" for="type">Method</label>
 
 
                                     <div class="input-group">
@@ -228,13 +228,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12  d-flex">
 
-                            </div>
 
-                            <div class="form-group col-12  d-flex">
-                                <div class="form-group col-4">
-                                    <label for="client">Yatırımcı ismiyle arayın...</label>
+                            <div style="margin: 0" class="form-group col-12  d-flex">
+                                <div style="margin: 0" class="form-group col-4">
+                                    <label style="margin-top: 10px;margin-top: 0" for="client">Yatırımcı ismiyle arayın...</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text @if(isset($customer_name)) bg-primary @endif">
@@ -250,8 +248,8 @@
                                         >
                                     </div>
                                 </div>
-                                <div class="form-group col-4 ">
-                                    <label>Tarih Baslangic:</label>
+                                <div style="margin: 0" class="form-group col-4 ">
+                                    <label style="margin-top: 10px;margin-top: 0">Tarih Baslangic:</label>
 
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -268,8 +266,8 @@
                                     </div>
                                     <!-- /.input group -->
                                 </div>
-                                <div class="form-group col-4 ">
-                                    <label>Tarih Bitis:</label>
+                                <div style="margin: 0" class="form-group col-4 ">
+                                    <label style="margin-top: 10px;margin-top: 0">Tarih Bitis:</label>
 
                                     <div class="input-group">
                                         <div class="input-group-prepend">
