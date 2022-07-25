@@ -35,8 +35,8 @@
                     <form action="{{route('financier.transactions.reports.accounts-filter')}}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-12 p-0 d-flex">
-                                <div class="form-group col-6 p-0">
+                            <div style="margin:0;" class="form-group col-12  d-flex">
+                                <div style="margin:0;" class="form-group col-6 ">
                                     <label for="client">Bankalar</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -62,7 +62,7 @@
                                 </div>
 
 
-                                <div class="form-group col-6 p-0">
+                                <div style="margin:0;" class="form-group col-6 ">
                                     <label for="website" id="bank-account-label">Banka Hesap</label>
                                     <div class="input-group" id="bank-account-container">
                                         <div class="input-group-prepend">
@@ -88,8 +88,8 @@
                                 </div>
                             </div>
 
-{{--                            <div class="form-group col-12 p-0 d-flex">--}}
-{{--                                <div class="form-group col-6 p-0">--}}
+{{--                            <div style="margin:0;" class="form-group col-12  d-flex">--}}
+{{--                                <div style="margin:0;" class="form-group col-6 ">--}}
 {{--                                    <label for="client">Musteriler</label>--}}
 {{--                                    <div class="input-group">--}}
 {{--                                        <div class="input-group-prepend">--}}
@@ -115,7 +115,7 @@
 {{--                                </div>--}}
 
 
-{{--                                <div class="form-group col-6 p-0">--}}
+{{--                                <div style="margin:0;" class="form-group col-6 ">--}}
 {{--                                    <label for="client">Para Birimi</label>--}}
 {{--                                    <div class="input-group">--}}
 {{--                                        <div class="input-group-prepend">--}}
@@ -141,9 +141,9 @@
 {{--                                </div>--}}
 {{--                            </div>--}}
 
-                            <div class="form-group col-12 p-0 d-flex">
+                            <div style="margin:0;" class="form-group col-12  d-flex">
 
-{{--                                <div class="form-group col-6 p-0" id="website-content">--}}
+{{--                                <div style="margin:0;" class="form-group col-6 " id="website-content">--}}
 {{--                                    <label for="website" id="website-label">Siteler</label>--}}
 
 {{--                                    <div class="input-group" id="website-container">--}}
@@ -168,7 +168,7 @@
 {{--                                        @endforeach--}}
 {{--                                    </datalist>--}}
 {{--                                </div>--}}
-                                <div class="form-group col-12 p-0">
+                                <div style="margin:0;" class="form-group col-12 ">
 
                                     <label for="status">Islem Sonucu</label>
 
@@ -200,9 +200,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12 p-0 d-flex">
+                            <div style="margin:0;" class="form-group col-12  d-flex">
 
-                                <div class="form-group col-6 p-0">
+                                <div style="margin:0;" class="form-group col-6 ">
                                     <label for="type">Tipi</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -226,7 +226,7 @@
                                         @endforeach
                                     </datalist>
                                 </div>
-                                <div class="form-group col-6 p-0">
+                                <div style="margin:0;" class="form-group col-6 ">
                                     <label for="type">Method</label>
 
 
@@ -253,8 +253,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12 p-0 d-flex">
-                                <div class="form-group col-6 p-0">
+                            <div style="margin:0;" class="form-group col-12  d-flex">
+                                <div style="margin:0;" class="form-group col-6 ">
                                     <label for="min_amount">Miktar Minimum</label>
 
                                     <div class="input-group">
@@ -269,7 +269,7 @@
                                                id="min_amount">
                                     </div>
                                 </div>
-                                <div class="form-group col-6 p-0">
+                                <div style="margin:0;" class="form-group col-6 ">
 
                                     <label for="max_amount">Miktar Maksimum</label>
                                     <div class="input-group">
@@ -286,9 +286,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12 p-0 d-flex">
+                            <div style="margin:0;" class="form-group col-12  d-flex">
 
-                                <div class="form-group col-6 p-0">
+                                <div style="margin:0;" class="form-group col-6 ">
                                     <label>Tarih Baslangic:</label>
 
                                     <div class="input-group">
@@ -306,7 +306,7 @@
                                     </div>
                                     <!-- /.input group -->
                                 </div>
-                                <div class="form-group col-6 p-0">
+                                <div style="margin:0;" class="form-group col-6 ">
                                     <label>Tarih Bitis:</label>
 
                                     <div class="input-group">
